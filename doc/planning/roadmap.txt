@@ -1,0 +1,65 @@
+A fancy word for a TODO list.
+
+Step 0 - A compiling ASN.1 grammar for the most basic messages
+--------------------
+- Does not include preauth, safe or priv.
+- Could possibly restrict this to just the AS-REQ and AS-REP
+- modules for basic datatypes (from a protocol perspective).
+  We should find out which ones of these we'll need for the first cut:
+ KerberosString
+ KerberosTime
+ RealmName
+ PrincipalName
+ Int32 and UInt32
+ HostAddress(es)
+ AuthorizationData
+ AD-IF-RELEVANT
+ KdcIssued
+ and-or
+ mandatory-for-kdc
+ KerberosFlags
+ Ticket
+- modules for encryption - see if cryptokit is appropriate.
+- modules for each message type.
+- ASN.1 Encoding + decoding for all relevant messages
+
+Step 1 - ASN.1 Test suite
+--------------------
+- take some packet captures of a real live kerberos
+- dump packet contents to disk
+- make a nice test suite that checks all our packet
+
+Step 2 - World's Crappiest KDC (WCKDC) and World's Crappiest Krb Client (WCKC)
+--------------------
+- Pick a networking library (probably not Async since we want to be usable by
+  lots of people)
+- Client = whoami () |> Principal.of_string |> send_as_req |> parse_as_rep |> printf "%s"
+- Server = read as_req |> generate_as_rep_without_really_authenticating
+
+Step 3 - Add TGS to WCKDC, WCKC
+Step 4 - World's Crappiest Service (comcast.ml)
+
+Steps 5-?
+- make KDC do legit authentication
+- keytabs
+- make TGS also legit
+- pre-authentication
+- cred cache
+- replay cache
+- auth_context
+- ... fill out more data structures from MIT krb5
+
+Steps ?-??
+- ktutil
+- kinit
+- kdestroy
+- klist
+- kstart
+
+Steps ??-???
+- user2user authentication
+- safe&priv
+
+Steps ???-????
+- GSSAPI
+- SPNEGO

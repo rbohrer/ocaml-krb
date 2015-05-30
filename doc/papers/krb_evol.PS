@@ -1,0 +1,10430 @@
+%!PS-Adobe-1.0
+%%Creator: tsx-11:jtkohl (John T Kohl,,608-3 Evans,5106421863,5105257984)
+%%Title: stdin (ditroff)
+%%CreationDate: Wed Jun 17 13:33:38 1992
+%%EndComments
+% Start of psdit.pro -- prolog for ditroff translator
+% Copyright (c) 1985,1987 Adobe Systems Incorporated. All Rights Reserved. 
+% GOVERNMENT END USERS: See Notice file in TranScript library directory
+% -- probably /usr/lib/ps/Notice
+% RCS: $Header: psdit.pro,v 2.2 87/11/17 16:40:42 byron Rel $
+/$DITroff 140 dict def $DITroff begin
+/fontnum 1 def /fontsize 10 def /fontheight 10 def /fontslant 0 def
+/xi {0 72 11 mul translate 72 resolution div dup neg scale 0 0 moveto
+  /fontnum 1 def /fontsize 10 def /fontheight 10 def /fontslant 0 def F
+  /pagesave save def}def
+/PB{save /psv exch def currentpoint translate
+  resolution 72 div dup neg scale 0 0 moveto}def
+/PE{psv restore}def
+/m1 matrix def /m2 matrix def /m3 matrix def /oldmat matrix def
+/tan{dup sin exch cos div}bind def
+/point{resolution 72 div mul}bind def
+/dround	{transform round exch round exch itransform}bind def
+/xT{/devname exch def}def
+/xr{/mh exch def /my exch def /resolution exch def}def
+/xp{}def
+/xs{docsave restore end}def
+/xt{}def
+/xf{/fontname exch def /slotno exch def fontnames slotno get fontname eq not
+ {fonts slotno fontname findfont put fontnames slotno fontname put}if}def
+/xH{/fontheight exch def F}bind def
+/xS{/fontslant exch def F}bind def
+/s{/fontsize exch def /fontheight fontsize def F}bind def
+/f{/fontnum exch def F}bind def
+/F{fontheight 0 le {/fontheight fontsize def}if
+   fonts fontnum get fontsize point 0 0 fontheight point neg 0 0 m1 astore
+   fontslant 0 ne{1 0 fontslant tan 1 0 0 m2 astore m3 concatmatrix}if
+   makefont setfont .04 fontsize point mul 0 dround pop setlinewidth}bind def
+/X{exch currentpoint exch pop moveto show}bind def
+/N{3 1 roll moveto show}bind def
+/Y{exch currentpoint pop exch moveto show}bind def
+/S /show load def
+/ditpush{}def/ditpop{}def
+/AX{3 -1 roll currentpoint exch pop moveto 0 exch ashow}bind def
+/AN{4 2 roll moveto 0 exch ashow}bind def
+/AY{3 -1 roll currentpoint pop exch moveto 0 exch ashow}bind def
+/AS{0 exch ashow}bind def
+/MX{currentpoint exch pop moveto}bind def
+/MY{currentpoint pop exch moveto}bind def
+/MXY /moveto load def
+/cb{pop}def	% action on unknown char -- nothing for now
+/n{}def/w{}def
+/p{pop showpage pagesave restore /pagesave save def}def
+/abspoint{currentpoint exch pop add exch currentpoint pop add exch}def
+/dstroke{currentpoint stroke moveto}bind def
+/Dl{2 copy gsave rlineto stroke grestore rmoveto}bind def
+/arcellipse{oldmat currentmatrix pop
+ currentpoint translate 1 diamv diamh div scale /rad diamh 2 div def
+ rad 0 rad -180 180 arc oldmat setmatrix}def
+/Dc{gsave dup /diamv exch def /diamh exch def arcellipse dstroke 
+    grestore diamh 0 rmoveto}def
+/De{gsave /diamv exch def /diamh exch def arcellipse dstroke
+    grestore diamh 0 rmoveto}def
+/Da{currentpoint /by exch def /bx exch def /fy exch def /fx exch def
+   /cy exch def /cx exch def /rad cx cx mul cy cy mul add sqrt def
+   /ang1 cy neg cx neg atan def /ang2 fy fx atan def cx bx add cy by add
+   2 copy rad ang1 ang2 arcn stroke exch fx add exch fy add moveto}def
+/Barray 200 array def % 200 values in a wiggle
+/D~{mark}def
+/D~~{counttomark Barray exch 0 exch getinterval astore /Bcontrol exch def pop
+ /Blen Bcontrol length def Blen 4 ge Blen 2 mod 0 eq and
+ {Bcontrol 0 get Bcontrol 1 get abspoint /Ycont exch def /Xcont exch def
+  Bcontrol 0 2 copy get 2 mul put Bcontrol 1 2 copy get 2 mul put
+  Bcontrol Blen 2 sub 2 copy get 2 mul put
+  Bcontrol Blen 1 sub 2 copy get 2 mul put
+  /Ybi /Xbi currentpoint 3 1 roll def def 0 2 Blen 4 sub
+  {/i exch def
+   Bcontrol i get 3 div Bcontrol i 1 add get 3 div
+   Bcontrol i get 3 mul Bcontrol i 2 add get add 6 div
+   Bcontrol i 1 add get 3 mul Bcontrol i 3 add get add 6 div
+   /Xbi Xcont Bcontrol i 2 add get 2 div add def
+   /Ybi Ycont Bcontrol i 3 add get 2 div add def
+   /Xcont Xcont Bcontrol i 2 add get add def
+   /Ycont Ycont Bcontrol i 3 add get add def
+   Xbi currentpoint pop sub Ybi currentpoint exch pop sub rcurveto
+  }for dstroke}if}def
+end
+/ditstart{$DITroff begin
+ /nfonts 60 def			% NFONTS makedev/ditroff dependent!
+ /fonts[nfonts{0}repeat]def
+ /fontnames[nfonts{()}repeat]def
+/docsave save def
+}def
+
+% character outcalls
+/oc {/pswid exch def /cc exch def /name exch def
+   /ditwid pswid fontsize mul resolution mul 72000 div def
+   /ditsiz fontsize resolution mul 72 div def
+   ocprocs name known{ocprocs name get exec}{name cb}
+   ifelse}def
+/fractm [.65 0 0 .6 0 0] def
+/fraction
+ {/fden exch def /fnum exch def gsave /cf currentfont def
+  cf fractm makefont setfont 0 .3 dm 2 copy neg rmoveto
+  fnum show rmoveto currentfont cf setfont(\244)show setfont fden show 
+  grestore ditwid 0 rmoveto} def
+/oce {grestore ditwid 0 rmoveto}def
+/dm {ditsiz mul}def
+/ocprocs 50 dict def ocprocs begin
+(14){(1)(4)fraction}def
+(12){(1)(2)fraction}def
+(34){(3)(4)fraction}def
+(13){(1)(3)fraction}def
+(23){(2)(3)fraction}def
+(18){(1)(8)fraction}def
+(38){(3)(8)fraction}def
+(58){(5)(8)fraction}def
+(78){(7)(8)fraction}def
+(sr){gsave .05 dm .16 dm rmoveto(\326)show oce}def
+(is){gsave 0 .15 dm rmoveto(\362)show oce}def
+(->){gsave 0 .02 dm rmoveto(\256)show oce}def
+(<-){gsave 0 .02 dm rmoveto(\254)show oce}def
+(==){gsave 0 .05 dm rmoveto(\272)show oce}def
+end
+% DIThacks fonts for some special chars
+50 dict dup begin
+/FontType 3 def
+/FontName /DIThacks def
+/FontMatrix [.001 0.0 0.0 .001 0.0 0.0] def
+/FontBBox [-220 -280 900 900] def% a lie but ...
+/Encoding 256 array def
+0 1 255{Encoding exch /.notdef put}for
+Encoding
+ dup 8#040/space put %space
+ dup 8#110/rc put %right ceil
+ dup 8#111/lt put %left  top curl
+ dup 8#112/bv put %bold vert
+ dup 8#113/lk put %left  mid curl
+ dup 8#114/lb put %left  bot curl
+ dup 8#115/rt put %right top curl
+ dup 8#116/rk put %right mid curl
+ dup 8#117/rb put %right bot curl
+ dup 8#120/rf put %right floor
+ dup 8#121/lf put %left  floor
+ dup 8#122/lc put %left  ceil
+ dup 8#140/sq put %square
+ dup 8#141/bx put %box
+ dup 8#142/ci put %circle
+ dup 8#143/br put %box rule
+ dup 8#144/rn put %root extender
+ dup 8#145/vr put %vertical rule
+ dup 8#146/ob put %outline bullet
+ dup 8#147/bu put %bullet
+ dup 8#150/ru put %rule
+ dup 8#151/ul put %underline
+ pop
+/DITfd 100 dict def
+/BuildChar{0 begin
+ /cc exch def /fd exch def
+ /charname fd /Encoding get cc get def
+ /charwid fd /Metrics get charname get def
+ /charproc fd /CharProcs get charname get def
+ charwid 0 fd /FontBBox get aload pop setcachedevice
+ 40 setlinewidth
+ newpath 0 0 moveto gsave charproc grestore
+ end}def
+/BuildChar load 0 DITfd put
+%/UniqueID 5 def
+/CharProcs 50 dict def
+CharProcs begin
+/space{}def
+/.notdef{}def
+/ru{500 0 rls}def
+/rn{0 750 moveto 500 0 rls}def
+/vr{20 800 moveto 0 -770 rls}def
+/bv{20 800 moveto 0 -1000 rls}def
+/br{20 770 moveto 0 -1040 rls}def
+/ul{0 -250 moveto 500 0 rls}def
+/ob{200 250 rmoveto currentpoint newpath 200 0 360 arc closepath stroke}def
+/bu{200 250 rmoveto currentpoint newpath 200 0 360 arc closepath fill}def
+/sq{80 0 rmoveto currentpoint dround newpath moveto
+    640 0 rlineto 0 640 rlineto -640 0 rlineto closepath stroke}def
+/bx{80 0 rmoveto currentpoint dround newpath moveto
+    640 0 rlineto 0 640 rlineto -640 0 rlineto closepath fill}def
+/ci{355 333 rmoveto currentpoint newpath 333 0 360 arc
+    50 setlinewidth stroke}def
+
+/lt{20 -200 moveto 0 550 rlineto currx 800 2cx s4 add exch s4 a4p stroke}def
+/lb{20 800 moveto 0 -550 rlineto currx -200 2cx s4 add exch s4 a4p stroke}def
+/rt{20 -200 moveto 0 550 rlineto currx 800 2cx s4 sub exch s4 a4p stroke}def
+/rb{20 800 moveto 0 -500 rlineto currx -200 2cx s4 sub exch s4 a4p stroke}def
+/lk{20 800 moveto 20 300 -280 300 s4 arcto pop pop 1000 sub
+    currentpoint stroke moveto
+    20 300 4 2 roll s4 a4p 20 -200 lineto stroke}def
+/rk{20 800 moveto 20 300 320 300 s4 arcto pop pop 1000 sub
+    currentpoint stroke moveto
+    20 300 4 2 roll s4 a4p 20 -200 lineto stroke}def
+/lf{20 800 moveto 0 -1000 rlineto s4 0 rls}def
+/rf{20 800 moveto 0 -1000 rlineto s4 neg 0 rls}def
+/lc{20 -200 moveto 0 1000 rlineto s4 0 rls}def
+/rc{20 -200 moveto 0 1000 rlineto s4 neg 0 rls}def
+end
+
+/Metrics 50 dict def Metrics begin
+/.notdef 0 def
+/space 500 def
+/ru 500 def
+/br 0 def
+/lt 250 def
+/lb 250 def
+/rt 250 def
+/rb 250 def
+/lk 250 def
+/rk 250 def
+/rc 250 def
+/lc 250 def
+/rf 250 def
+/lf 250 def
+/bv 250 def
+/ob 350 def
+/bu 350 def
+/ci 750 def
+/bx 750 def
+/sq 750 def
+/rn 500 def
+/ul 500 def
+/vr 0 def
+end
+
+DITfd begin
+/s2 500 def /s4 250 def /s3 333 def
+/a4p{arcto pop pop pop pop}def
+/2cx{2 copy exch}def
+/rls{rlineto stroke}def
+/currx{currentpoint pop}def
+/dround{transform round exch round exch itransform} def
+end
+end
+/DIThacks exch definefont pop
+
+ditstart
+(psc)xT
+576 1 1 xr
+1(Times-Roman)xf 1 f
+2(Times-Italic)xf 2 f
+3(Times-Bold)xf 3 f
+4(Times-BoldItalic)xf 4 f
+5(Helvetica)xf 5 f
+6(Helvetica-Bold)xf 6 f
+7(Courier)xf 7 f
+8(Courier-Bold)xf 8 f
+9(Symbol)xf 9 f
+10(DIThacks)xf 10 f
+10 s
+1 f
+xi
+%%EndProlog
+
+%%Page: 1 1
+10 s 0 xH 0 xS 1 f
+32(--)Y
+4323(--)X
+3 f
+12 s
+1192 984(The)N
+1376(Evolution)X
+1800(of)X
+1904(the)X
+4 f
+2056(Kerberos)X
+3 f
+2437(Authentication)X
+3074(Service)X
+2 f
+10 s
+2075 1176(John)N
+2251(T.)X
+2335(Kohl)X
+1 f
+1783 1320(Digital)N
+2025(Equipment)X
+2396(Corporation)X
+2 f
+1969 1512(B.)N
+2058(Clifford)X
+2330(Neuman)X
+1 f
+1800 1656(Information)N
+2203(Sciences)X
+2504(Institute)X
+1743 1752(University)N
+2101(of)X
+2188(Southern)X
+2497(California)X
+2 f
+2006 1944(Theodore)N
+2333(Y.)X
+2417(Ts'o)X
+1 f
+1665 2088(Massachusetts)N
+2148(Institute)X
+2430(of)X
+2517(Technology)X
+2 f
+2094 2392(ABSTRACT)N
+1 f
+1043 2600(The)N
+1196(Kerberos)X
+1518(Authentication)X
+2021(Service,)X
+2309(developed)X
+2666(at)X
+8 s
+2747(MIT)X
+10 s
+2864(,)X
+2911(has)X
+3045(been)X
+3224(widely)X
+3469(adopted)X
+843 2696(by)N
+947(other)X
+1136(organizations)X
+1592(to)X
+1678(identify)X
+1951(clients)X
+2184(of)X
+2275(network)X
+2562(services)X
+2845(across)X
+3070(an)X
+3169(insecure)X
+3460(network)X
+843 2792(and)N
+991(to)X
+1085(protect)X
+1340(the)X
+1470(privacy)X
+1743(and)X
+1891(integrity)X
+2194(of)X
+2293(communication)X
+2823(with)X
+2997(those)X
+3197(services.)X
+3527(While)X
+843 2888(Version)N
+1121(4)X
+1185(was)X
+1334(a)X
+1394(step)X
+1547(up)X
+1651(from)X
+1831(traditional)X
+2184(security)X
+2462(in)X
+2547(networked)X
+2909(systems,)X
+3205(extensions)X
+3566(were)X
+843 2984(needed)N
+1097(to)X
+1185(allow)X
+1389(its)X
+1490(wider)X
+1699(application)X
+2081(in)X
+2169(environments)X
+2631(with)X
+2798(different)X
+3100(characteristics)X
+3585(than)X
+843 3080(that)N
+991(at)X
+8 s
+1073(MIT)X
+10 s
+1190(.)X
+1258(This)X
+1428(paper)X
+1635(discusses)X
+1961(some)X
+2158(of)X
+2253(the)X
+2379(limitations)X
+2748(of)X
+2843(Version)X
+3124(4)X
+3191(of)X
+3285(Kerberos)X
+3607(and)X
+843 3176(presents)N
+1126(the)X
+1244(solutions)X
+1552(provided)X
+1857(by)X
+1957(Version)X
+2231(5.)X
+3 f
+555 3464(1.)N
+655(Introduction)X
+1 f
+555 3588(The)N
+702(Kerberos)X
+1019(Authentication)X
+1517(Service)X
+1780(was)X
+1927(developed)X
+2278(by)X
+2379(the)X
+2498(Massachusetts)X
+2982(Institute)X
+3265(of)X
+3353(Technology)X
+3757(\()X
+8 s
+3784(MIT)X
+10 s
+3901(\))X
+3949(to)X
+555 3684(protect)N
+802(the)X
+924(emerging)X
+1251(network)X
+1538(services)X
+1821(provided)X
+2130(by)X
+2234(Project)X
+2485(Athena.)X
+2781(Versions)X
+3089(1)X
+3152(through)X
+3424(3)X
+3487(were)X
+3667(used)X
+3837(inter-)X
+555 3780(nally.)N
+788(Although)X
+1123(designed)X
+1441(primarily)X
+1772(for)X
+1899(use)X
+2039(by)X
+2152(Project)X
+2412(Athena,)X
+2697(Version)X
+2984(4)X
+3057(of)X
+3157(the)X
+3287(protocol)X
+3586(has)X
+3725(achieved)X
+555 3876(widespread)N
+942(use)X
+1070(beyond)X
+8 s
+1323(MIT)X
+10 s
+1440(.)X
+1501(Models)X
+1762(for)X
+1877(administration)X
+2360(and)X
+2496(use)X
+2623(of)X
+2710(computer)X
+3033(services)X
+3312(differ)X
+3511(from)X
+3687(site)X
+3818(to)X
+3900(site)X
+555 3972(and)N
+694(some)X
+886(environments)X
+1345(require)X
+1596(support)X
+1858(that)X
+2000(isn't)X
+2164(present)X
+2418(in)X
+2502(Version)X
+2778(4.)X
+2880(Version)X
+3156(5)X
+3218(of)X
+3307(the)X
+3427(Kerberos)X
+3744(protocol)X
+555 4068(incorporates)N
+984(new)X
+1150(features)X
+1436(suggested)X
+1783(by)X
+1894(experience)X
+2274(with)X
+2447(Version)X
+2732(4,)X
+2823(making)X
+3094(it)X
+3169(useful)X
+3396(in)X
+3489(more)X
+3685(situations.)X
+555 4164(Version)N
+829(5)X
+889(was)X
+1034(based)X
+1237(in)X
+1319(part)X
+1464(upon)X
+1644(input)X
+1828(from)X
+2004(many)X
+2202(contributors)X
+2609(familiar)X
+2883(with)X
+3045(Version)X
+3319(4.)X
+555 4288(This)N
+719(paper)X
+920(begins)X
+1151(by)X
+1253(describing)X
+1609(the)X
+1728(Kerberos)X
+2044(model)X
+2265(and)X
+2402(basic)X
+2588(protocol)X
+2876(exchanges.)X
+3272(Section)X
+3533(3)X
+3594(discusses)X
+3913(the)X
+555 4384(limitations)N
+918(of)X
+1007(Version)X
+1283(4)X
+1345(of)X
+1434(Kerberos.)X
+1791(The)X
+1937(fourth)X
+2154(section)X
+2402(reviews)X
+2673(new)X
+2828(features)X
+3104(found)X
+3312(in)X
+3395(Version)X
+3670(5.)X
+3771(Section)X
+555 4480(5)N
+618(describes)X
+940(the)X
+1061(implementation)X
+1586(of)X
+1676(Version)X
+1952(5)X
+2014(and)X
+2152(support)X
+2414(for)X
+2530(converting)X
+2895(existing)X
+3170(applications)X
+3579(from)X
+3757(Version)X
+555 4576(4.)N
+655(The)X
+800(paper)X
+999(concludes)X
+1340(with)X
+1502(status)X
+1704(and)X
+1840(plans)X
+2029(for)X
+2143(future)X
+2355(work.)X
+3 f
+555 4768(Terminology)N
+1015(and)X
+1163(conventions)X
+1 f
+555 4892(A)N
+2 f
+634(principal)X
+1 f
+955(is)X
+1029(the)X
+1148(basic)X
+1334(entity)X
+1536(that)X
+1676(participates)X
+2066(in)X
+2148(authentication.)X
+2662(In)X
+2749(most)X
+2924(cases)X
+3114(a)X
+3170(principal)X
+3475(represents)X
+3821(a)X
+3877(user)X
+555 4988(or)N
+643(an)X
+739(instantiation)X
+1154(of)X
+1241(a)X
+1297(network)X
+1580(service)X
+1828(on)X
+1928(a)X
+1984(particular)X
+2312(host.)X
+2505(Each)X
+2686(principal)X
+2991(is)X
+3064(uniquely)X
+3364(named)X
+3598(by)X
+3698(its)X
+2 f
+3793(princi-)X
+555 5084(pal)N
+677(identi\256er.)X
+555 5208(Encryption)N
+1 f
+946(is)X
+1027(the)X
+1153(process)X
+1422(of)X
+1517(transforming)X
+1959(data)X
+2121(into)X
+2273(a)X
+2337(form)X
+2521(that)X
+2669(cannot)X
+2911(be)X
+3014(understood)X
+3397(without)X
+3668(applying)X
+3975(a)X
+555 5304(second)N
+812(transformation.)X
+1358(The)X
+1517(transformation)X
+2023(is)X
+2110(affected)X
+2403(by)X
+2516(an)X
+2 f
+2625(encryption)X
+3001(key)X
+1 f
+3142(in)X
+3237(such)X
+3417(a)X
+3486(manner)X
+3760(that)X
+3913(the)X
+8 s
+10 f
+555 5384(hhhhhhhhhhhhhhhhhh)N
+1 f
+555 5464(This)N
+688(paper)X
+847(is)X
+908(a)X
+954(revision)X
+1178(of)X
+1249(a)X
+1295(paper)X
+1454(presented)X
+1716(at)X
+1780(the)X
+1876(Spring)X
+2065(1991)X
+2211(EurOpen)X
+2459(Conference,)X
+2786(in)X
+2854(Troms\371,)X
+3087(Norway,)X
+3326(and)X
+3436(will)X
+3554(appear)X
+555 5544(in)N
+621(an)X
+697(upcoming)X
+969(IEEE)X
+1123(Computer)X
+1395(Society)X
+1603(Press)X
+1770(book)X
+1914(edited)X
+2086(by)X
+2166(Frances)X
+2380(Brazier)X
+2583(and)X
+2691(Dag)X
+2813(Johansen.)X
+555 5704(The)N
+670(work)X
+817(described)X
+1077(here)X
+1202(was)X
+1317(done)X
+1457(while)X
+1615(Kohl)X
+1759(was)X
+1874(at)X
+6 s
+1932(MIT)X
+8 s
+(,)S
+2052(and)X
+2160(in)X
+2226(part)X
+2341(while)X
+2499(Neuman)X
+2731(was)X
+2846(at)X
+2908(the)X
+3002(University)X
+3288(of)X
+3357(Washington.)X
+
+2 p
+%%Page: 2 2
+8 s 0 xH 0 xS 1 f
+10 s
+0 32(--)N
+4323(--)X
+2216 416(-)N
+2263(2)X
+2323(-)X
+555 672(second)N
+798(transformation)X
+1290(can)X
+1422(only)X
+1584(be)X
+1680(applied)X
+1936(by)X
+2036(someone)X
+2341(in)X
+2423(possession)X
+2785(of)X
+2872(the)X
+2990(corresponding)X
+2 f
+3469(decryption)X
+3832(key.)X
+1 f
+555 796(A)N
+2 f
+635(secret-key)X
+984(cryptosystem)X
+1 f
+1425(such)X
+1594(as)X
+1683(that)X
+1825(de\256ned)X
+2083(by)X
+2185(the)X
+2305(Data)X
+2479(Encryption)X
+2857(Standard)X
+3164(\()X
+8 s
+3191(DES)X
+10 s
+3312(\))X
+3361([FIPS46])X
+3675(uses)X
+3834(a)X
+3891(sin-)X
+555 892(gle)N
+673(key)X
+809(for)X
+923(both)X
+1085(encryption)X
+1448(and)X
+1584(decryption.)X
+1987(Such)X
+2167(an)X
+2263(encryption)X
+2626(key)X
+2762(is)X
+2835(called)X
+3047(a)X
+2 f
+3103(secret)X
+1 f
+3322(key.)X
+555 1016(A)N
+2 f
+638(public-key)X
+997(cryptosystem)X
+1 f
+1440(such)X
+1611(as)X
+8 s
+1698(RSA)X
+10 s
+1847([Riv78])X
+2120(uses)X
+2282(different)X
+2583(keys)X
+2754(for)X
+2872(encryption)X
+3239(and)X
+3379(decryption.)X
+3786(One)X
+3944(of)X
+555 1112(the)N
+675(keys)X
+844(in)X
+928(the)X
+1048(pair)X
+1195(can)X
+1329(be)X
+1427(publicly)X
+1711(known)X
+1951(while)X
+2150(the)X
+2269(other)X
+2455(must)X
+2631(be)X
+2728(kept)X
+2887(private.)X
+3171(These)X
+3384(keys)X
+3552(are)X
+3672(referred)X
+3949(to)X
+555 1208(as)N
+2 f
+642(public)X
+1 f
+869(and)X
+2 f
+1005(private)X
+1 f
+1259(keys)X
+1426(respectively.)X
+2 f
+555 1332(Plaintext)N
+1 f
+889(is)X
+980(a)X
+1054(message)X
+1364(in)X
+1464(its)X
+1577(unencrypted)X
+2012(form,)X
+2226(either)X
+2447(before)X
+2691(the)X
+2826(encryption)X
+3206(transformation)X
+3715(has)X
+3859(been)X
+555 1428(applied,)N
+846(or)X
+948(after)X
+1131(the)X
+1264(corresponding)X
+1758(decryption)X
+2135(transformation)X
+2641(is)X
+2728(complete.)X
+2 f
+3096(Ciphertext)X
+1 f
+3475(is)X
+3562(the)X
+3694(encrypted)X
+555 1524(form)N
+731(of)X
+818(a)X
+874(message,)X
+1186(the)X
+1304(output)X
+1528(of)X
+1615(the)X
+1733(encryption)X
+2096(transformation.)X
+555 1648(In)N
+649(\256gures,)X
+914(encryption)X
+1284(is)X
+1364(denoted)X
+1645(by)X
+1752(showing)X
+2050(the)X
+2175(plaintext)X
+2482(surrounded)X
+2870(by)X
+2977(curly)X
+3169(braces)X
+3402(\({}\))X
+3558(followed)X
+3869(by)X
+3975(a)X
+555 1744(key)N
+707(\(K\))X
+855(whose)X
+1096(subscript)X
+1421(denotes)X
+1702(the)X
+1836(principals)X
+2188(who)X
+2362(possess)X
+2638(or)X
+2741(have)X
+2929(access)X
+3171(to)X
+3269(that)X
+3425(key.)X
+3617(Thus,)X
+3833("abc")X
+555 1840(encrypted)N
+892(under)X
+1095(c's)X
+1209(key)X
+1345(is)X
+1418(represented)X
+1809(as)X
+1896({abc}K)X
+7 s
+2142 1856(c)N
+10 s
+2174 1840(.)N
+3 f
+555 2128(2.)N
+655(The)X
+4 f
+808(Kerberos)X
+3 f
+1126(Model)X
+1 f
+555 2252(Kerberos)N
+877(was)X
+1029(developed)X
+1386(to)X
+1475(enable)X
+1712(network)X
+2002(applications)X
+2416(to)X
+2505(securely)X
+2800(identify)X
+3076(their)X
+3250(peers.)X
+3487(To)X
+3603(achieve)X
+3876(this,)X
+555 2348(the)N
+677(client)X
+879(\(initiating)X
+1218(party\))X
+1434(conducts)X
+1743(a)X
+1803(three-party)X
+2180(message)X
+2476(exchange)X
+2804(to)X
+2889(prove)X
+3095(its)X
+3193(identity)X
+3460(to)X
+3545(the)X
+3666(server)X
+3886(\(the)X
+555 2444(contacted)N
+883(party\).)X
+1135(The)X
+1280(client)X
+1478(proves)X
+1712(its)X
+1807(identity)X
+2071(by)X
+2171(presenting)X
+2525(to)X
+2607(the)X
+2725(server)X
+2942(a)X
+2 f
+2998(ticket)X
+1 f
+3199(\(shown)X
+3455(in)X
+3537(\256gures)X
+3775(as)X
+3862(T)X
+7 s
+3911 2460(c,)N
+3955(s)X
+10 s
+3984 2444(\))N
+555 2540(which)N
+777(identi\256es)X
+1096(a)X
+1158(principal)X
+1469(and)X
+1611(establishes)X
+1984(a)X
+2046(temporary)X
+2402(encryption)X
+2770(key)X
+2911(that)X
+3056(may)X
+3219(be)X
+3320(used)X
+3492(to)X
+3579(communicate)X
+555 2636(with)N
+718(that)X
+858(principal,)X
+1183(and)X
+1319(an)X
+2 f
+1415(authenticator)X
+1 f
+1873(\(shown)X
+2129(in)X
+2211(\256gures)X
+2449(as)X
+2536(A)X
+7 s
+2594 2652(c,)N
+2638(s)X
+10 s
+2667 2636(\))N
+2714(which)X
+2930(proves)X
+3164(that)X
+3304(the)X
+3422(client)X
+3620(is)X
+3693(in)X
+3775(posses-)X
+555 2732(sion)N
+725(of)X
+829(the)X
+964(temporary)X
+1331(encryption)X
+1710(key)X
+1862(that)X
+2018(was)X
+2179(assigned)X
+2491(to)X
+2589(the)X
+2723(principal)X
+3044(identi\256ed)X
+3382(by)X
+3498(the)X
+3632(ticket.)X
+3886(The)X
+555 2828(authenticator)N
+994(prevents)X
+1286(an)X
+1382(intruder)X
+1656(from)X
+1832(replaying)X
+2155(the)X
+2273(same)X
+2458(ticket)X
+2656(to)X
+2738(the)X
+2856(server)X
+3073(in)X
+3155(a)X
+3211(future)X
+3423(session.)X
+555 2952(Tickets)N
+815(are)X
+938(issued)X
+1162(by)X
+1265(a)X
+1324(trusted)X
+1565(third)X
+1739(party)X
+2 f
+1927(Key)X
+2075(Distribution)X
+2488(Center)X
+1 f
+2729(\()X
+8 s
+2756(KDC)X
+10 s
+2891(\).)X
+2961(The)X
+8 s
+3105(KDC)X
+10 s
+3240(,)X
+3283(proposed)X
+3600(by)X
+3703(Needham)X
+555 3048(and)N
+692(Schroeder)X
+1059([Nee78],)X
+1364(is)X
+1438(trusted)X
+1677(to)X
+1760(hold)X
+1923(in)X
+2006(con\256dence)X
+2375(secret)X
+2584(keys)X
+2752(known)X
+2991(by)X
+3092(each)X
+3261(client)X
+3460(and)X
+3596(server)X
+3813(on)X
+3913(the)X
+555 3144(network)N
+849(\(the)X
+1005(secret)X
+1223(keys)X
+1400(are)X
+1529(established)X
+1915(out-of-band)X
+2324(or)X
+2421(through)X
+2700(an)X
+2806(encrypted)X
+3153(channel\).)X
+3500(The)X
+3655(key)X
+3801(shared)X
+555 3240(with)N
+734(the)X
+8 s
+864(KDC)X
+10 s
+1035(forms)X
+1258(the)X
+1392(basis)X
+1588(upon)X
+1784(which)X
+2016(a)X
+2088(client)X
+2302(or)X
+2405(server)X
+2638(believes)X
+2937(the)X
+3071(authenticity)X
+3485(of)X
+3588(the)X
+3722(tickets)X
+3967(it)X
+555 3336(receives.)N
+891(A)X
+981(Kerberos)X
+1308(ticket)X
+1518(is)X
+1603(valid)X
+1795(for)X
+1921(a)X
+1989(\256nite)X
+2184(interval)X
+2460(called)X
+2683(its)X
+2 f
+2789(lifetime.)X
+1 f
+3087(When)X
+3310(the)X
+3439(interval)X
+3715(ends,)X
+3913(the)X
+555 3432(ticket)N
+753(expires;)X
+1027(any)X
+1163(later)X
+1326(authentication)X
+1800(exchanges)X
+2155(require)X
+2403(a)X
+2459(new)X
+2613(ticket)X
+2811(from)X
+2987(the)X
+8 s
+3101(KDC)X
+10 s
+3236(.)X
+555 3556(Each)N
+757(installation)X
+1153(comprises)X
+1519(an)X
+1636(autonomously)X
+2130(administered)X
+2 f
+2585(realm)X
+1 f
+2820(and)X
+2976(establishes)X
+3363(its)X
+3478(own)X
+8 s
+3652(KDC)X
+10 s
+3787(.)X
+3847(Most)X
+555 3652(currently-operating)N
+1210(sites)X
+1387(have)X
+1574(chosen)X
+1832(realm)X
+2050(names)X
+2289(that)X
+2443(parallel)X
+2718(their)X
+2899(names)X
+3138(under)X
+3355(the)X
+3487(Internet)X
+3771(domain)X
+555 3748(name)N
+751(system)X
+995(\(e.g.)X
+1160(Project)X
+1409(Athena's)X
+1721(realm)X
+1925(is)X
+7 f
+2027(ATHENA.MIT.EDU)X
+1 f
+(\).)S
+2787(Clients)X
+3034(in)X
+3117(separate)X
+3402(realms)X
+3637(can)X
+3770(authen-)X
+555 3844(ticate)N
+749(to)X
+831(each)X
+999(other)X
+1184(if)X
+1253(the)X
+1371(administrators)X
+1849(of)X
+1936(those)X
+2125(realms)X
+2359(have)X
+2531(previously)X
+2889(arranged)X
+3191(a)X
+3247(shared)X
+3477(secret.)X
+3 f
+555 4036(2.1.)N
+715(The)X
+868(initial)X
+1087(ticket)X
+1299(exchange)X
+1 f
+555 4160(Figure)N
+785(1)X
+846(shows)X
+1067(the)X
+1186(messages\262)X
+1550(required)X
+1839(for)X
+1954(a)X
+2011(client)X
+2210(to)X
+2293(prove)X
+2497(its)X
+2593(identity)X
+2858(to)X
+2941(a)X
+2998(server.)X
+3256(The)X
+3402(basic)X
+3588(messages)X
+3912(are)X
+555 4256(the)N
+677(same)X
+866(for)X
+984(Versions)X
+1292(4)X
+1355(and)X
+1494(5)X
+1557(of)X
+1647(Kerberos)X
+1965(though)X
+2210(the)X
+2331(details)X
+2563(of)X
+2653(the)X
+2774(encoding)X
+3091(differ.)X
+3333(A)X
+3414(typical)X
+3655(application)X
+555 4352(uses)N
+719(this)X
+860(exchange)X
+1190(when)X
+1390(it)X
+1460(\256rst)X
+1610(establishes)X
+1983(a)X
+2045(connection)X
+2423(to)X
+2511(a)X
+2572(server.)X
+2834(Subsequent)X
+3228(connections)X
+3636(to)X
+3723(the)X
+3846(same)X
+555 4448(server)N
+779(require)X
+1033(only)X
+1201(the)X
+1325(\256nal)X
+1493(message)X
+1791(in)X
+1879(the)X
+2003(exchange)X
+2333(\(client)X
+2564(caching)X
+2840(eliminates)X
+3195(the)X
+3319(need)X
+3497(for)X
+3617(the)X
+3741(\256rst)X
+3891(two)X
+555 4544(messages)N
+878(until)X
+1044(the)X
+1162(ticket)X
+1360(expires\).)X
+555 4668(In)N
+653(the)X
+782(\256rst)X
+937(message)X
+1240(the)X
+1369(client)X
+1577(contacts)X
+1870(the)X
+8 s
+1994(KDC)X
+10 s
+2129(,)X
+2179(identi\256es)X
+2502(itself,)X
+2712(presents)X
+3005(a)X
+3071(nonce)X
+3293(\(a)X
+3386(timestamp)X
+3749(or)X
+3846(other)X
+555 4764(non-repeating)N
+1021(identi\256er)X
+1330(for)X
+1444(the)X
+1562(request\),)X
+1861(and)X
+1997(requests)X
+2280(credentials)X
+2648(for)X
+2762(use)X
+2889(with)X
+3051(a)X
+3107(particular)X
+3435(server.)X
+555 4888(Upon)N
+755(receipt)X
+996(of)X
+1084(the)X
+1203(message)X
+1496(the)X
+8 s
+1611(KDC)X
+10 s
+1767(selects)X
+2002(a)X
+2059(random)X
+2325(encryption)X
+2689(key)X
+2826(K)X
+7 s
+2884 4904(c,)N
+2928(s)X
+10 s
+2957 4888(,)N
+2998(called)X
+3211(the)X
+2 f
+3330(session)X
+3582(key,)X
+1 f
+3731(and)X
+3868(gen-)X
+555 4984(erates)N
+767(the)X
+889(requested)X
+1221(ticket.)X
+1463(The)X
+1612(ticket)X
+1814(identi\256es)X
+2131(the)X
+2253(client,)X
+2475(speci\256es)X
+2774(the)X
+2895(session)X
+3149(key)X
+3288(K)X
+7 s
+3346 5000(c,)N
+3390(s)X
+10 s
+3419 4984(,)N
+3462(lists)X
+3613(the)X
+3734(start)X
+3895(and)X
+555 5080(expiration)N
+908(times,)X
+1129(and)X
+1273(is)X
+1354(encrypted)X
+1699(in)X
+1789(the)X
+1915(key)X
+2059(K)X
+7 s
+2117 5096(s)N
+10 s
+2174 5080(shared)N
+2411(by)X
+2518(the)X
+8 s
+2639(KDC)X
+10 s
+2801(and)X
+2944(the)X
+3069(server.)X
+3333(Because)X
+3628(the)X
+3753(ticket)X
+3958(is)X
+555 5176(encrypted)N
+894(in)X
+978(a)X
+1036(key)X
+1174(known)X
+1414(only)X
+1578(by)X
+1680(the)X
+8 s
+1796(KDC)X
+10 s
+1953(and)X
+2091(the)X
+2211(server,)X
+2450(nobody)X
+2712(else)X
+2859(can)X
+2993(read)X
+3154(it)X
+3220(or)X
+3309(change)X
+3559(the)X
+3679(identity)X
+3944(of)X
+555 5272(the)N
+673(client)X
+871(speci\256ed)X
+1176(within)X
+1400(it.)X
+1504(The)X
+8 s
+1645(KDC)X
+10 s
+1800(next)X
+1958(assembles)X
+2303(a)X
+2359(response,)X
+2680(the)X
+2798(second)X
+3041(message,)X
+3353(which)X
+3569(it)X
+3633(sends)X
+3831(to)X
+3913(the)X
+555 5368(client.)N
+803(The)X
+958(response)X
+1269(includes)X
+1566(the)X
+1694(session)X
+1955(key,)X
+2120(the)X
+2247(nonce,)X
+2488(and)X
+2633(the)X
+2760(ticket.)X
+2987(The)X
+3141(session)X
+3401(key)X
+3546(and)X
+3691(nonce)X
+3912(are)X
+555 5464(encrypted)N
+892(with)X
+1054(the)X
+1172(client's)X
+1428(secret)X
+1636(key)X
+1772(K)X
+7 s
+1830 5480(c)N
+10 s
+1882 5464(\(in)N
+1991(Version)X
+2265(4)X
+2325(all)X
+2425(\256elds)X
+2618(are)X
+2737(encrypted)X
+3074(in)X
+3156(K)X
+7 s
+3214 5480(c)N
+10 s
+3246 5464(\).)N
+8 s
+10 f
+555 5544(hhhhhhhhhhhhhhhhhh)N
+1 f
+555 5624(\262)N
+604(For)X
+710(clarity,)X
+905(the)X
+999(\256gures)X
+1189(show)X
+1340(a)X
+1384(simpli\256ed)X
+1657(version)X
+1861(of)X
+1930(the)X
+2024(messages.)X
+2313(Other)X
+2474(message)X
+2706(\256elds)X
+2861(present)X
+3061(in)X
+3127(the)X
+3221(actual)X
+3389(messages)X
+3646(are)X
+555 5704(less)N
+667(relevant)X
+888(to)X
+954(the)X
+1048(present)X
+1248(discussion.)X
+
+3 p
+%%Page: 3 3
+8 s 0 xH 0 xS 1 f
+10 s
+0 32(--)N
+4323(--)X
+2216 416(-)N
+2263(3)X
+2323(-)X
+1791 836(KDC)N
+1707 820 MXY
+336 238 De
+3 f
+1815 1076(1)N
+1 f
+1887 988 MXY
+-12 -48 Dl
+1863 988 MXY
+12 -48 Dl
+0 240 Dl
+3 f
+1943 1076(2)N
+1 f
+1911 1132 MXY
+12 48 Dl
+1935 1132 MXY
+-12 48 Dl
+0 -240 Dl
+1778 1315(Client)N
+1707 1299 MXY
+336 238 De
+3 f
+2263 1267(3)N
+1 f
+10 f
+2043 1299(hhhhhhhhhhhh)N
+2474 1311 MXY
+48 -12 Dl
+2474 1287 MXY
+48 12 Dl
+1 f
+2585 1315(Server)N
+2522 1299 MXY
+336 238 De
+3 f
+1489 1620(1.)N
+1 f
+1569(Client)X
+9 f
+1784 MX
+(->)174 987 oc
+1 f
+1883(KDC:)X
+2094(c,)X
+2170(s,)X
+2241(n)X
+3 f
+1489 1716(2.)N
+1 f
+1569(KDC)X
+9 f
+1758 MX
+(->)174 987 oc
+1 f
+1857(Client:)X
+2094({K)X
+8 s
+2190 1741(c,s)N
+10 s
+2279 1716(,n}K)N
+8 s
+2435 1741(c)N
+10 s
+2483 1716(,{T)N
+8 s
+2590 1741(c,s)N
+10 s
+2659 1716(}K)N
+8 s
+2755 1741(s)N
+3 f
+10 s
+1489 1812(3.)N
+1 f
+1569(Client)X
+9 f
+1784 MX
+(->)174 987 oc
+1 f
+1883(Server:)X
+2135({A)X
+8 s
+2231 1837(c)N
+10 s
+2259 1812(}K)N
+8 s
+2355 1837(c,s)N
+10 s
+2444 1812(,{T)N
+8 s
+2551 1837(c,s)N
+10 s
+2620 1812(}K)N
+8 s
+2716 1837(s)N
+10 s
+1489 2004(\(In)N
+1603(version)X
+1859(4,)X
+1939(message)X
+2231(2)X
+2291(is)X
+2364({K)X
+8 s
+2460 2029(c,s)N
+10 s
+2549 2004(,n,{T)N
+8 s
+2716 2029(c,s)N
+10 s
+2785 2004(})N
+2843(K)X
+8 s
+2901 2029(s)N
+10 s
+2926 2004(}K)N
+8 s
+3022 2029(c)N
+10 s
+3050 2004(\))N
+3 f
+1564 2148(Figure)N
+1811(1:)X
+2 f
+1898(Getting)X
+2158(and)X
+2298(using)X
+2491(an)X
+2591(Initial)X
+2806(Ticket)X
+1 f
+555 2340(Upon)N
+759(receiving)X
+1084(the)X
+1208(response)X
+1515(the)X
+1639(client)X
+1843(decrypts)X
+2141(it)X
+2211(using)X
+2410(its)X
+2511(secret)X
+2725(key)X
+2867(\(usually)X
+3151(derived)X
+3418(from)X
+3600(a)X
+3661(password\).)X
+555 2436(After)N
+745(checking)X
+1055(the)X
+1173(nonce,)X
+1405(the)X
+1523(client)X
+1721(caches)X
+1956(the)X
+2074(ticket)X
+2272(and)X
+2408(associated)X
+2758(session)X
+3009(key)X
+3145(for)X
+3259(future)X
+3471(use.)X
+555 2560(In)N
+647(the)X
+770(third)X
+946(message)X
+1243(the)X
+1366(client)X
+1569(presents)X
+1857(the)X
+1980(ticket)X
+2183(and)X
+2324(a)X
+2385 0.2109(freshly-generated)AX
+2973(authenticator)X
+3417(to)X
+3503(the)X
+3625(server.)X
+3886(The)X
+555 2656(authenticator)N
+1011(contains)X
+1315(a)X
+1388(timestamp)X
+1758(and)X
+1911(is)X
+2000(encrypted)X
+2353(in)X
+2451(the)X
+2585(session)X
+2852(key)X
+3004(K)X
+7 s
+3062 2672(c,)N
+3106(s)X
+10 s
+3135 2656(.)N
+3211(Upon)X
+3425(receipt)X
+3680(the)X
+3814(server)X
+555 2752(decrypts)N
+854(the)X
+979(ticket)X
+1184(using)X
+1383(the)X
+1507(key)X
+1649(it)X
+1719(shares)X
+1946(with)X
+2114(the)X
+8 s
+2234(KDC)X
+10 s
+2395(\(this)X
+2563(key)X
+2705(is)X
+2784(kept)X
+2948(in)X
+3036(secure)X
+3268(storage)X
+3526(on)X
+3632(the)X
+3756(server's)X
+555 2848(host\))N
+737(and)X
+875(extracts)X
+1147(the)X
+1267(identity)X
+1533(of)X
+1622(the)X
+1742(client)X
+1942(and)X
+2080(the)X
+2199(session)X
+2451(key)X
+2588(K)X
+7 s
+2646 2864(c,)N
+2690(s)X
+10 s
+2719 2848(.)N
+2780(To)X
+2890(verify)X
+3103(the)X
+3222(identity)X
+3487(of)X
+3575(the)X
+3694(client,)X
+3913(the)X
+555 2944(sever)N
+748(decrypts)X
+1043(the)X
+1164(authenticator)X
+1606(\(using)X
+1829(the)X
+1950(session)X
+2204(key)X
+2342(K)X
+7 s
+2400 2960(c,)N
+2444(s)X
+10 s
+2495 2944(from)N
+2673(the)X
+2793(ticket\))X
+3020(and)X
+3158(veri\256es)X
+3416(that)X
+3558(the)X
+3678(timestamp)X
+555 3040(is)N
+628(current.)X
+555 3164(Successful)N
+926(veri\256cation)X
+1319(of)X
+1414(the)X
+1540(authenticator)X
+1987(proves)X
+2229(that)X
+2376(the)X
+2501(client)X
+2706(possesses)X
+3040(the)X
+3165(session)X
+3423(key)X
+3566(K)X
+7 s
+3624 3180(c,)N
+3668(s)X
+10 s
+3697 3164(,)N
+3744(which)X
+3967(it)X
+555 3260(only)N
+719(could)X
+919(have)X
+1093(obtained)X
+1391(if)X
+1462(it)X
+1528(were)X
+1707(able)X
+1862(to)X
+1945(decrypt)X
+2207(the)X
+2326(response)X
+2628(from)X
+2805(the)X
+8 s
+2920(KDC)X
+10 s
+3055(.)X
+3116(Since)X
+3315(the)X
+3434(response)X
+3736(from)X
+3913(the)X
+8 s
+555 3356(KDC)N
+10 s
+711(was)X
+857(encrypted)X
+1195(in)X
+1278(K)X
+7 s
+1336 3372(c)N
+10 s
+1368 3356(,)N
+1408(the)X
+1526(key)X
+1662(of)X
+1749(the)X
+1867(user)X
+2021(named)X
+2255(in)X
+2337(the)X
+2455(ticket,)X
+2673(the)X
+2791(server)X
+3008(may)X
+3166(reasonably)X
+3534(be)X
+3630(assured)X
+3891(that)X
+555 3452(identity)N
+819(of)X
+906(the)X
+1024(client)X
+1222(is)X
+1295(in)X
+1377(fact)X
+1518(the)X
+1636(principal)X
+1941(named)X
+2175(in)X
+2257(the)X
+2375(ticket.)X
+555 3576(If)N
+644(the)X
+777(client)X
+990(requests)X
+1288(mutual)X
+1545(authentication)X
+2034(from)X
+2225(the)X
+2358(server,)X
+2610(the)X
+2743(server)X
+2975(responds)X
+3295(with)X
+3472(a)X
+3543(fresh)X
+3739(message)X
+555 3672(encrypted)N
+892(using)X
+1085(the)X
+1203(session)X
+1454(key.)X
+1630(This)X
+1792(proves)X
+2026(to)X
+2108(the)X
+2226(client)X
+2424(that)X
+2564(the)X
+2682(server)X
+2899(possesses)X
+3226(the)X
+3344(session)X
+3595(key,)X
+3751(which)X
+3967(it)X
+555 3768(could)N
+758(only)X
+924(have)X
+1100(obtained)X
+1400(if)X
+1473(it)X
+1541(was)X
+1690(able)X
+1848(to)X
+1934(decrypt)X
+2199(the)X
+2321(ticket.)X
+2563(Since)X
+2765(the)X
+2887(ticket)X
+3089(is)X
+3166(encrypted)X
+3507(in)X
+3593(a)X
+3653(key)X
+3793(known)X
+555 3864(only)N
+717(by)X
+817(the)X
+8 s
+931(KDC)X
+10 s
+1086(and)X
+1222(the)X
+1340(server,)X
+1577(the)X
+1695(response)X
+1996(proves)X
+2230(the)X
+2348(identity)X
+2612(of)X
+2699(the)X
+2817(server.)X
+555 3988(For)N
+690(greater)X
+938(detail)X
+1140(on)X
+1244(the)X
+1366(messages)X
+1693(in)X
+1779(Version)X
+2057(4)X
+2121(of)X
+2212(Kerberos)X
+2531(the)X
+2653(reader)X
+2879(is)X
+2956(referred)X
+3236(to)X
+3342([Ste88])X
+3602(and)X
+3742([Mil87].)X
+555 4084(Details)N
+802(about)X
+1000(Version)X
+1274(5)X
+1334(can)X
+1466(be)X
+1562(found)X
+1769(in)X
+1871([Koh92].)X
+3 f
+555 4276(2.2.)N
+715(The)X
+868(additional)X
+1233(ticket)X
+1445(exchange)X
+1 f
+555 4400(To)N
+672(reduce)X
+915(the)X
+1041(risk)X
+1189(of)X
+1284(exposure)X
+1602(of)X
+1696(the)X
+1821(client's)X
+2084(secret)X
+2299(key)X
+2442(K)X
+7 s
+2500 4416(c)N
+10 s
+2559 4400(and)N
+2702(to)X
+2791(make)X
+2992(the)X
+3117(use)X
+3251(of)X
+3345(Kerberos)X
+3667(more)X
+3859(tran-)X
+555 4496(sparent)N
+818(to)X
+911(the)X
+1040(user,)X
+1224(the)X
+1352(exchange)X
+1686(above)X
+1908(is)X
+1991(used)X
+2168(primarily)X
+2496(to)X
+2588(obtain)X
+2818(a)X
+2884(ticket)X
+3092(for)X
+3216(a)X
+3282(special)X
+2 f
+3535(ticket-granting)X
+555 4592(server)N
+1 f
+781(\()X
+8 s
+808(TGS)X
+10 s
+929(\).)X
+1001(The)X
+1151(client)X
+1354(erases)X
+1576(its)X
+1676(copy)X
+1857(of)X
+1949(the)X
+2072(client's)X
+2333(secret)X
+2546(key)X
+2687(once)X
+2864(this)X
+3004(ticket-granting)X
+3500(ticket)X
+3702(\()X
+8 s
+3729(TGT)X
+10 s
+3853(\))X
+3904(has)X
+555 4688(been)N
+727(obtained,)X
+555 4812(The)N
+8 s
+700(TGS)X
+10 s
+845(is)X
+922(logically)X
+1226(distinct)X
+1485(from)X
+1665(the)X
+8 s
+1783(KDC)X
+10 s
+1942(which)X
+2162(provides)X
+2461(the)X
+2582(initial)X
+2791(ticket)X
+2992(service,)X
+3263(but)X
+3388(the)X
+8 s
+3505(TGS)X
+10 s
+3649(runs)X
+3810(on)X
+3913(the)X
+555 4908(same)N
+742(host)X
+897(and)X
+1035(has)X
+1164(access)X
+1392(to)X
+1476(the)X
+1596(same)X
+1783(database)X
+2082(of)X
+2170(clients)X
+2400(and)X
+2537(keys)X
+2705(used)X
+2873(by)X
+2974(the)X
+8 s
+3089(KDC)X
+10 s
+3245(\(see)X
+3396(Figure)X
+3626(2\).)X
+3754(A)X
+3833(client)X
+555 5004(presents)N
+843(its)X
+8 s
+939(TGT)X
+10 s
+1088(\(along)X
+1318(with)X
+1485(other)X
+1675(request)X
+1932(data\))X
+2118(to)X
+2205(the)X
+8 s
+2324(TGS)X
+10 s
+2470(as)X
+2562(it)X
+2631(would)X
+2856(present)X
+3113(it)X
+3182(to)X
+3269(any)X
+3410(other)X
+3600(server)X
+3822(\(in)X
+3935(an)X
+555 5100(application)N
+932(request\);)X
+1234(the)X
+8 s
+1349(TGS)X
+10 s
+1491(veri\256es)X
+1748(the)X
+1867(ticket,)X
+2086(authenticator,)X
+2546(and)X
+2683(accompanying)X
+3171(request,)X
+3443(and)X
+3579(replies)X
+3813(with)X
+3975(a)X
+555 5196(ticket)N
+757(for)X
+875(a)X
+935(new)X
+1093(server.)X
+1354(The)X
+1503(protected)X
+1826(part)X
+1975(of)X
+2066(the)X
+2188(reply)X
+2377(is)X
+2454(encrypted)X
+2795(with)X
+2961(the)X
+3083(session)X
+3338(key)X
+3477(from)X
+3656(the)X
+8 s
+3773(TGT)X
+10 s
+3897(,)X
+3940(so)X
+555 5292(the)N
+674(client)X
+873(need)X
+1046(not)X
+1169(retain)X
+1373(the)X
+1492(original)X
+1762(secret)X
+1971(key)X
+2108(K)X
+7 s
+2166 5308(c)N
+10 s
+2219 5292(to)N
+2302(decrypt)X
+2564(and)X
+2700(use)X
+2827(this)X
+2962(reply.)X
+3187(The)X
+3332(client)X
+3530(then)X
+3688(uses)X
+3846(these)X
+555 5388(new)N
+709(credentials)X
+1077(as)X
+1164(before)X
+1390(to)X
+1472(authenticate)X
+1880(itself)X
+2060(to)X
+2142(the)X
+2260(server,)X
+2497(and)X
+2633(perhaps)X
+2903(to)X
+2985(verify)X
+3197(the)X
+3315(identity)X
+3579(of)X
+3666(the)X
+3784(server.)X
+555 5512(Once)N
+752(the)X
+877(authentication)X
+1358(is)X
+1438(established,)X
+1841(the)X
+1966(client)X
+2171(and)X
+2314(server)X
+2538(share)X
+2735(a)X
+2798(common)X
+3105(session)X
+3363(key)X
+3505(K)X
+7 s
+3563 5528(c,)N
+3607(s)X
+10 s
+3636 5512(,)N
+3682(which)X
+3904(has)X
+555 5608(never)N
+756(been)X
+930(transmitted)X
+1312(over)X
+1477(the)X
+1597(network)X
+1882(without)X
+2148(being)X
+2348(encrypted.)X
+2727(They)X
+2914(may)X
+3074(use)X
+3203(this)X
+3340(key)X
+3478(to)X
+3562(protect)X
+3806(subse-)X
+555 5704(quent)N
+756(messages)X
+1082(from)X
+1261(disclosure)X
+1608(or)X
+1697(modi\256cation.)X
+2163(Kerberos)X
+2480(provides)X
+2778(message)X
+3072(formats)X
+3339(which)X
+3557(an)X
+3655(application)X
+555 5800(may)N
+713(generate)X
+1006(as)X
+1093(needed)X
+1341(to)X
+1423(assure)X
+1644(the)X
+1762(integrity)X
+2053(or)X
+2140(both)X
+2302(the)X
+2420(integrity)X
+2711(and)X
+2847(privacy)X
+3108(of)X
+3195(a)X
+3251(message.)X
+
+4 p
+%%Page: 4 4
+10 s 0 xH 0 xS 1 f
+0 32(--)N
+4323(--)X
+2216 416(-)N
+2263(4)X
+2323(-)X
+1791 836(KDC)N
+1707 820 MXY
+336 238 De
+2615 836(TGS)N
+2522 820 MXY
+336 238 De
+1980 703(usually)N
+2231(co-located)X
+2041 723 MXY
+-47 12 Dl
+2041 747 MXY
+-47 -12 Dl
+(.)S
+2018(.)X
+2042(.)X
+2066(.)X
+2090(.)X
+2114(.)X
+2138(.)X
+2162(.)X
+2186(.)X
+2210(.)X
+2234(.)X
+2258(.)X
+2283(.)X
+2307(.)X
+2331(.)X
+2355(.)X
+2379(.)X
+2403(.)X
+2427(.)X
+2451(.)X
+2475(.)X
+2499(.)X
+2523(.)X
+2547(.)X
+2571(.)X
+2524 747 MXY
+47 -12 Dl
+2524 723 MXY
+47 12 Dl
+1778 1315(Client)N
+1707 1299 MXY
+336 238 De
+2585 1315(Server)N
+2522 1299 MXY
+336 238 De
+3 f
+1676 1076(1)N
+1 f
+10 f
+1756 1195(c)N
+1125(c)Y
+1045(c)Y
+965(c)Y
+1768 953 MXY
+-12 -48 Dl
+1744 953 MXY
+12 -48 Dl
+3 f
+1915 1076(2)N
+1 f
+1875 940 MXY
+0 240 Dl
+1863 1132 MXY
+12 48 Dl
+1887 1132 MXY
+-12 48 Dl
+3 f
+2178 1033(3)N
+1 f
+1994 1215 MXY
+528 -395 Dl
+2491 858 MXY
+31 -38 Dl
+2477 839 MXY
+45 -19 Dl
+3 f
+2347 1118(4)N
+1 f
+2571 905 MXY
+-528 394 Dl
+2074 1261 MXY
+-31 38 Dl
+2088 1280 MXY
+-45 19 Dl
+3 f
+2263 1352(5)N
+1 f
+10 f
+1994 1384(h)N
+2011(hhhhhhhhhhhhhh)X
+2524 1396 MXY
+47 -12 Dl
+2524 1372 MXY
+47 12 Dl
+3 f
+1427 1620(1.)N
+1 f
+1507(Client)X
+9 f
+1722 MX
+(->)174 987 oc
+1 f
+1821(KDC:)X
+2032(c,)X
+2108(tgs,)X
+2241(n)X
+3 f
+1427 1724(2.)N
+1 f
+1507(KDC)X
+9 f
+1696 MX
+(->)174 987 oc
+1 f
+1795(Client:)X
+2032({K)X
+8 s
+2128 1749(c,tgs)N
+10 s
+2267 1724(,n}K)N
+8 s
+2423 1749(c)N
+10 s
+2471 1724(,{T)N
+8 s
+2578 1749(c,tgs)N
+10 s
+2697 1724(}K)N
+8 s
+2793 1749(tgs)N
+3 f
+10 s
+1427 1828(3.)N
+1 f
+1507(Client)X
+9 f
+1722 MX
+(->)174 987 oc
+1 f
+1821(TGS:)X
+2014({A)X
+8 s
+2110 1853(c)N
+10 s
+2138 1828(}K)N
+8 s
+2234 1853(c,tgs)N
+10 s
+2373 1828(,{T)N
+8 s
+2480 1853(c,tgs)N
+10 s
+2599 1828(}K)N
+8 s
+2695 1853(tgs)N
+10 s
+2790 1828(,)N
+2830(s,)X
+2901(n)X
+3 f
+1427 1932(4.)N
+1 f
+1507(TGS)X
+9 f
+1678 MX
+(->)174 987 oc
+1 f
+1777(Client:)X
+2014({K)X
+8 s
+2110 1957(c,s)N
+10 s
+2179 1932(,n}K)N
+8 s
+2335 1957(c,tgs)N
+10 s
+2474 1932(,{T)N
+8 s
+2581 1957(c,s)N
+10 s
+2650 1932(}K)N
+8 s
+2746 1957(s)N
+3 f
+10 s
+1427 2036(5.)N
+1 f
+1507(Client)X
+9 f
+1722 MX
+(->)174 987 oc
+1 f
+1821(Server:)X
+2073({A)X
+8 s
+2169 2061(c)N
+10 s
+2197 2036(}K)N
+8 s
+2293 2061(c,s)N
+10 s
+2382 2036(,{T)N
+8 s
+2489 2061(c,s)N
+10 s
+2558 2036(}K)N
+8 s
+2654 2061(s)N
+10 s
+1427 2236(\(In)N
+1541(version)X
+1797(4,)X
+1877(message)X
+3 f
+2169(2)X
+1 f
+2229(is)X
+2302({K)X
+8 s
+2398 2261(c,tgs)N
+10 s
+2537 2236(,n,{T)N
+8 s
+2704 2261(c,tgs)N
+10 s
+2823 2236(}K)N
+8 s
+2919 2261(tgs)N
+10 s
+2994 2236(}K)N
+8 s
+3090 2261(c)N
+10 s
+3118 2236(,)N
+1427 2340(and)N
+1563(message)X
+3 f
+1855(4)X
+1 f
+1915(is)X
+1988({K)X
+8 s
+2084 2365(c,s)N
+10 s
+2173 2340(,n,{T)N
+8 s
+2340 2365(c,s)N
+10 s
+2409 2340(}K)N
+8 s
+2505 2365(s)N
+10 s
+2530 2340(}K)N
+8 s
+2626 2365(c,tgs)N
+10 s
+2745 2340(\))N
+3 f
+1745 2492(Figure)N
+1992(2:)X
+2 f
+2079(Getting)X
+2339(a)X
+2399(service)X
+2647(ticket)X
+3 f
+555 2684(3.)N
+655(Limitations)X
+1070(of)X
+1157(Version)X
+1444(4)X
+1 f
+555 2808(Version)N
+839(4)X
+909(of)X
+1006(Kerberos)X
+1331(is)X
+1414(in)X
+1506(widespread)X
+1902(use,)X
+2059(but)X
+2191(some)X
+2390(sites)X
+2562(require)X
+2820(functionality)X
+3259(that)X
+3408(it)X
+3481(doesn't)X
+3746(provide,)X
+555 2904(while)N
+756(others)X
+975(have)X
+1150(a)X
+1209(computing)X
+1574(environment)X
+2002(or)X
+2091(administrative)X
+2571(procedures)X
+2946(that)X
+3088(differ)X
+3289(from)X
+3467(that)X
+3609(at)X
+8 s
+3685(MIT)X
+10 s
+3802(.)X
+3864(As)X
+3975(a)X
+555 3000(result,)N
+780(work)X
+972(on)X
+1079(Kerberos)X
+1401(Version)X
+1682(5)X
+1749(commenced)X
+2164(in)X
+2253(1989,)X
+2460(fueled)X
+2688(by)X
+2795(discussions)X
+3186(with)X
+3355(Version)X
+3636(4)X
+3703(users)X
+3895(and)X
+555 3096(administrators)N
+1033(about)X
+1231(their)X
+1398(experiences)X
+1798(with)X
+1960(the)X
+2078(protocol)X
+2365(and)X
+8 s
+2497(MIT)X
+10 s
+2614('s)X
+2692(implementation.)X
+3 f
+555 3288(3.1.)N
+715(Environmental)X
+1250(shortcomings)X
+1 f
+555 3412(Kerberos)N
+871(Version)X
+1146(4)X
+1207(was)X
+1353(targeted)X
+1633(primarily)X
+1952(for)X
+2067(Project)X
+2315(Athena)X
+2588([Cha90],)X
+2892(and)X
+3029(as)X
+3117(such)X
+3285(in)X
+3367(some)X
+3556(areas)X
+3742(it)X
+3806(makes)X
+555 3508(assumptions)N
+970(and)X
+1106(takes)X
+1291(approaches)X
+1673(that)X
+1813(are)X
+1932(not)X
+2054(appropriate)X
+2440(universally:)X
+3 f
+555 3632(Encryption)N
+964(system)X
+1219(dependence:)X
+1 f
+1669(The)X
+1817(Version)X
+2094(4)X
+2157(protocol)X
+2447(uses)X
+2608(only)X
+2773(the)X
+2893(Data)X
+3067(Encryption)X
+3445(Standard)X
+3752(\()X
+8 s
+3779(DES)X
+10 s
+3900(\))X
+3949(to)X
+755 3728(encrypt)N
+1026(messages.)X
+1399(The)X
+1554(export)X
+1789(of)X
+8 s
+1882(DES)X
+10 s
+2033(from)X
+2219(the)X
+8 s
+2343(USA)X
+10 s
+2501(is)X
+2584(restricted)X
+2913(by)X
+3023(the)X
+3150(U.S.)X
+3321(Government,)X
+3771(making)X
+755 3824(truly)N
+926(widespread)X
+1312(use)X
+1439(of)X
+1526(Version)X
+1800(4)X
+1860(dif\256cult.)X
+3 f
+555 3948(Internet)N
+874(protocol)X
+1196(dependence:)X
+1 f
+1660(Version)X
+1951(4)X
+2028(requires)X
+2324(the)X
+2459(use)X
+2603(of)X
+2707(Internet)X
+2994(Protocol)X
+3302(\()X
+8 s
+3329(IP)X
+10 s
+3386(\))X
+3450(addresses,)X
+3815(which)X
+755 4044(makes)N
+980(it)X
+1044(unsuitable)X
+1393(for)X
+1507(some)X
+1696(environments.)X
+3 f
+555 4168(Message)N
+881(byte)X
+1064(ordering:)X
+1 f
+1425(Version)X
+1715(4)X
+1791(uses)X
+1965(a)X
+2037("receiver)X
+2366(makes)X
+2607(right")X
+2827(philosophy)X
+3218(for)X
+3348(encoding)X
+3678(multi-byte)X
+755 4264(values)N
+985(in)X
+1072(network)X
+1360(messages,)X
+1708(where)X
+1930(the)X
+2052(sending)X
+2325(host)X
+2482(encodes)X
+2765(the)X
+2887(value)X
+3085(in)X
+3171(its)X
+3270(own)X
+3432(natural)X
+3679(byte)X
+3841(order)X
+755 4360(and)N
+894(the)X
+1015(receiver)X
+1298(must)X
+1476(convert)X
+1740(this)X
+1878(byte)X
+2039(order)X
+2232(to)X
+2317(its)X
+2415(own)X
+2576(native)X
+2795(order.)X
+3028(While)X
+3246(this)X
+3383(makes)X
+3610(communica-)X
+755 4456(tion)N
+905(between)X
+1199(two)X
+1345(hosts)X
+1535(with)X
+1703(the)X
+1827(same)X
+2018(byte)X
+2182(order)X
+2378(simple,)X
+2637(it)X
+2707(does)X
+2880(not)X
+3008(follow)X
+3243(established)X
+3624(conventions)X
+755 4552(and)N
+902(will)X
+1057(preclude)X
+1365(interoperability)X
+1890(of)X
+1988(a)X
+2055(machine)X
+2358(with)X
+2531(an)X
+2638(unusual)X
+2917(byte)X
+3085(order)X
+3285(not)X
+3417(understood)X
+3803(by)X
+3913(the)X
+755 4648(receiver.)N
+3 f
+555 4772(Ticket)N
+798(lifetimes:)X
+1 f
+1139(The)X
+1288(valid)X
+1472(life)X
+1603(of)X
+1694(a)X
+1754(ticket)X
+1956(in)X
+2042(Version)X
+2320(4)X
+2384(is)X
+2461(encoded)X
+2753(by)X
+2857(a)X
+8 s
+2913(UNIX)X
+10 s
+3096(timestamp)X
+3453(issue)X
+3637(date)X
+3795(and)X
+3935(an)X
+755 4868(8-bit)N
+928(lifetime)X
+1199(quantity)X
+1483(in)X
+1567(units)X
+1744(of)X
+1833(\256ve)X
+1975(minutes,)X
+2270(resulting)X
+2572(in)X
+2656(a)X
+2714(maximum)X
+3060(lifetime)X
+3331(of)X
+3420(21)X
+(14)129 833 oc
+3589(hours.)X
+3829(Some)X
+755 4964(environments)N
+1225(require)X
+1487(longer)X
+1726(lifetimes)X
+2040(for)X
+2168(proper)X
+2412(operation)X
+2749(\(e.g.)X
+2925(a)X
+2994(long-running)X
+3445(simulation)X
+3815(which)X
+755 5060(requires)N
+1034(valid)X
+1214(Kerberos)X
+1529(credentials)X
+1897(during)X
+2126(its)X
+2221(entire)X
+2424(execution\).)X
+3 f
+555 5184(Authentication)N
+1090(forwarding:)X
+1 f
+1528(Version)X
+1806(4)X
+1870(has)X
+2001(no)X
+2105(provision)X
+2431(for)X
+2549(allowing)X
+2853(credentials)X
+3224(issued)X
+3447(to)X
+3532(a)X
+3591(client)X
+3792(on)X
+3895(one)X
+755 5280(host)N
+911(to)X
+996(be)X
+1095(forwarded)X
+1449(to)X
+1534(some)X
+1726(other)X
+1914(host)X
+2069(and)X
+2207(used)X
+2376(by)X
+2478(another)X
+2741(client.)X
+2981(Support)X
+3256(for)X
+3372(this)X
+3509(might)X
+3717(be)X
+3815(useful)X
+755 5376(if)N
+837(an)X
+945(intermediate)X
+1378(server)X
+1607(needs)X
+1822(to)X
+1916(access)X
+2154(some)X
+2355(resource)X
+2660(with)X
+2834(the)X
+2964(rights)X
+3178(of)X
+3277(the)X
+3407(client)X
+3617(\(e.g.)X
+3792(a)X
+3860(print)X
+755 5472(server)N
+984(needs)X
+1199(access)X
+1437(to)X
+1530(the)X
+1659(\256le)X
+1792(server)X
+2020(to)X
+2113(retrieve)X
+2390(a)X
+2457(client's)X
+2724(\256le)X
+2857(for)X
+2982(printing\),)X
+3313(or)X
+3411(if)X
+3491(a)X
+3558(user)X
+3723(logs)X
+3887(into)X
+755 5568(another)N
+1020(host)X
+1177(on)X
+1281(the)X
+1403(network)X
+1690(and)X
+1830(wishes)X
+2072(to)X
+2157(pursue)X
+2394(activities)X
+2706(there)X
+2890(with)X
+3055(the)X
+3176(privileges)X
+3515(and)X
+3654(authentica-)X
+755 5664(tion)N
+899(available)X
+1209(on)X
+1309(the)X
+1427(originating)X
+1798(host.)X
+3 f
+555 5788(Principal)N
+895(naming:)X
+1 f
+1204(In)X
+1296(Version)X
+1574(4,)X
+1658(principals)X
+1998(are)X
+2121(named)X
+2359(with)X
+2525(three)X
+2710(components:)X
+3143(name,)X
+3361(instance,)X
+3668(and)X
+3808(realm,)X
+
+5 p
+%%Page: 5 5
+10 s 0 xH 0 xS 1 f
+0 32(--)N
+4323(--)X
+2216 416(-)N
+2263(5)X
+2323(-)X
+755 672(each)N
+927(of)X
+1018(which)X
+1238(may)X
+1400(be)X
+1500(up)X
+1604(to)X
+1690(39)X
+1794(characters)X
+2145(long.)X
+2351(These)X
+2567(sizes)X
+2746(are)X
+2868(too)X
+2993(short)X
+3176(for)X
+3293(some)X
+3485(applications)X
+3895(and)X
+755 768(installation)N
+1132(environments.)X
+1630(In)X
+1719(addition,)X
+2023(due)X
+2161(to)X
+2245(implementation-imposed)X
+3067(conventions)X
+3476(the)X
+3596(normal)X
+3845(char-)X
+755 864(acter)N
+941(set)X
+1059(allowed)X
+1342(for)X
+1465(the)X
+1592(name)X
+1795(portion)X
+2055(excludes)X
+2365(the)X
+2492(period)X
+2726(\(.\),)X
+2849(which)X
+3074(is)X
+3155(used)X
+3330(in)X
+3420(account)X
+3698(names)X
+3931(on)X
+755 960(some)N
+946(systems.)X
+1261(These)X
+1475(same)X
+1662(conventions)X
+2071(dictate)X
+2307(that)X
+2449(the)X
+2569(account)X
+2841(name)X
+3037(match)X
+3255(the)X
+3375(name)X
+3571(portion)X
+3824(of)X
+3913(the)X
+755 1056(principal)N
+1063(identi\256er,)X
+1395(which)X
+1614(is)X
+1690(unacceptable)X
+2133(in)X
+2218(situations)X
+2547(where)X
+2766(Kerberos)X
+3083(is)X
+3158(being)X
+3358(installed)X
+3651(in)X
+3735(an)X
+3833(exist-)X
+755 1152(ing)N
+877(network)X
+1160(with)X
+1322(non-unique)X
+1707(account)X
+1977(names.)X
+3 f
+555 1276(Inter-realm)N
+986(authentication:)X
+1 f
+1535(Version)X
+1818(4)X
+1887(provides)X
+2192(cooperation)X
+2600(between)X
+2897(authentication)X
+3380(realms)X
+3623(by)X
+3731(allowing)X
+755 1372(each)N
+926(pair)X
+1074(of)X
+1164(cooperating)X
+1566(realms)X
+1802(to)X
+1886(exchange)X
+2212(an)X
+2310(encryption)X
+2675(key)X
+2813(to)X
+2897(be)X
+2995(used)X
+3164(as)X
+3253(a)X
+3311(secondary)X
+3659(key)X
+3797(for)X
+3913(the)X
+755 1468(ticket-granting)N
+1255(service.)X
+1550(A)X
+1635(client)X
+1840(can)X
+1979(obtain)X
+2206(tickets)X
+2442(for)X
+2563(services)X
+2849(from)X
+3032(a)X
+3095(foreign)X
+3354(realm's)X
+8 s
+3618(KDC)X
+10 s
+3780(by)X
+3887(\256rst)X
+755 1564(obtaining)N
+1082(a)X
+1143(ticket-granting)X
+1640(ticket)X
+1843(for)X
+1962(the)X
+2085(foreign)X
+2341(realm)X
+2548(from)X
+2728(its)X
+2827(local)X
+8 s
+3003(KDC)X
+10 s
+3162(and)X
+3302(then)X
+3464(using)X
+3661(that)X
+8 s
+3801(TGT)X
+10 s
+3949(to)X
+755 1660(obtain)N
+981(tickets)X
+1216(for)X
+1336(the)X
+1460(foreign)X
+1718(application)X
+2100(server)X
+2323(\(see)X
+2479(Figure)X
+2713(3\).)X
+2845(This)X
+3012(pair-wise)X
+3336(key)X
+3477(exchange)X
+3806(makes)X
+755 1756(inter-realm)N
+1138(ticket)X
+1342(requests)X
+1630(and)X
+1771(veri\256cation)X
+2161(easy)X
+2329(to)X
+2416(implement,)X
+2803(but)X
+2930(requires)X
+2 f
+3214(O)X
+1 f
+3285(\()X
+2 f
+3312(n)X
+1 f
+7 s
+3361 1724(2)N
+10 s
+3396 1756(\))N
+3448(key)X
+3589(exchanges)X
+3949(to)X
+755 1852(interconnect)N
+2 f
+1177(n)X
+1 f
+1242(realms)X
+1481(\(see)X
+1636(Figure)X
+1870(4\).)X
+2002(Even)X
+2191(with)X
+2357(only)X
+2523(a)X
+2583(few)X
+2728(cooperating)X
+3131(realms,)X
+3389(the)X
+3511(assignment)X
+3895(and)X
+755 1948(management)N
+1185(of)X
+1272(the)X
+1390(inter-realm)X
+1767(keys)X
+1934(is)X
+2007(an)X
+2103(expansive)X
+2444(task.)X
+3 f
+555 2140(3.2.)N
+715(Technical)X
+1068(de\256ciencies)X
+1 f
+555 2264(In)N
+643(addition)X
+926(to)X
+1009(the)X
+1128(environmental)X
+1612(problems,)X
+1951(there)X
+2133(are)X
+2253(some)X
+2443(technical)X
+2754(de\256ciencies)X
+3154(in)X
+3237(Version)X
+3511(4)X
+3571(and)X
+3707(its)X
+3802(imple-)X
+555 2360(mentation.)N
+935(Bellovin)X
+1230(and)X
+1366(Merritt)X
+1633([Bel90])X
+1898(provide)X
+2163(detailed)X
+2437(analyses)X
+2729(of)X
+2816(some)X
+3005(of)X
+3092(these)X
+3277(issues.)X
+3 f
+555 2484(Double)N
+836(Encryption:)X
+1 f
+1286(As)X
+1412(shown)X
+1657(in)X
+1755(Figure)X
+2000(1,)X
+2096(the)X
+2230(ticket)X
+2444(issued)X
+2680(by)X
+2796(the)X
+2930(Kerberos)X
+3261(server)X
+3494(in)X
+3592(Version)X
+3882(4)X
+3958(is)X
+755 2580(encrypted)N
+1101(twice)X
+1304(when)X
+1507(transmitted)X
+1896(to)X
+1987(the)X
+2114(client,)X
+2341(and)X
+2485(only)X
+2655(once)X
+2835(when)X
+3037(sent)X
+3194(to)X
+3284(the)X
+3410(application)X
+3794(server.)X
+755 2676(There)N
+964(is)X
+1038(no)X
+1139(need)X
+1312(to)X
+1395(encrypt)X
+1657(it)X
+1722(in)X
+1805(the)X
+1924(message)X
+2217(from)X
+2394(the)X
+8 s
+2509(KDC)X
+10 s
+2664(to)X
+2746(the)X
+2864(client,)X
+3082(and)X
+3218(doing)X
+3420(so)X
+3511(can)X
+3643(be)X
+3739(wasteful)X
+755 2772(of)N
+847(processing)X
+1215(time)X
+1382(if)X
+1456(encryption)X
+1824(is)X
+1902(computationally)X
+2446(intensive)X
+2759(\(as)X
+2877(will)X
+3025(be)X
+3125(the)X
+3247(case)X
+3410(for)X
+3528(most)X
+3707(software-)X
+755 2868(based)N
+975(encryption)X
+1355(implementations;)X
+1947(see)X
+2087([Mer90])X
+2391(for)X
+2521(discussion)X
+2890(of)X
+2993(fast)X
+3145(software-based)X
+3668(encryption)X
+755 2964(methods\).)N
+3 f
+555 3088(PCBC)N
+795(encryption:)X
+1 f
+1213(Kerberos)X
+1529(Version)X
+1804(4)X
+1865(uses)X
+2024(a)X
+2081(non-standard)X
+2521(mode)X
+2720(of)X
+8 s
+2804(DES)X
+10 s
+2946(to)X
+3029(encrypt)X
+3291(its)X
+3387(messages.)X
+3751(FIPS)X
+3931(81)X
+755 3184([FIPS81])N
+1071(describes)X
+1393(the)X
+1514(normal)X
+1764(cipher-block-chaining)X
+2496(\()X
+8 s
+2523(CBC)X
+10 s
+2652(\))X
+2702(mode)X
+2903(of)X
+8 s
+2988(DES)X
+10 s
+3109(.)X
+3171(Version)X
+3447(4)X
+3509(uses)X
+3669(a)X
+3727(modi\256ed)X
+755 3280(Version)N
+1032(called)X
+1247(plain-)X
+1457(and)X
+1596(cipher-block-chaining)X
+2328(mode)X
+2529(\()X
+8 s
+2556(PCBC)X
+10 s
+2721(\).)X
+2811(This)X
+2975(mode)X
+3175(was)X
+3322(an)X
+3420(attempt)X
+3682(to)X
+3766(provide)X
+755 3376(data)N
+923(encryption)X
+1300(and)X
+1449(integrity)X
+1753(protection)X
+2111(in)X
+2206(one)X
+2355(operation.)X
+2731(Unfortunately,)X
+3234(it)X
+3311(allows)X
+3553(an)X
+3662(intruder)X
+3949(to)X
+755 3472(modify)N
+1012(a)X
+1073(message)X
+1370(with)X
+1537(a)X
+1598(special)X
+1846(block-exchange)X
+2380(attack)X
+2597(which)X
+2818(may)X
+2981(not)X
+3108(be)X
+3209(detected)X
+3502(by)X
+3607(the)X
+3730(recipient)X
+755 3568([Koh89].)N
+1690 3828(TGS)N
+8 s
+1841 3853(local)N
+10 s
+1611 3812 MXY
+432 238 De
+2574 3828(TGS)N
+8 s
+2725 3853(remote)N
+10 s
+2522 3812 MXY
+432 238 De
+1730 4308(Client)N
+1611 4292 MXY
+432 238 De
+2545 4308(Server)N
+8 s
+2755 4333(remote)N
+10 s
+2522 4292 MXY
+432 238 De
+3 f
+1594 4068(1)N
+1 f
+10 f
+1674 4187(c)N
+4117(c)Y
+4037(c)Y
+3957(c)Y
+1686 3945 MXY
+-12 -48 Dl
+1662 3945 MXY
+12 -48 Dl
+3 f
+1867 4068(2)N
+1 f
+1827 3932 MXY
+0 240 Dl
+1815 4124 MXY
+12 48 Dl
+1839 4124 MXY
+-12 48 Dl
+3 f
+2171 4025(3)N
+1 f
+1979 4207 MXY
+543 -395 Dl
+2491 3850 MXY
+31 -38 Dl
+2476 3830 MXY
+46 -18 Dl
+3 f
+2354 4110(4)N
+1 f
+2586 3897 MXY
+-543 395 Dl
+2074 4254 MXY
+-31 38 Dl
+2089 4273 MXY
+-46 19 Dl
+3 f
+2262 4344(5)N
+1 f
+10 f
+1979 4376(h)N
+1986(hhhhhhhhhhhhhhh)X
+2538 4388 MXY
+48 -12 Dl
+2538 4364 MXY
+48 12 Dl
+3 f
+1401 4612(1.)N
+1 f
+1481(Client)X
+9 f
+1696 MX
+(->)174 987 oc
+1 f
+1795(TGS)X
+8 s
+1946 4637(local)N
+10 s
+2070 4612(:)N
+2112({A)X
+8 s
+2208 4637(c)N
+10 s
+2236 4612(}K)N
+8 s
+2332 4637(c,tgs)N
+10 s
+2471 4612(,{T)N
+8 s
+2578 4637(c,tgs)N
+10 s
+2697 4612(}K)N
+8 s
+2793 4637(tgs)N
+10 s
+2888 4612(,)N
+2928(tgs)X
+8 s
+3021 4637(rem)N
+3 f
+10 s
+1401 4724(2.)N
+1 f
+1481(TGS)X
+8 s
+1632 4749(local)N
+10 s
+9 f
+1776 4724 MXY
+(->)174 987 oc
+1 f
+1875(Client:)X
+2112({K)X
+8 s
+2208 4749(c,tgs)N
+6 s
+2327 4768(rem)N
+10 s
+2401 4724(}K)N
+8 s
+2497 4749(c,tgs)N
+10 s
+2636 4724(,{T)N
+8 s
+2743 4749(c,tgs)N
+6 s
+2862 4768(rem)N
+10 s
+2936 4724(}K)N
+8 s
+3032 4749(tgs)N
+6 s
+3107 4768(rem)N
+3 f
+10 s
+1401 4836(3.)N
+1 f
+1481(Client)X
+9 f
+1696 MX
+(->)174 987 oc
+1 f
+1795(TGS)X
+8 s
+1946 4861(remote)N
+10 s
+2123 4836(:)N
+2165({A)X
+8 s
+2261 4861(c)N
+10 s
+2289 4836(}K)N
+8 s
+2385 4861(c,tgs)N
+6 s
+2504 4880(rem)N
+10 s
+2598 4836(,{T)N
+8 s
+2705 4861(c,tgs)N
+6 s
+2824 4880(rem)N
+10 s
+2898 4836(}K)N
+8 s
+2994 4861(tgs)N
+6 s
+3069 4880(rem)N
+10 s
+3143 4836(,)N
+3183(s)X
+8 s
+3214 4861(rem)N
+3 f
+10 s
+1401 4948(4.)N
+1 f
+1481(TGS)X
+8 s
+1632 4973(remote)N
+10 s
+9 f
+1829 4948 MXY
+(->)174 987 oc
+1 f
+1928(Client:)X
+2165({K)X
+8 s
+2261 4973(c,s)N
+6 s
+2330 4992(rem)N
+10 s
+2404 4948(}K)N
+8 s
+2500 4973(c,tgs)N
+6 s
+2619 4992(rem)N
+10 s
+2713 4948(,{T)N
+8 s
+2820 4973(c,s)N
+6 s
+2889 4992(rem)N
+10 s
+2963 4948(}K)N
+8 s
+3059 4973(s)N
+6 s
+3084 4992(rem)N
+3 f
+10 s
+1401 5060(5.)N
+1 f
+1481(Client)X
+9 f
+1696 MX
+(->)174 987 oc
+1 f
+1795(Server)X
+8 s
+2005 5085(remote)N
+10 s
+2182 5060(:)N
+2244({A)X
+8 s
+2340 5085(c)N
+10 s
+2368 5060(}K)N
+8 s
+2464 5085(c,s)N
+6 s
+2533 5104(rem)N
+10 s
+2627 5060(,{T)N
+8 s
+2734 5085(c,s)N
+6 s
+2803 5104(rem)N
+10 s
+2877 5060(}K)N
+8 s
+2973 5085(s)N
+6 s
+2998 5104(rem)N
+10 s
+1401 5268(\(In)N
+1515(version)X
+1771(4,)X
+1851(message)X
+3 f
+2143(2)X
+1 f
+2203(is)X
+2276({K)X
+8 s
+2372 5293(c,tgs)N
+6 s
+2491 5312(rem)N
+10 s
+2585 5268(,{T)N
+8 s
+2692 5293(c,tgs)N
+6 s
+2811 5312(rem)N
+10 s
+2885 5268(}K)N
+8 s
+2981 5293(tgs)N
+6 s
+3056 5312(rem)N
+10 s
+3130 5268(}K)N
+8 s
+3226 5293(c,tgs)N
+10 s
+3345 5268(,)N
+1401 5380(and)N
+1537(message)X
+3 f
+1829(4)X
+1 f
+1889(is)X
+1962({K)X
+8 s
+2058 5405(c,s)N
+6 s
+2127 5424(rem)N
+10 s
+2221 5380(,{T)N
+8 s
+2328 5405(c,s)N
+6 s
+2397 5424(rem)N
+10 s
+2471 5380(}K)N
+8 s
+2567 5405(s)N
+6 s
+2592 5424(rem)N
+10 s
+2666 5380(}K)N
+8 s
+2762 5405(c,tgs)N
+6 s
+2881 5424(rem)N
+10 s
+2955 5380(\))N
+3 f
+1616 5540(Figure)N
+1863(3:)X
+2 f
+1950(Getting)X
+2210(a)X
+2270(foreign)X
+2521(realm)X
+2728(service)X
+2976(ticket)X
+
+6 p
+%%Page: 6 6
+10 s 0 xH 0 xS 2 f
+1 f
+0 32(--)N
+4323(--)X
+2216 416(-)N
+2263(6)X
+2323(-)X
+1865 1528(EDU)N
+1707 1584 MXY
+0 -144 Dl
+10 f
+(hhhhhhhhhhhh)S
+0 144 Dl
+1707(hhhhhhhhhhhh)X
+1 f
+2597 1048(MIT.EDU)N
+2523 1104 MXY
+0 -144 Dl
+10 f
+(hhhhhhhhhhhh)S
+0 144 Dl
+2523(hhhhhhhhhhhh)X
+1 f
+2430 1528(Berkeley.EDU)N
+2379 1584 MXY
+0 -144 Dl
+10 f
+(h)S
+2395(hhhhhhhhhhhhhh)X
+0 144 Dl
+2379(h)X
+2395(hhhhhhhhhhhhhh)X
+1 f
+1625 1048(UMICH.EDU)N
+1563 1104 MXY
+0 -144 Dl
+10 f
+(h)S
+1579(hhhhhhhhhhhhhh)X
+0 144 Dl
+1563(h)X
+1579(hhhhhhhhhhhhhh)X
+1 f
+2086 760(IFS.UMICH.EDU)N
+2019 816 MXY
+0 -144 Dl
+10 f
+(hhhhhhhhhhhhhhhhhh)S
+0 144 Dl
+2019(hhhhhhhhhhhhhhhhhh)X
+2235 1428 MXY
+-48 12 Dl
+2235 1452 MXY
+-48 -12 Dl
+192 0 Dl
+2331 1452 MXY
+48 -12 Dl
+2331 1428 MXY
+48 12 Dl
+2156 1400 MXY
+-29 40 Dl
+2171 1418 MXY
+-44 22 Dl
+396 -336 Dl
+2494 1144 MXY
+29 -40 Dl
+2479 1126 MXY
+44 -22 Dl
+2073 1391 MXY
+-6 49 Dl
+2095 1400 MXY
+-28 40 Dl
+240 -624 Dl
+2301 865 MXY
+6 -49 Dl
+2279 856 MXY
+28 -40 Dl
+1922 1397 MXY
+25 43 Dl
+1945 1391 MXY
+2 49 Dl
+-96 -336 Dl
+1876 1147 MXY
+-25 -43 Dl
+1853 1153 MXY
+-2 -49 Dl
+2669 1391 MXY
+-2 49 Dl
+2692 1397 MXY
+-25 43 Dl
+96 -336 Dl
+2761 1153 MXY
+2 -49 Dl
+2738 1147 MXY
+25 -43 Dl
+2501 1396 MXY
+22 44 Dl
+2524 1391 MXY
+-1 49 Dl
+-144 -624 Dl
+2401 860 MXY
+-22 -44 Dl
+2378 865 MXY
+1 -49 Dl
+2410 1413 MXY
+41 27 Dl
+2427 1397 MXY
+24 43 Dl
+-312 -336 Dl
+2180 1131 MXY
+-41 -27 Dl
+2163 1147 MXY
+-24 -43 Dl
+2743 915 MXY
+20 45 Dl
+2767 911 MXY
+-4 49 Dl
+-24 -144 Dl
+2759 861 MXY
+-20 -45 Dl
+2735 865 MXY
+4 -49 Dl
+2475 1044 MXY
+48 -12 Dl
+2475 1020 MXY
+48 12 Dl
+2139(h)X
+2163(hhhhhhhhh)X
+2187 1020 MXY
+-48 12 Dl
+2187 1044 MXY
+-48 -12 Dl
+1990 856 MXY
+29 -40 Dl
+1975 838 MXY
+44 -22 Dl
+-168 144 Dl
+1880 920 MXY
+-29 40 Dl
+1895 938 MXY
+-44 22 Dl
+3 f
+1681 1737(Figure)N
+1928(4:)X
+2 f
+2015(Version)X
+2284(4)X
+2344(realm)X
+2551(interconnections)X
+3 f
+555 1957(Authenticators)N
+1102(and)X
+1265(replay)X
+1518(detection:)X
+1 f
+1892(Kerberos)X
+2222(Version)X
+2511(4)X
+2586(uses)X
+2759(an)X
+2870(encrypted)X
+3222(timestamp)X
+3590(to)X
+3687(verify)X
+3913(the)X
+755 2053(freshness)N
+1077(of)X
+1167(messages)X
+1493(and)X
+1632(prevent)X
+1896(an)X
+1995(intruder)X
+2272(from)X
+2451(staging)X
+2705(a)X
+2764(successful)X
+3117(replay)X
+3341(attack.)X
+3596(If)X
+3672(an)X
+3770(authen-)X
+755 2149(ticator)N
+994(\(which)X
+1251(contains)X
+1552(the)X
+1684(timestamp\))X
+2078(is)X
+2165(out)X
+2300(of)X
+2400(date)X
+2567(or)X
+2667(is)X
+2753(being)X
+2964(replayed,)X
+3294(the)X
+3425(application)X
+3814(server)X
+755 2245(rejects)N
+1005(the)X
+1143(authentication.)X
+1677(However,)X
+2032(maintaining)X
+2454(a)X
+2530(list)X
+2667(of)X
+2774(unexpired)X
+3135(authenticators)X
+3624(which)X
+3859(have)X
+755 2341(already)N
+1024(been)X
+1208(presented)X
+1548(to)X
+1642(a)X
+1710(service)X
+1970(can)X
+2114(be)X
+2222(hard)X
+2397(to)X
+2490(implement)X
+2863(properly)X
+3166(\(and)X
+3340(indeed)X
+3585(is)X
+3669(not)X
+3802(imple-)X
+755 2437(mented)N
+1011(in)X
+1093(the)X
+1211(Version)X
+1485(4)X
+1545(implementation)X
+2067(distributed)X
+2429(by)X
+8 s
+2525(MIT)X
+10 s
+2642(\).)X
+3 f
+555 2561(Password)N
+916(attacks:)X
+1 f
+1220(The)X
+1377(initial)X
+1595(exchange)X
+1931(with)X
+2105(the)X
+2235(Kerberos)X
+2562(server)X
+2791(encrypts)X
+3094(the)X
+3223(response)X
+3535(with)X
+3708(a)X
+3775(client's)X
+755 2657(secret)N
+972(key,)X
+1136(which)X
+1360(in)X
+1450(the)X
+1576(case)X
+1743(of)X
+1838(a)X
+1902(user)X
+2064(is)X
+2145(algorithmically)X
+2662(derived)X
+2931(from)X
+3115(a)X
+3179(password.)X
+3550(An)X
+3676(intruder)X
+3958(is)X
+755 2753(able)N
+918(to)X
+1009(record)X
+1244(an)X
+1349(exchange)X
+1682(of)X
+1778(this)X
+1922(sort)X
+2071(and,)X
+2236(without)X
+2508(alerting)X
+2781(any)X
+2925(system)X
+3175(administrators,)X
+3681(attempt)X
+3949(to)X
+755 2849(discover)N
+1066(the)X
+1203(user's)X
+1434(password)X
+1776(by)X
+1895(decrypting)X
+2277(the)X
+2414(response)X
+2734(with)X
+2914(each)X
+3100(password)X
+3441(guess.)X
+3697(Since)X
+3913(the)X
+755 2945(response)N
+1071(from)X
+1262(the)X
+1395(Kerberos)X
+1725(server)X
+1957(includes)X
+2259(veri\256able)X
+2597(plaintext)X
+2912([Lom89],)X
+3252(the)X
+3385(intruder)X
+3674(can)X
+3821(try)X
+3944(as)X
+755 3041(many)N
+968(passwords)X
+1337(as)X
+1439(are)X
+1573(available)X
+1897(and)X
+2047(will)X
+2205(know)X
+2417(when)X
+2625(the)X
+2757(proper)X
+3001(password)X
+3338(has)X
+3479(been)X
+3665(found)X
+3886(\(the)X
+755 3137(decrypted)N
+1092(response)X
+1393(will)X
+1537(make)X
+1731(sense\).)X
+3 f
+555 3261(Session)N
+834(keys:)X
+1 f
+1043(Each)X
+1235(ticket)X
+1443(issued)X
+1673(by)X
+1783(the)X
+8 s
+1907(KDC)X
+10 s
+2072(contains)X
+2369(a)X
+2435(key)X
+2581(speci\256c)X
+2856(to)X
+2948(that)X
+3098(ticket,)X
+3326(called)X
+3548(a)X
+3614(session)X
+3875(key,)X
+755 3357(which)N
+975(may)X
+1137(be)X
+1237(used)X
+1408(by)X
+1512(the)X
+1634(client)X
+1836(and)X
+1976(server)X
+2197(to)X
+2283(protect)X
+2530(their)X
+2700(communications)X
+3252(once)X
+3427(authentication)X
+3904(has)X
+755 3453(been)N
+931(established.)X
+1351(However,)X
+1690(since)X
+1879(many)X
+2080(clients)X
+2312(use)X
+2442(a)X
+2501(ticket)X
+2702(multiple)X
+2991(times)X
+3187(during)X
+3419(a)X
+3478(user's)X
+3693(session,)X
+3967(it)X
+755 3549(may)N
+919(be)X
+1021(possible)X
+1309(for)X
+1429(an)X
+1530(intruder)X
+1809(to)X
+1896(replay)X
+2122(messages)X
+2450(from)X
+2631(a)X
+2692(previous)X
+2993(connection)X
+3370(to)X
+3457(clients)X
+3691(or)X
+3783(servers)X
+755 3645(which)N
+985(do)X
+1099(not)X
+1235(properly)X
+1541(protect)X
+1798(themselves)X
+2188(\(again,)X
+8 s
+2439(MIT)X
+10 s
+2556('s)X
+2648(Version)X
+2936(4)X
+3010(implementation)X
+3545(does)X
+3725(not)X
+3860(fully)X
+755 3741(implement)N
+1123(this)X
+1264(protection)X
+1615(for)X
+1735(the)X
+8 s
+1855(KRB_SAFE)X
+10 s
+2202(and)X
+8 s
+2340(KRB_PRIV)X
+10 s
+2676(messages\).)X
+3072(Additionally,)X
+3522(there)X
+3709(are)X
+3833(situa-)X
+755 3837(tions)N
+933(in)X
+1018(which)X
+1237(a)X
+1296(client)X
+1497(wishes)X
+1738(to)X
+1823(share)X
+2016(a)X
+2075(session)X
+2329(key)X
+2468(with)X
+2633(several)X
+2884(servers.)X
+3174(This)X
+3338(requires)X
+3619(special)X
+3864(non-)X
+755 3933(standard)N
+1047(application)X
+1423(negotiations)X
+1834(in)X
+1916(Version)X
+2190(4.)X
+3 f
+555 4057(Cryptographic)N
+1084(checksum:)X
+1 f
+1471(The)X
+1618(cryptographic)X
+2086(checksum)X
+2429(\(sometimes)X
+2820(called)X
+3034(a)X
+3091(message)X
+3384(authentication)X
+3859(code)X
+755 4153(or)N
+860(hash)X
+1044(or)X
+1148(digest)X
+1376(function\))X
+1707(used)X
+1891(in)X
+1990(Version)X
+2281(4)X
+2358(is)X
+2448(based)X
+2668(on)X
+2785(the)X
+2920(quadratic)X
+3256(algorithm)X
+3604(described)X
+3949(in)X
+755 4249([Jue85].)N
+1063(The)X
+8 s
+1211(MIT)X
+10 s
+1354(implementation)X
+1882(does)X
+2055(not)X
+2183(perform)X
+2468(this)X
+2609(function)X
+2902(as)X
+2995(described;)X
+3351(the)X
+3475(suitability)X
+3820(of)X
+3913(the)X
+755 4345(modi\256ed)N
+1059(version)X
+1315(as)X
+1402(a)X
+1458(cryptographic)X
+1924(checksum)X
+2265(function)X
+2552(is)X
+2625(unknown.)X
+3 f
+555 4537(4.)N
+655(Changes)X
+968(for)X
+1091(Version)X
+1378(5)X
+1 f
+555 4661(Version)N
+831(5)X
+893(of)X
+981(the)X
+1100(protocol)X
+1388(has)X
+1516(evolved)X
+1791(over)X
+1955(the)X
+2074(past)X
+2224(two)X
+2365(years)X
+2556(based)X
+2760(on)X
+2861(implementation)X
+3384(experience)X
+3754(and)X
+3891(dis-)X
+555 4757(cussions)N
+847(within)X
+1072(the)X
+1191(community)X
+1576(of)X
+1663(Kerberos)X
+1978(users.)X
+2203(Its)X
+2303(\256nal)X
+2465(speci\256cation)X
+2890(has)X
+3017(reached)X
+3288(closure,)X
+3560(and)X
+3696(a)X
+3752(descrip-)X
+555 4853(tion)N
+704(of)X
+796(the)X
+919(protocol)X
+1211(is)X
+1289(available)X
+1604([Koh92].)X
+1941(Version)X
+2219(5)X
+2283(addresses)X
+2615(the)X
+2737(concerns)X
+3047(described)X
+3379(above)X
+3595(and)X
+3735(provides)X
+555 4949(additional)N
+895(functionality.)X
+3 f
+555 5141(4.1.)N
+715(Changes)X
+1028(between)X
+1329(Versions)X
+1647(4)X
+1707(and)X
+1855(5)X
+555 5333(Use)N
+700(of)X
+787(encryption)X
+1 f
+555 5457(To)N
+669(improve)X
+961(modularity)X
+1337(and)X
+1478(ease)X
+1642(export-regulation)X
+2224(considerations)X
+2712(for)X
+2831(Version)X
+3109(5,)X
+3193(the)X
+3315(use)X
+3446(of)X
+3537(encryption)X
+3904(has)X
+555 5553(been)N
+737(separated)X
+1071(into)X
+1225(distinct)X
+1490(software)X
+1797(modules)X
+2098(which)X
+2324(can)X
+2466(be)X
+2572(replaced)X
+2875(or)X
+2972(removed)X
+3282(by)X
+3391(the)X
+3518(programmer)X
+3944(as)X
+555 5649(needed.)N
+849(When)X
+1067(encryption)X
+1436(is)X
+1515(used)X
+1688(in)X
+1776(a)X
+1838(protocol)X
+2131(message,)X
+2449(the)X
+2572(ciphertext)X
+2918(is)X
+2996(tagged)X
+3235(with)X
+3402(a)X
+3463(type)X
+3626(identi\256er)X
+3940(so)X
+555 5745(that)N
+695(the)X
+813(recipient)X
+1114(can)X
+1246(identify)X
+1515(the)X
+1633(appropriate)X
+2019(decryption)X
+2382(algorithm)X
+2713(necessary)X
+3046(to)X
+3128(interpret)X
+3420(the)X
+3538(message.)X
+
+7 p
+%%Page: 7 7
+10 s 0 xH 0 xS 1 f
+0 32(--)N
+4323(--)X
+2216 416(-)N
+2263(7)X
+2323(-)X
+555 672(Encryption)N
+933(keys)X
+1102(are)X
+1223(also)X
+1374(tagged)X
+1610(with)X
+1774(a)X
+1832(type)X
+1992(and)X
+2130(length)X
+2352(when)X
+2548(they)X
+2708(appear)X
+2945(in)X
+3029(messages.)X
+3394(Since)X
+3594(it)X
+3660(is)X
+3734(conceiv-)X
+555 768(able)N
+714(to)X
+801(use)X
+933(the)X
+1056(same)X
+1246(key)X
+1386(type)X
+1548(in)X
+1634(multiple)X
+1924(encryption)X
+2291(systems)X
+2568(\(e.g.)X
+2735(different)X
+3036(variations)X
+3376(on)X
+8 s
+3476(DES)X
+10 s
+3621(encryption\),)X
+555 864(the)N
+673(key)X
+809(type)X
+967(may)X
+1125(not)X
+1247(map)X
+1405(one-to-one)X
+1773(to)X
+1855(the)X
+1973(encryption)X
+2336(type.)X
+555 988(Each)N
+746(encryption)X
+1119(algorithm)X
+1460(is)X
+1543(responsible)X
+1937(for)X
+2060(providing)X
+2400(suf\256cient)X
+2727(integrity)X
+3027(protection)X
+3381(for)X
+3504(the)X
+3631(plaintext)X
+3940(so)X
+555 1084(that)N
+705(the)X
+832(receiver)X
+1121(can)X
+1262(verify)X
+1483(that)X
+1632(the)X
+1759(ciphertext)X
+2109(was)X
+2263(not)X
+2394(altered)X
+2642(in)X
+2733(transit.)X
+3002(If)X
+3085(the)X
+3212(algorithm)X
+3552(does)X
+3728(not)X
+3859(have)X
+555 1180(such)N
+724(properties,)X
+1087(it)X
+1153(can)X
+1287(be)X
+1385(augmented)X
+1758(by)X
+1859(including)X
+2182(a)X
+2239(checksum)X
+2581(in)X
+2664(the)X
+2783(plaintext)X
+3084(before)X
+3311(encryption.)X
+3715(By)X
+3829(doing)X
+555 1276(this,)N
+713(we)X
+830(can)X
+965(discard)X
+1220(the)X
+8 s
+1337(PCBC)X
+1520(DES)X
+10 s
+1663(mode,)X
+1883(and)X
+2021(use)X
+2150(the)X
+2270(standard)X
+8 s
+2560(CBC)X
+10 s
+2711(mode)X
+2911(with)X
+3075(an)X
+3173(embedded)X
+3525(checksum)X
+3868(over)X
+555 1372(the)N
+674(plaintext.)X
+1015(It)X
+1085(is)X
+1159(important)X
+1491(to)X
+1574(consider)X
+1867(the)X
+1986(effects)X
+2222(of)X
+2309(chosen)X
+2552(plaintext)X
+2852(attacks)X
+3095(when)X
+3289(analyzing)X
+3621(the)X
+3739(message)X
+555 1468(integrity)N
+867(properties)X
+1228(of)X
+1335(candidate)X
+1683(encryption)X
+2066(algorithms.)X
+2488(Some)X
+2710(potential)X
+3030(weaknesses)X
+3445(were)X
+3642(found)X
+3869(with)X
+555 1564(encryption)N
+927(and)X
+1072(checksum)X
+1422(methods)X
+1722(in)X
+1813(initial)X
+2028(drafts)X
+2240(of)X
+2336(the)X
+2463(Version)X
+2745(5)X
+2813(protocol)X
+3108([Stu92].)X
+3416(These)X
+3636(weaknesses)X
+555 1660(were)N
+732(corrected)X
+1052(in)X
+1134(subsequent)X
+1510(revisions.)X
+3 f
+555 1852(Network)N
+874(addresses)X
+1 f
+555 1976(When)N
+778(network)X
+1072(addresses)X
+1411(appear)X
+1657(in)X
+1750(protocol)X
+2048(messages,)X
+2402(they)X
+2571(are)X
+2701(similarly)X
+3015(tagged)X
+3259(with)X
+3431(a)X
+3497(type)X
+3665(and)X
+3811(length)X
+555 2072(\256eld)N
+719(so)X
+812(the)X
+932(recipient)X
+1235(can)X
+1369(interpret)X
+1662(them)X
+1843(properly.)X
+2176(If)X
+2251(a)X
+2308(host)X
+2462(supports)X
+2754(multiple)X
+3041(network)X
+3325(protocols)X
+3644(or)X
+3732(has)X
+3860(mul-)X
+555 2168(tiple)N
+717(addresses)X
+1045(of)X
+1132(a)X
+1188(single)X
+1399(type,)X
+1577(all)X
+1677(types)X
+1866(and)X
+2002(all)X
+2102(addresses)X
+2430(can)X
+2562(be)X
+2658(provided)X
+2963(in)X
+3045(a)X
+3101(ticket.)X
+3 f
+555 2360(Message)N
+865(encoding)X
+1 f
+555 2484(Network)N
+872(messages)X
+1210(in)X
+1307(Version)X
+1596(5)X
+1671(are)X
+1805(described)X
+2148(using)X
+2356(the)X
+2489(Abstract)X
+2796(Syntax)X
+3053(Notation)X
+3368(One)X
+3537(\()X
+8 s
+3564(ASN.1)X
+10 s
+3740(\))X
+3802(syntax)X
+555 2580([ISO8824])N
+932(and)X
+1082(encoded)X
+1384(according)X
+1735(to)X
+1831(the)X
+1963(basic)X
+2162(encoding)X
+2490(rules)X
+2680([ISO8825].)X
+3096(This)X
+3271(avoids)X
+3513(the)X
+3644(problem)X
+3944(of)X
+555 2676(independently)N
+1039(specifying)X
+1403(the)X
+1531(encoding)X
+1855(for)X
+1979(multi-byte)X
+2342(quantities)X
+2683(as)X
+2779(was)X
+2933(done)X
+3118(in)X
+3209(Version)X
+3492(4.)X
+3601(It)X
+3679(makes)X
+3913(the)X
+555 2772(protocol)N
+845(description)X
+1224(look)X
+1389(quite)X
+1572(different)X
+1872(from)X
+2051(Version)X
+2328(4,)X
+2411(but)X
+2535(it)X
+2601(is)X
+2676(primarily)X
+2996(the)X
+3116(presentation)X
+3530(of)X
+3619(the)X
+3739(message)X
+555 2868(\256elds)N
+748(that)X
+888(changes;)X
+1189(the)X
+1307(essence)X
+1573(of)X
+1660(the)X
+1778(Kerberos)X
+2093(Version)X
+2367(4)X
+2427(protocol)X
+2714(remains.)X
+3 f
+555 3060(Ticket)N
+793(changes)X
+1 f
+555 3184(The)N
+701(Kerberos)X
+1017(Version)X
+1292(5)X
+1353(ticket)X
+1551(has)X
+1678(an)X
+1774(expanded)X
+2102(format)X
+2336(to)X
+2418(accommodate)X
+2884(the)X
+3002(required)X
+3290(changes)X
+3569(from)X
+3745(the)X
+3863(Ver-)X
+555 3280(sion)N
+718(4)X
+788(ticket.)X
+1036(It)X
+1115(is)X
+1198(split)X
+1365(into)X
+1519(two)X
+1669(parts,)X
+1875(one)X
+2020(encrypted)X
+2366(and)X
+2511(the)X
+2638(other)X
+2832(plaintext.)X
+3181(The)X
+3335(server's)X
+3619(name)X
+3822(in)X
+3913(the)X
+555 3376(ticket)N
+763(is)X
+846(plaintext)X
+1156(since)X
+1350(a)X
+1415(server)X
+1641(with)X
+1812(multiple)X
+2107(identities,)X
+2449(e.g.)X
+2614(an)X
+2719(inter-realm)X
+8 s
+3101(TGS)X
+10 s
+3222(,)X
+3271(may)X
+3438(need)X
+3619(the)X
+3746(name)X
+3949(to)X
+555 3472(select)N
+764(a)X
+826(key)X
+968(with)X
+1136(which)X
+1358(to)X
+1446(decrypt)X
+1713(the)X
+1837(the)X
+1961(remainder)X
+2313(of)X
+2406(the)X
+2530(ticket)X
+2733(\(the)X
+2883(name)X
+3082(of)X
+3174(the)X
+3297(server)X
+3519(is)X
+3597(bookkeeping)X
+555 3568(information)N
+964(only)X
+1137(and)X
+1284(its)X
+1390(protection)X
+1746(is)X
+1830(not)X
+1962(necessary)X
+2305(for)X
+2429(secure)X
+2665(authentication\).)X
+3216(Everything)X
+3602(else)X
+3757(remains)X
+555 3664(encrypted.)N
+939(The)X
+1091(ticket)X
+1296(lifetime)X
+1572(is)X
+1652(encoded)X
+1947(as)X
+2040(a)X
+2102(starting)X
+2368(time)X
+2536(and)X
+2678(an)X
+2780(expiration)X
+3131(time)X
+3299(\(rather)X
+3540(than)X
+3704(a)X
+3766(speci\256c)X
+555 3760(lifetime)N
+826(\256eld\),)X
+1037(affording)X
+1357(nearly)X
+1579(limitless)X
+1870(ticket)X
+2069(lifetimes.)X
+2410(The)X
+2556(new)X
+2711(ticket)X
+2910(also)X
+3060(contains)X
+3348(a)X
+3405(new)X
+3560(\257ags)X
+3732(\256eld)X
+3895(and)X
+555 3856(other)N
+740(new)X
+894(\256elds)X
+1087(used)X
+1254(to)X
+1336(enable)X
+1566(the)X
+1684(new)X
+1838(features)X
+2113(described)X
+2441(later.)X
+3 f
+555 4048(Naming)N
+846(principals)X
+1 f
+555 4172(Principal)N
+872(identi\256ers)X
+1220(are)X
+1347(multi-component)X
+1926(names)X
+2159(in)X
+2249(Kerberos)X
+2571(Version)X
+2852(5.)X
+2959(The)X
+3111(identi\256er)X
+3427(is)X
+3507(encoded)X
+3802(in)X
+3891(two)X
+555 4268(parts,)N
+755(the)X
+877(realm)X
+1084(and)X
+1224(the)X
+1346(remainder)X
+1696(of)X
+1787(the)X
+1909(name.)X
+2147(The)X
+2295(realm)X
+2501(is)X
+2577(separate)X
+2864(to)X
+2949(facilitate)X
+3253(easy)X
+3419(implementation)X
+3944(of)X
+555 4364(realm-traversal)N
+1071(routines)X
+1358(and)X
+1503(realm-sensitive)X
+2022(access)X
+2257(checks.)X
+2545(The)X
+2699(remainder)X
+3053(of)X
+3148(the)X
+3274(name)X
+3476(is)X
+3557(a)X
+3621(sequence)X
+3944(of)X
+555 4460(however)N
+868(many)X
+1082(components)X
+1505(are)X
+1640(needed)X
+1904(to)X
+2002(name)X
+2212(the)X
+2346(principal.)X
+2707(The)X
+2868(realm)X
+3086(and)X
+3237(each)X
+3420(component)X
+3811(of)X
+3913(the)X
+555 4556(remainder)N
+902(are)X
+1022(encoded)X
+1311(as)X
+1399(separate)X
+8 s
+1680(ASN.1)X
+7 f
+10 s
+1905(GeneralString)X
+1 f
+(s,)S
+2601(so)X
+2693(there)X
+2875(are)X
+2995(few)X
+3137(practical)X
+3435(restrictions)X
+3812(on)X
+3913(the)X
+555 4652(characters)N
+902(available)X
+1212(for)X
+1326(principal)X
+1631(names.)X
+2165 4864(EDU)N
+1959 4920 MXY
+0 -144 Dl
+10 f
+(h)S
+1975(hhhhhhhhhhhhhh)X
+0 144 Dl
+1959(h)X
+1975(hhhhhhhhhhhhhh)X
+1 f
+2010 5248(Berkeley.EDU)N
+1959 5304 MXY
+0 -144 Dl
+10 f
+(h)S
+1975(hhhhhhhhhhhhhh)X
+0 144 Dl
+1959(h)X
+1975(hhhhhhhhhhhhhh)X
+1 f
+1265 5248(MIT.EDU)N
+1143 5304 MXY
+0 -144 Dl
+10 f
+(h)S
+1159(hhhhhhhhhhhhhh)X
+0 144 Dl
+1143(h)X
+1159(hhhhhhhhhhhhhh)X
+1 f
+2837 5248(UMICH.EDU)N
+2775 5304 MXY
+0 -144 Dl
+10 f
+(h)S
+2791(hhhhhhhhhhhhhh)X
+0 144 Dl
+2775(h)X
+2791(hhhhhhhhhhhhhh)X
+1 f
+2770 5632(IFS.UMICH.EDU)N
+2703 5688 MXY
+0 -144 Dl
+10 f
+(hhhhhhhhhhhhhhhhhh)S
+0 144 Dl
+2703(hhhhhhhhhhhhhhhhhh)X
+1920 4951 MXY
+39 -31 Dl
+1910 4929 MXY
+49 -9 Dl
+-528 240 Dl
+1470 5129 MXY
+-39 31 Dl
+1480 5151 MXY
+-49 9 Dl
+2259 4968 MXY
+-12 -48 Dl
+2235 4968 MXY
+12 -48 Dl
+0 240 Dl
+2235 5112 MXY
+12 48 Dl
+2259 5112 MXY
+-12 48 Dl
+2584 4929 MXY
+-49 -9 Dl
+2574 4951 MXY
+-39 -31 Dl
+528 240 Dl
+3014 5151 MXY
+49 9 Dl
+3024 5129 MXY
+39 31 Dl
+3075 5352 MXY
+-12 -48 Dl
+3051 5352 MXY
+12 -48 Dl
+0 240 Dl
+3051 5496 MXY
+12 48 Dl
+3075 5496 MXY
+-12 48 Dl
+1 f
+1545 5476(shortcut)N
+1823(link)X
+1507 5298 MXY
+-76 6 Dl
+1495 5344 MXY
+-64 -40 Dl
+23 6 Dl
+1477 5315 MXY
+24 6 Dl
+1523 5327 MXY
+24 5 Dl
+1570 5338 MXY
+23 6 Dl
+1616 5349 MXY
+23 6 Dl
+1662 5361 MXY
+24 5 Dl
+1708 5372 MXY
+24 6 Dl
+1755 5383 MXY
+23 6 Dl
+1801 5395 MXY
+23 5 Dl
+1847 5406 MXY
+24 6 Dl
+1893 5417 MXY
+24 6 Dl
+1940 5429 MXY
+23 5 Dl
+1986 5440 MXY
+23 6 Dl
+2032 5451 MXY
+24 6 Dl
+2078 5463 MXY
+24 6 Dl
+2125 5474 MXY
+23 6 Dl
+2171 5486 MXY
+23 5 Dl
+2217 5497 MXY
+24 6 Dl
+2263 5508 MXY
+24 6 Dl
+2310 5520 MXY
+23 5 Dl
+2356 5531 MXY
+23 6 Dl
+2402 5542 MXY
+24 6 Dl
+2448 5554 MXY
+24 5 Dl
+2495 5565 MXY
+23 6 Dl
+2541 5576 MXY
+23 6 Dl
+2587 5588 MXY
+24 5 Dl
+2633 5599 MXY
+24 6 Dl
+2680 5610 MXY
+23 6 Dl
+2627 5622 MXY
+76 -6 Dl
+2639 5576 MXY
+64 40 Dl
+3 f
+1601 5841(Figure)N
+1848(5:)X
+2 f
+1935(A)X
+2004(Version)X
+2273(5)X
+2333(hierarchy)X
+2665(of)X
+2747(realms)X
+
+8 p
+%%Page: 8 8
+10 s 0 xH 0 xS 2 f
+1 f
+0 32(--)N
+4323(--)X
+2216 416(-)N
+2263(8)X
+2323(-)X
+3 f
+555 672(Inter-realm)N
+977(support)X
+1 f
+555 796(In)N
+648(Version)X
+928(5,)X
+1014(Kerberos)X
+1335(realms)X
+1575(cooperate)X
+1914(through)X
+2189(a)X
+2251(hierarchy)X
+2581(based)X
+2790(on)X
+2896(the)X
+3020(name)X
+3220(of)X
+3313(the)X
+3437(realm)X
+3646(\(see)X
+3802(Figure)X
+555 892(5\).)N
+684(A)X
+764(source)X
+996(realm)X
+1200(is)X
+1274(interoperable)X
+1719(with)X
+1882(a)X
+1939(destination)X
+2311(realm)X
+2515(if)X
+2585(it)X
+2650(shares)X
+2872(an)X
+2969(inter-realm)X
+3347(key)X
+3484(directly)X
+3750(with)X
+3913(the)X
+555 988(destination)N
+929(realm,)X
+1155(or)X
+1245(if)X
+1317(it)X
+1384(shares)X
+1608(a)X
+1667(key)X
+1806(with)X
+1971(an)X
+2070(intermediate)X
+2494(realm)X
+2700(that)X
+2843(is)X
+2919(itself)X
+3102(interoperable)X
+3549(with)X
+3713(the)X
+3833(desti-)X
+555 1084(nation)N
+787(realm.)X
+1042(Each)X
+1235(realm)X
+1450(exchanges)X
+1817(a)X
+1885(different)X
+2194(pair)X
+2351(of)X
+2450(inter-realm)X
+2839(keys)X
+3018(with)X
+3191(its)X
+3297(parent)X
+3529(node)X
+3716(and)X
+3863(each)X
+555 1180(child.)N
+786(These)X
+1009(keys)X
+1187(are)X
+1317(used)X
+1495(in)X
+1588(a)X
+1655(common)X
+1966(encryption)X
+2340(system)X
+2593(to)X
+2686(obtain)X
+2917(tickets)X
+3157(for)X
+3281(each)X
+3459(successive)X
+3828(realm)X
+555 1276(along)N
+753(the)X
+871(path.)X
+1069(This)X
+1231(arrangement)X
+1653(reduces)X
+1919(the)X
+2037(number)X
+2302(of)X
+2389(key)X
+2525(exchanges)X
+2880(to)X
+2 f
+2962(O)X
+1 f
+3033(\(log\()X
+2 f
+3189(n)X
+1 f
+3236(\)\).)X
+555 1400(When)N
+773(an)X
+874(application)X
+1255(needs)X
+1463(to)X
+1550(contact)X
+1807(a)X
+1868(server)X
+2090(in)X
+2177(a)X
+2238(foreign)X
+2495(realm,)X
+2723(it)X
+2792("walks")X
+3070(up)X
+3175(and)X
+3316(down)X
+3519(the)X
+3642(tree)X
+3788(toward)X
+555 1496(the)N
+676(destination)X
+1050(realm,)X
+1276(contacting)X
+1633(each)X
+1804(realm's)X
+8 s
+2064(KDC)X
+10 s
+2221(in)X
+2305(turn,)X
+2476(asking)X
+2707(for)X
+2823(a)X
+2881(ticket-granting)X
+3375(ticket)X
+3575(to)X
+3659(the)X
+3779(foreign)X
+555 1592(realm.)N
+802(In)X
+893(most)X
+1072(cases,)X
+1286(the)X
+8 s
+1404(KDC)X
+10 s
+1563(will)X
+1711(issue)X
+1895(a)X
+1955(ticket)X
+2157(for)X
+2275(the)X
+2397(next)X
+2559(node)X
+2739(in)X
+2825(the)X
+2947(proper)X
+3181(direction)X
+3490(on)X
+3593(the)X
+3714(tree.)X
+3898(If)X
+3975(a)X
+555 1688(realm)N
+770(has)X
+909(established)X
+1297(a)X
+1364("shortcut")X
+1719(spanning)X
+2039(link)X
+2194(with)X
+2367(some)X
+2567(realm)X
+2781(further)X
+3031(in)X
+3124(the)X
+3253(path,)X
+3442(it)X
+3517(issues)X
+3739(a)X
+3806(ticket-)X
+555 1784(granting)N
+850(ticket)X
+1056(for)X
+1178(that)X
+1326(realm)X
+1537(instead.)X
+1832(This)X
+2002(way)X
+2164(every)X
+2370(realm)X
+2580(can)X
+2719(interoperate,)X
+3150(and)X
+3293(heavily-traveled)X
+3842(paths)X
+555 1880(can)N
+687(be)X
+783(optimized)X
+1123(with)X
+1285(a)X
+1341(direct)X
+1544(link.)X
+555 2004(When)N
+768(a)X
+825(ticket)X
+1024(for)X
+1139(the)X
+1258(end)X
+1395(service)X
+1644(is)X
+1718(\256nally)X
+1943(issued,)X
+2184(it)X
+2248(will)X
+2392(contain)X
+2648(an)X
+2744(enumeration)X
+3165(of)X
+3252(all)X
+3352(the)X
+3470(realms)X
+3704(consulted)X
+555 2100(in)N
+639(the)X
+759(process)X
+1022(of)X
+1111(requesting)X
+1467(the)X
+1587(ticket.)X
+1826(An)X
+1945(application)X
+2322(server)X
+2540(which)X
+2757(applies)X
+3005(strict)X
+3186(authorization)X
+3630(rules)X
+3807(is)X
+3881(per-)X
+555 2196(mitted)N
+779(to)X
+861(reject)X
+1060(authentication)X
+1534(which)X
+1750(passes)X
+1975(through)X
+2244(certain)X
+2483(untrusted)X
+2801(realms.)X
+3 f
+555 2388(4.2.)N
+715(New)X
+887(protocol)X
+1192(features)X
+1489(in)X
+1575(Version)X
+1862(5)X
+1 f
+555 2512(In)N
+642(addition)X
+924(to)X
+1006(the)X
+1124(changes)X
+1403(discussed)X
+1730(above,)X
+1962(several)X
+2210(new)X
+2364(features)X
+2639(are)X
+2758(supported)X
+3094(in)X
+3176(Version)X
+3450(5.)X
+3 f
+555 2704(Tickets)N
+1 f
+555 2828(Version)N
+843(5)X
+917(tickets)X
+1160(contain)X
+1430(several)X
+1692(additional)X
+2045(timestamps)X
+2442(and)X
+2591(a)X
+2660(\257ags)X
+2844(\256eld.)X
+3059(These)X
+3284(changes)X
+3576(allow)X
+3787(greater)X
+555 2924(\257exibility)N
+885(in)X
+967(the)X
+1085(use)X
+1212(of)X
+1299(tickets)X
+1528(than)X
+1686(was)X
+1831(available)X
+2141(in)X
+2223(Version)X
+2497(4.)X
+555 3048(Each)N
+739(ticket)X
+940(issued)X
+1163(by)X
+1266(the)X
+8 s
+1382(KDC)X
+10 s
+1539(using)X
+1734(the)X
+1854(initial)X
+2062(ticket)X
+2262(exchange)X
+2588(is)X
+2663(\257agged)X
+2921(as)X
+3010(such.)X
+3219(This)X
+3383(allows)X
+3614(servers)X
+3864(such)X
+555 3144(as)N
+646(a)X
+706(password)X
+1033(changing)X
+1351(server)X
+1572(to)X
+1657(require)X
+1908(that)X
+2051(a)X
+2110(client)X
+2311(present)X
+2566(a)X
+2625(ticket)X
+2826(obtained)X
+3125(by)X
+3228(direct)X
+3434(use)X
+3564(of)X
+3654(the)X
+3775(client's)X
+555 3240(secret)N
+767(key)X
+907(K)X
+7 s
+965 3256(c)N
+10 s
+1021 3240(instead)N
+1272(of)X
+1363(one)X
+1503(obtained)X
+1803(using)X
+2000(a)X
+8 s
+2056(TGT)X
+10 s
+2180(.)X
+2244(Such)X
+2428(a)X
+2488(requirement)X
+2900(prevents)X
+3196(an)X
+3296(attacker)X
+3574(from)X
+3753(walking)X
+555 3336(up)N
+655(to)X
+737(an)X
+833(unattended)X
+1205(but)X
+1327(logged)X
+1565(in)X
+1647(workstation)X
+2045(and)X
+2181(changing)X
+2495(another)X
+2756(user's)X
+2968(password.)X
+555 3460(Tickets)N
+813(may)X
+973(be)X
+1071(issued)X
+1293(as)X
+1382(renewable)X
+1734(tickets)X
+1964(with)X
+2127(two)X
+2268(expiration)X
+2614(times,)X
+2828(one)X
+2965(for)X
+3080(a)X
+3137(time)X
+3300(in)X
+3383(the)X
+3502(near)X
+3662(future,)X
+3895(and)X
+555 3556(one)N
+703(later.)X
+918(The)X
+1075(ticket)X
+1285(expires)X
+1549(as)X
+1648(usual)X
+1849(at)X
+1939(the)X
+2069(earlier)X
+2307(time,)X
+2501(but)X
+2634(if)X
+2714(it)X
+2789(is)X
+2873(presented)X
+3212(to)X
+3305(the)X
+8 s
+3430(KDC)X
+10 s
+3596(in)X
+3689(a)X
+3756(renewal)X
+555 3652(request)N
+811(before)X
+1041(this)X
+1180(earlier)X
+1410(expiration)X
+1759(time,)X
+1945(a)X
+2005(replacement)X
+2422(ticket)X
+2624(is)X
+2701(returned)X
+2993(which)X
+3213(is)X
+3290(valid)X
+3474(for)X
+3592(an)X
+3691(additional)X
+555 3748(period)N
+783(of)X
+873(time.)X
+1078(The)X
+8 s
+1222(KDC)X
+10 s
+1380(will)X
+1527(not)X
+1652(renew)X
+1872(a)X
+1931(ticket)X
+2132(beyond)X
+2391(the)X
+2512(second)X
+2758(expiration)X
+3106(indicated)X
+3423(in)X
+3508(the)X
+3629(ticket.)X
+3869(This)X
+555 3844(mechanism)N
+947(has)X
+1081(the)X
+1206(advantage)X
+1559(that)X
+1706(although)X
+2013(the)X
+2138(credentials)X
+2512(can)X
+2650(be)X
+2752(used)X
+2925(for)X
+3045(long)X
+3213(periods)X
+3475(of)X
+3568(time,)X
+3756(the)X
+8 s
+3876(KDC)X
+10 s
+555 3940(may)N
+713(refuse)X
+930(to)X
+1012(renew)X
+1229(tickets)X
+1458(which)X
+1674(are)X
+1793(reported)X
+2081(as)X
+2168(stolen)X
+2379(and)X
+2515(thereby)X
+2776(thwart)X
+3001(their)X
+3168(continued)X
+3504(use.)X
+555 4064(A)N
+637(similar)X
+883(mechanism)X
+1272(is)X
+1349(available)X
+1663(to)X
+1748(assist)X
+1944(authentication)X
+2421(during)X
+2653(batch)X
+2850(processing.)X
+3256(A)X
+3337(ticket)X
+3538(issued)X
+3761(as)X
+3851(post-)X
+555 4160(dated)N
+750(and)X
+887(invalid)X
+1129(will)X
+1273(not)X
+1395(be)X
+1491(valid)X
+1671(until)X
+1837(its)X
+1932(post-dated)X
+2286(starting)X
+2546(time)X
+2708(passes)X
+2933(and)X
+3069(it)X
+3133(is)X
+3206(replaced)X
+3499(with)X
+3661(a)X
+3717(validated)X
+555 4256(ticket.)N
+793(The)X
+938(client)X
+1136(validates)X
+1441(the)X
+1559(ticket)X
+1757(by)X
+1857(presenting)X
+2211(it)X
+2275(to)X
+2357(the)X
+8 s
+2471(KDC)X
+10 s
+2626(as)X
+2713(described)X
+3041(above)X
+3253(for)X
+3367(renewable)X
+3718(tickets.)X
+555 4380(Authentication)N
+1057(forwarding)X
+1440(can)X
+1578(be)X
+1680(implemented)X
+2124(by)X
+2230(contacting)X
+2590(the)X
+8 s
+2709(KDC)X
+10 s
+2869(with)X
+3036(the)X
+3159(additional)X
+3504(ticket)X
+3707(exchange)X
+555 4476(and)N
+694(requesting)X
+1051(a)X
+1110(ticket)X
+1311(valid)X
+1494(for)X
+1611(a)X
+1669(different)X
+1968(set)X
+2079(of)X
+2168(addresses)X
+2498(than)X
+2658(the)X
+8 s
+2774(TGT)X
+10 s
+2920(used)X
+3089(in)X
+3173(the)X
+3293(request.)X
+3587(The)X
+8 s
+3730(KDC)X
+10 s
+3887(will)X
+555 4572(not)N
+681(issue)X
+865(such)X
+1036(tickets)X
+1269(unless)X
+1493(the)X
+1615(presented)X
+8 s
+1943(TGT)X
+10 s
+2091(has)X
+2222(a)X
+2282(\257ag)X
+2426(set)X
+2539(indicating)X
+2883(that)X
+3027(this)X
+3166(is)X
+3242(a)X
+3301(permissible)X
+3693(use)X
+3823(of)X
+3913(the)X
+555 4668(ticket.)N
+797(When)X
+1013(the)X
+1135(entity)X
+1341(on)X
+1445(the)X
+1567(remote)X
+1814(host)X
+1971(is)X
+2048(granted)X
+2313(only)X
+2479(limited)X
+2729(rights)X
+2935(to)X
+3021(use)X
+3151(the)X
+3272(authentication,)X
+3769(the)X
+3890(for-)X
+555 4764(warded)N
+818(credentials)X
+1192(are)X
+1317(referred)X
+1599(to)X
+1687(as)X
+1780(a)X
+2 f
+1841(proxy)X
+1 f
+2056(\(after)X
+2256(the)X
+2379(proxy)X
+2591(used)X
+2763(in)X
+2850(legal)X
+3031(and)X
+3172(\256nancial)X
+3473(affairs\).)X
+3771(Proxies)X
+555 4860(are)N
+684(handled)X
+968(similarly)X
+1282(to)X
+1374(forwarded)X
+1735(tickets,)X
+1994(except)X
+2234(that)X
+2383(new)X
+2546(proxy)X
+2762(tickets)X
+3000(will)X
+3153(not)X
+3284(be)X
+3389(issued)X
+3618(for)X
+3741(a)X
+3806(ticket-)X
+555 4956(granting)N
+842(service;)X
+1112(they)X
+1270(will)X
+1414(only)X
+1576(be)X
+1672(issued)X
+1892(for)X
+2006(application)X
+2382(server)X
+2599(tickets.)X
+555 5080(In)N
+652(certain)X
+901(situations,)X
+1256(an)X
+1361(application)X
+1746(server)X
+1972(\(such)X
+2175(as)X
+2271(an)X
+2376(X)X
+2463(Window)X
+2768(System)X
+3032(server\))X
+3285(will)X
+3438(not)X
+3569(have)X
+3750(reliable,)X
+555 5176(protected)N
+881(access)X
+1114(to)X
+1203(an)X
+1306(encryption)X
+1676(key)X
+1819(necessary)X
+2159(for)X
+2280(normal)X
+2534(participation)X
+2966(as)X
+3060(a)X
+3122(server)X
+3345(in)X
+3433(the)X
+3557(authentication)X
+555 5272(exchanges.)N
+956(In)X
+1049(such)X
+1222(cases,)X
+1437(if)X
+1511(the)X
+1634(server)X
+1856(has)X
+1988(access)X
+2219(to)X
+2306(a)X
+2367(user's)X
+2584(ticket-granting)X
+3081(ticket)X
+3284(and)X
+3425(associated)X
+3780(session)X
+555 5368(key)N
+699(\(which)X
+950(in)X
+1040(the)X
+1166(case)X
+1333(of)X
+1427(single-user)X
+1806(workstations)X
+2242(may)X
+2407(well)X
+2572(be)X
+2675(the)X
+2800(case\),)X
+3013(it)X
+3084(can)X
+3223(send)X
+3397(this)X
+3539(ticket-granting)X
+555 5464(ticket)N
+764(to)X
+857(the)X
+986(client,)X
+1215(who)X
+1384(presents)X
+1678(it)X
+1753(and)X
+1900(the)X
+2029(user's)X
+2252(own)X
+2421(ticket-granting)X
+2924(ticket)X
+3133(to)X
+3226(the)X
+8 s
+3351(KDC)X
+10 s
+3486(.)X
+3557(The)X
+8 s
+3708(KDC)X
+10 s
+3873(then)X
+555 5560(issues)N
+773(a)X
+836(ticket)X
+1041(encrypted)X
+1385(in)X
+1474(the)X
+1598(session)X
+1855(key)X
+1997(from)X
+2179(the)X
+2303(server's)X
+2584(ticket-granting)X
+3082(ticket;)X
+3308(the)X
+3432(application)X
+3814(server)X
+555 5656(has)N
+692(the)X
+820(proper)X
+1060(key)X
+1206(to)X
+1298(decrypt)X
+1569(and)X
+1715(process)X
+1986(this)X
+2131(ticket.)X
+2379(The)X
+2534(details)X
+2773(of)X
+2870(such)X
+3046(an)X
+3151(exchange)X
+3484(are)X
+3612(presented)X
+3949(in)X
+555 5752([Dav90].)N
+
+9 p
+%%Page: 9 9
+10 s 0 xH 0 xS 1 f
+0 32(--)N
+4323(--)X
+2216 416(-)N
+2263(9)X
+2323(-)X
+3 f
+555 672(Authorization)N
+1055(data)X
+1 f
+555 796(Kerberos)N
+877(is)X
+957(concerned)X
+1315(primarily)X
+1640(with)X
+1809(authentication;)X
+2312(it)X
+2383(is)X
+2463(not)X
+2592(directly)X
+2863(concerned)X
+3220(with)X
+3388(the)X
+3512(related)X
+3757(security)X
+555 892(functions)N
+884(of)X
+982(authorization)X
+1436(and)X
+1583(accounting.)X
+2006(To)X
+2126(support)X
+2397(the)X
+2526(implementation)X
+3059(of)X
+3157(these)X
+3353(related)X
+3603(functions)X
+3931(by)X
+555 988(other)N
+745(services,)X
+1049(Version)X
+1327(5)X
+1391(of)X
+1482(Kerberos)X
+1801(provides)X
+2101(a)X
+2161(mechanism)X
+2550(for)X
+2668(the)X
+2790(tamper-proof)X
+3238(transmission)X
+3666(of)X
+3757(authori-)X
+555 1084(zation)N
+773(and)X
+911(accounting)X
+1285(information)X
+1685(as)X
+1773(part)X
+1919(of)X
+2007(a)X
+2064(ticket.)X
+2303(This)X
+2466(information)X
+2865(takes)X
+3051(the)X
+3170(form)X
+3347(of)X
+3435(restrictions)X
+3812(on)X
+3913(the)X
+555 1180(use)N
+688(of)X
+781(a)X
+843(ticket.)X
+1087(The)X
+1238(encoding)X
+1558(of)X
+1651(each)X
+1825(restriction)X
+2176(is)X
+2255(not)X
+2383(a)X
+2445(concern)X
+2726(of)X
+2819(the)X
+2943(Kerberos)X
+3264(protocol,)X
+3577(but)X
+3705(is)X
+3784(instead)X
+555 1276(de\256ned)N
+815(by)X
+919(the)X
+1041(authorization)X
+1488(or)X
+1579(accounting)X
+1955(mechanism)X
+2344(in)X
+2430(use.)X
+2601(Restrictions)X
+3006(are)X
+3128(carried)X
+3375(in)X
+3460(the)X
+2 f
+3581(authorization)X
+555 1372(data)N
+1 f
+717(\256eld)X
+879(of)X
+966(the)X
+1084(ticket.)X
+555 1496(When)N
+788(a)X
+865(ticket)X
+1084(is)X
+1178(requested,)X
+1547(restrictions)X
+1944(are)X
+2083(sent)X
+2252(to)X
+2354(the)X
+8 s
+2488(KDC)X
+10 s
+2663(where)X
+2900(they)X
+3078(are)X
+3217(inserted)X
+3511(into)X
+3675(the)X
+3813(ticket,)X
+555 1592(encrypted,)N
+920(and)X
+1064(thus)X
+1225(protected)X
+1551(from)X
+1734(tampering.)X
+2126(In)X
+2220(the)X
+2345(protocol's)X
+2697(most)X
+2879(general)X
+3143(form,)X
+3346(a)X
+3409(client)X
+3614(may)X
+3779(request)X
+555 1688(that)N
+704(the)X
+8 s
+827(KDC)X
+10 s
+991(include)X
+1256(or)X
+1352(add)X
+1497(such)X
+1672(data)X
+1834(to)X
+1924(a)X
+1988(new)X
+2150(ticket.)X
+2396(The)X
+8 s
+2545(KDC)X
+10 s
+2708(does)X
+2883(not)X
+3013(remove)X
+3282(any)X
+3426(authorization)X
+3877(data)X
+555 1784(from)N
+734(a)X
+793(ticket;)X
+1016(the)X
+8 s
+1133(TGS)X
+10 s
+1277(always)X
+1523(copies)X
+1751(it)X
+1818(from)X
+1997(the)X
+8 s
+2114(TGT)X
+10 s
+2261(into)X
+2408(the)X
+2529(new)X
+2686(ticket,)X
+2907(and)X
+3046(then)X
+3207(adds)X
+3377(any)X
+3516(requested)X
+3846(addi-)X
+555 1880(tional)N
+760(authorization)X
+1206(data.)X
+1403(Upon)X
+1604(decryption)X
+1970(of)X
+2060(a)X
+2119(ticket,)X
+2340(the)X
+2461(authorization)X
+2907(data)X
+3064(is)X
+3139(available)X
+3451(to)X
+3535(the)X
+3655(application)X
+555 1976(server.)N
+820(While)X
+1044(Kerberos)X
+1367(makes)X
+1599(no)X
+1706(interpretation)X
+2165(of)X
+2259(the)X
+2384(data,)X
+2565(the)X
+2690(application)X
+3073(server)X
+3297(is)X
+3377(expected)X
+3690(to)X
+3779(use)X
+3913(the)X
+555 2072(authorization)N
+998(data)X
+1152(to)X
+1234(appropriately)X
+1682(restrict)X
+1925(the)X
+2043(client's)X
+2299(access)X
+2525(to)X
+2607(its)X
+2702(resources.)X
+555 2196(Among)N
+824(other)X
+1018(uses,)X
+1205(the)X
+2 f
+1332(authorization)X
+1791(data)X
+1 f
+1962(\256eld)X
+2133(can)X
+2273(be)X
+2377(used)X
+2552(in)X
+2642(a)X
+2706(proxy)X
+2921(ticket)X
+3127(to)X
+3217(create)X
+3438(a)X
+3502(capability.)X
+3886(The)X
+555 2292(client)N
+760(requesting)X
+1121(the)X
+1245(proxy)X
+1458(from)X
+1640(the)X
+8 s
+1760(KDC)X
+10 s
+1921(speci\256es)X
+2223(any)X
+2365(authorization)X
+2814(restrictions)X
+3196(in)X
+3284(the)X
+3408(authorization)X
+3857(data,)X
+555 2388(then)N
+718(securely)X
+1011(transmits)X
+1329(the)X
+1452(proxy)X
+1664(and)X
+1805(session)X
+2061(key)X
+2202(to)X
+2289(another)X
+2555(party,)X
+2765(which)X
+2986(uses)X
+3149(the)X
+3272(ticket)X
+3475(to)X
+3561(obtain)X
+3785(limited)X
+555 2484(service)N
+815(from)X
+1003(an)X
+1111(application)X
+1499(server.)X
+1768(Neuman)X
+2091([Neu91])X
+2390(discusses)X
+2719(possible)X
+3012(uses)X
+3181(of)X
+3279(the)X
+2 f
+3408(authorization)X
+3869(data)X
+1 f
+555 2580(\256eld)N
+717(in)X
+799(detail.)X
+555 2704(The)N
+702(Open)X
+898(Software)X
+1210(Foundation's)X
+1654(Distributed)X
+2036(Computing)X
+2417(Environment)X
+2857(uses)X
+3017(the)X
+2 f
+3137(authorization)X
+3589(data)X
+1 f
+3753(\256eld)X
+3917(for)X
+555 2800(the)N
+678(generation)X
+1042(of)X
+1134(privilege)X
+1444(attribute)X
+1736(certi\256cates)X
+2109(\()X
+8 s
+2136(PAC)X
+10 s
+2261(s\).)X
+2384(Privilege)X
+2698(information)X
+3101(is)X
+3179(maintained)X
+3560(by)X
+3665(a)X
+3726(privilege)X
+555 2896(server.)N
+817(When)X
+1034(a)X
+8 s
+1091(PAC)X
+10 s
+1241(is)X
+1319(requested)X
+1652(by)X
+1756(a)X
+1816(client)X
+2018(the)X
+2140(privilege)X
+2449(server)X
+2670(requests)X
+2957(a)X
+3017(Kerberos)X
+3336(ticket)X
+3538(identifying)X
+3913(the)X
+555 2992(privilege)N
+866(server)X
+1089(itself,)X
+1295(but)X
+1423(restricting)X
+1774(the)X
+1898(groups)X
+2142(to)X
+2230(which)X
+2452(the)X
+2576(client)X
+2780(belongs)X
+3055(and)X
+3197(specifying)X
+3556(a)X
+8 s
+3613(DCE)X
+10 s
+3766(speci\256c)X
+555 3088(user)N
+8 s
+710(ID)X
+10 s
+777(.)X
+842(The)X
+992(ticket)X
+1195(is)X
+1273(then)X
+1436(returned)X
+1729(to)X
+1815(the)X
+1937(client)X
+2139(which)X
+2359(uses)X
+2521(it)X
+2589(to)X
+2675(assert)X
+2882(its)X
+8 s
+2977(DCE)X
+10 s
+3129(user)X
+8 s
+3283(ID)X
+10 s
+3374(and)X
+3514(prove)X
+3721(member-)X
+555 3184(ship)N
+712(in)X
+798(the)X
+920(listed)X
+1117(groups.)X
+1399(In)X
+1490(essence,)X
+1780(the)X
+1901(privilege)X
+2209(server)X
+2429(grants)X
+2648(the)X
+2769(client)X
+2970(a)X
+3029(proxy)X
+3239(authorizing)X
+3627(the)X
+3748(client)X
+3949(to)X
+555 3280(act)N
+672(as)X
+762(the)X
+883(privilege)X
+1191(server)X
+1411(to)X
+1495(assert)X
+1700(the)X
+1820(listed)X
+8 s
+2011(DCE)X
+10 s
+2161(user)X
+8 s
+2313(ID)X
+10 s
+2402(and)X
+2540(membership)X
+2958(in)X
+3042(the)X
+3162(listed)X
+3357(groups.)X
+3637(If)X
+3713(the)X
+3833(ticket)X
+555 3376(did)N
+681(not)X
+807(include)X
+1067(restrictions,)X
+1467(it)X
+1535(would)X
+1759(indicate)X
+2037(that)X
+2181(the)X
+2303(client)X
+2505(was)X
+2654(the)X
+2776(privilege)X
+3084(server,)X
+3324(allowing)X
+3627(the)X
+3748(client)X
+3949(to)X
+555 3472(assert)N
+758(any)X
+894(user)X
+8 s
+1044(ID)X
+10 s
+1131(and)X
+1267(membership)X
+1683(in)X
+1765(any)X
+1901(group.)X
+3 f
+555 3664(Pre-authentication)N
+1216(data)X
+1 f
+555 3788(In)N
+651(an)X
+756(effort)X
+964(to)X
+1055(complicate)X
+1436(the)X
+1563(theft)X
+1739(of)X
+1835(passwords,)X
+2218(the)X
+2345(Kerberos)X
+2669(Version)X
+2952(5)X
+3021(protocol)X
+3317(provides)X
+3622(\256elds)X
+3823(in)X
+3913(the)X
+555 3884(initial-)N
+796(and)X
+940(additional-ticket)X
+1493(exchanges)X
+1856(to)X
+1946(support)X
+2214(password)X
+2545(alternatives)X
+2943(such)X
+3118(as)X
+3213(hand-held)X
+3561(authenticators)X
+555 3980(\(devices)N
+854(which)X
+1081(have)X
+1264(internal)X
+1540(circuitry)X
+1843(used)X
+2021(to)X
+2114(generate)X
+2418(a)X
+2485(continually)X
+2876(changing)X
+3200(password\).)X
+3600(In)X
+3697(the)X
+3825(initial)X
+555 4076(ticket)N
+756(exchange,)X
+1103(these)X
+1291(\256elds)X
+1487(can)X
+1622(be)X
+1721(used)X
+1891(to)X
+1976(alter)X
+2142(the)X
+2263(key)X
+2402(K)X
+7 s
+2460 4092(c)N
+10 s
+2515 4076(in)N
+2600(which)X
+2819(the)X
+2940(reply)X
+3128(is)X
+3204(encrypted.)X
+3584(This)X
+3748(makes)X
+3975(a)X
+555 4172(stolen)N
+776(password)X
+1109(useless)X
+1366(since)X
+1561(fresh)X
+1752(information)X
+2160(from)X
+2345(a)X
+2410(physical)X
+2706(device)X
+2945(is)X
+3027(needed)X
+3284(to)X
+3375(decrypt)X
+3645(a)X
+3710(response.)X
+555 4268(The)N
+706(\256eld)X
+874(can)X
+1012(also)X
+1166(be)X
+1267(used)X
+1439(to)X
+1526(prove)X
+1734(the)X
+1857(client's)X
+2118(identity)X
+2387(to)X
+2474(the)X
+8 s
+2593(KDC)X
+10 s
+2753(before)X
+2984(any)X
+3125(ticket)X
+3328(is)X
+3406(issued.)X
+3671(Doing)X
+3896(this)X
+555 4364(makes)N
+792(it)X
+868(a)X
+936(little)X
+1114(more)X
+1311(dif\256cult)X
+1596(for)X
+1722(an)X
+1830(attacker)X
+2117(to)X
+2211(obtain)X
+2443(a)X
+2510(message)X
+2813(that)X
+2964(can)X
+3107(be)X
+3214(used)X
+3392(to)X
+3485(verify)X
+3708(password)X
+555 4460(guesses.)N
+555 4584(This)N
+723(pre-authentication)X
+1333(data)X
+1493(\256eld)X
+1661(is)X
+1740(used)X
+1913(by)X
+2019(the)X
+2143(client)X
+2346(in)X
+2433(the)X
+2556(additional)X
+2901(ticket)X
+3104(exchange)X
+3433(to)X
+3520(pass)X
+3683(the)X
+3806(ticket-)X
+555 4680(granting)N
+851(ticket)X
+1058(to)X
+1149(the)X
+8 s
+1272(KDC)X
+10 s
+1407(;)X
+1457(since)X
+1650(it)X
+1722(is)X
+1803(a)X
+1867(variable-length)X
+2381(array,)X
+2595(other)X
+2788(values)X
+3021(may)X
+3187(be)X
+3291(sent)X
+3448(in)X
+3538(the)X
+3664(additional-)X
+555 4776(ticket)N
+753(exchange.)X
+3 f
+555 4968(Subsession)N
+942(key)X
+1082(negotiation)X
+1 f
+555 5092(Tickets)N
+813(are)X
+934(cached)X
+1180(by)X
+1282(clients)X
+1513(for)X
+1629(later)X
+1794(use.)X
+1962(To)X
+2072(avoid)X
+2271(problems)X
+2590(caused)X
+2830(by)X
+2931(the)X
+3050(reuse)X
+3241(of)X
+3329(a)X
+3386(ticket's)X
+3643(session)X
+3895(key)X
+555 5188(across)N
+786(multiple)X
+1082(connections,)X
+1515(a)X
+1581(server)X
+1808(and)X
+1954(client)X
+2162(can)X
+2304(cooperate)X
+2647(to)X
+2739(choose)X
+2992(a)X
+3058(new)X
+2 f
+3222(subsession)X
+3594(key)X
+1 f
+3732(which)X
+3958(is)X
+555 5284(used)N
+722(to)X
+804(protect)X
+1047(a)X
+1103(single)X
+1314(connection.)X
+1726(This)X
+1888(subsession)X
+2250(key)X
+2386(is)X
+2459(discarded)X
+2787(once)X
+2959(the)X
+3077(connection)X
+3449(is)X
+3522(closed.)X
+555 5408(Negotiation)N
+970(of)X
+1074(subsession)X
+1453(keys)X
+1637(allows)X
+1883(an)X
+1996(application)X
+2389(to)X
+2488(protect)X
+2748(the)X
+2883(privacy)X
+3161(of)X
+3265(messages)X
+3605(broadcast)X
+3949(to)X
+555 5504(several)N
+806(recipients.)X
+1181(The)X
+1329(application)X
+1707(can)X
+1841(individually)X
+2249(negotiate)X
+2565(with)X
+2729(each)X
+2899(recipient)X
+3202(to)X
+3286(use)X
+3415(a)X
+3473(common)X
+3775(subses-)X
+555 5600(sion)N
+708(key)X
+844(before)X
+1070(beginning)X
+1410(the)X
+1528(broadcasts.)X
+
+10 p
+%%Page: 10 10
+10 s 0 xH 0 xS 1 f
+0 32(--)N
+4323(--)X
+2196 416(-)N
+2243(10)X
+2343(-)X
+3 f
+555 672(Sequence)N
+895(numbers)X
+1 f
+555 796(Kerberos)N
+877(provides)X
+1180(two)X
+1327(message)X
+1626(formats)X
+1898(for)X
+2019(applications)X
+2433(to)X
+2522(protect)X
+2772(their)X
+2946(communications.)X
+3542(The)X
+8 s
+3690(KRB_SAFE)X
+10 s
+555 892(message)N
+848(uses)X
+1007(a)X
+1064(cryptographic)X
+1531(checksum)X
+1873(to)X
+1956(insure)X
+2173(data)X
+2328(integrity.)X
+2660(The)X
+8 s
+2802(KRB_PRIV)X
+10 s
+3133(message)X
+3426(uses)X
+3585(encryption)X
+3949(to)X
+555 988(insure)N
+773(integrity)X
+1066(and)X
+1204(privacy.)X
+1507(In)X
+1596(Version)X
+1872(4)X
+1934(these)X
+2121(messages)X
+2446(included)X
+2744(as)X
+2833(control)X
+3082(information)X
+3482(a)X
+3540(timestamp)X
+3895(and)X
+555 1084(the)N
+675(sender's)X
+965(network)X
+1250(address.)X
+1553(With)X
+1734(Version)X
+2009(5,)X
+2090(an)X
+2187(application)X
+2564(may)X
+2723(elect)X
+2896(to)X
+2979(use)X
+3107(a)X
+3164(timestamp)X
+3518(\(as)X
+3633(before\))X
+3887(or)X
+3975(a)X
+555 1180(sequence)N
+871(number.)X
+1177(If)X
+1252(the)X
+1371(timestamp)X
+1725(is)X
+1799(used,)X
+1987(the)X
+2106(receiver)X
+2387(must)X
+2563(record)X
+2790(the)X
+2908(known)X
+3146(timestamps)X
+3530(to)X
+3612(avoid)X
+3810(replay)X
+555 1276(attacks;)N
+824(if)X
+897(a)X
+957(sequence)X
+1276(number)X
+1545(is)X
+1622(used)X
+1793(the)X
+1915(receiver)X
+2199(must)X
+2378(verify)X
+2594(that)X
+2738(the)X
+2860(messages)X
+3187(arrive)X
+3399(in)X
+3485(the)X
+3607(proper)X
+3841(order)X
+555 1372(without)N
+834(gaps.)X
+1056(There)X
+1279(are)X
+1413(situations)X
+1753(where)X
+1984(one)X
+2134(choice)X
+2378(makes)X
+2617(applications)X
+3038(simpler)X
+3312(\(or)X
+3440(even)X
+3626(possible\))X
+3949(to)X
+555 1468(implement;)N
+939(see)X
+1062(the)X
+1180(discussions)X
+1564(in)X
+1666([Koh92].)X
+3 f
+555 1660(5.)N
+655(Implementation)X
+1222(features)X
+555 1880(5.1.)N
+715(The)X
+868(base)X
+1039(implementation)X
+1 f
+555 2004(The)N
+8 s
+700(MIT)X
+10 s
+841(implementation)X
+1367(of)X
+1458(the)X
+1580(Version)X
+1857(5)X
+1920(protocols)X
+2241(is)X
+2317(composed)X
+2665(of)X
+2755(several)X
+3006(run-time)X
+3305(libraries)X
+3591(with)X
+3756(which)X
+3975(a)X
+555 2100(program)N
+853(may)X
+1017(link.)X
+1207(The)X
+1358(core)X
+1523(library)X
+1763(functions)X
+2087(will)X
+2237(probably)X
+2548(be)X
+2650(used)X
+2822(by)X
+2927(all)X
+3032(applications;)X
+3466(other)X
+3656(libraries)X
+3944(or)X
+555 2196(subsystems)N
+950(may)X
+1119(be)X
+1226(replaced)X
+1529(or)X
+1626(omitted)X
+1900(as)X
+1997(needed)X
+2255(by)X
+2365(an)X
+2471(application)X
+2857(programmer.)X
+3324(All)X
+3456(code)X
+3638(is)X
+3721(currently)X
+555 2292(written)N
+802(in)X
+884("C.")X
+3 f
+555 2416(The)N
+721(base)X
+905(functions:)X
+1 f
+1280(The)X
+1438(core)X
+1610(Kerberos)X
+1937(library)X
+2183(contains)X
+2482(the)X
+2612(routines)X
+2902(which)X
+3130(assemble,)X
+3476(disassemble)X
+3895(and)X
+755 2512(interpret)N
+1049(the)X
+1169(network)X
+1454(messages.)X
+1819(This)X
+1983(includes)X
+8 s
+2268(ASN.1)X
+10 s
+2466(encoding)X
+2782(and)X
+2919(decoding)X
+3234(functions)X
+3553(which)X
+3770(convert)X
+755 2608(from)N
+935(a)X
+995(machine's)X
+1349(native)X
+1569(format)X
+1807(to)X
+1893(the)X
+2015(network)X
+2302(encoding)X
+2620(\(currently)X
+2961(based)X
+3168(on)X
+3272(the)X
+8 s
+3390(ISODE)X
+10 s
+3602(package,)X
+3909(but)X
+755 2704(another)N
+8 s
+1016(ASN.1)X
+10 s
+1215(support)X
+1478(package)X
+1765(may)X
+1926(be)X
+2025(substituted\),)X
+2441(routines)X
+2722(which)X
+2941(verify)X
+3156(that)X
+3299(requests)X
+3585(are)X
+3707(answered)X
+755 2800(as)N
+845(expected,)X
+1174(and)X
+1313(routines)X
+1593(to)X
+1677(determine)X
+2020(which)X
+2238(messages)X
+2563(are)X
+2684(necessary.)X
+3059(This)X
+3223(core)X
+3384(set)X
+3495(of)X
+3584(routines)X
+3864(calls)X
+755 2896(out)N
+879(to)X
+963(the)X
+1082(remaining)X
+1428(portions)X
+1711(of)X
+1799(the)X
+1918(library)X
+2153(as)X
+2241(required.)X
+2570(A)X
+2649(programmer)X
+3067(may)X
+3226(replace)X
+3480(those)X
+3670(portions)X
+3953(at)X
+755 2992(certain)N
+994(speci\256ed)X
+1299(interfaces.)X
+3 f
+555 3116(Encryption)N
+971(routines:)X
+1 f
+1308(Since)X
+1516(multiple)X
+1812(encryption)X
+2185(types)X
+2384(may)X
+2552(be)X
+2658(in)X
+2749(use)X
+2885(simultaneously,)X
+3418(the)X
+3545(core)X
+3713(functions)X
+755 3212(call)N
+895(encryption)X
+1262(routines)X
+1544(through)X
+1817(a)X
+1877(function)X
+2168(table)X
+2348(which)X
+2567(has)X
+2697(entries)X
+2934(provided)X
+3242(by)X
+3345(each)X
+3516(encryption)X
+3882(sys-)X
+755 3308(tem)N
+906(implementation.)X
+1479(The)X
+1635(core)X
+1805(library)X
+2050(provides)X
+2357(a)X
+2424(default)X
+2678(cryptosystem)X
+3136(table,)X
+3343(initialized)X
+3694(to)X
+3786(list)X
+3913(the)X
+755 3404(known)N
+997(encryption)X
+1364(types.)X
+1597(A)X
+1678(programmer)X
+2098(may)X
+2259(load)X
+2420(his)X
+2536(own)X
+2697(cryptosystem)X
+3147(table)X
+3326(to)X
+3411(replace)X
+3667(the)X
+3788(default)X
+755 3500(table)N
+931(and)X
+1067(avoid)X
+1265(linking)X
+1511(with)X
+1673(the)X
+1791(default)X
+2034(encryption)X
+2397(libraries.)X
+755 3692(In)N
+860(an)X
+974(attempt)X
+1251(to)X
+1350(alleviate)X
+1659(some)X
+1865(possible)X
+2164(export)X
+2406(restrictions,)X
+8 s
+2815(MIT)X
+10 s
+2932('s)X
+3027(implementation)X
+3566(distributes)X
+3936(its)X
+755 3788(encryption)N
+1131(systems)X
+1416(separately)X
+1774(from)X
+1962(the)X
+2092(remainder)X
+2450(of)X
+2549(the)X
+2679(system.)X
+2973(Only)X
+8 s
+3161(DES)X
+10 s
+3314(is)X
+3399(currently)X
+3721(available)X
+755 3884(from)N
+8 s
+927(MIT)X
+10 s
+1044(.)X
+3 f
+555 4008(Checksum)N
+948(routines:)X
+1 f
+1288(In)X
+1388(a)X
+1457(similar)X
+1712(fashion)X
+1981(to)X
+2076(the)X
+2207(encryption)X
+2583(routines,)X
+2894(the)X
+3025(core)X
+3197(routines)X
+3487(call)X
+3635(any)X
+3783(needed)X
+755 4104(checksum)N
+1097(functions)X
+1416(through)X
+1686(a)X
+1743(function)X
+2031(table,)X
+2228(and)X
+2365(compute)X
+2662(any)X
+2799(necessary)X
+3133(sizes)X
+3309(based)X
+3512(on)X
+3612(the)X
+3730(informa-)X
+755 4200(tion)N
+905(in)X
+993(the)X
+1117(table.)X
+1339(Certain)X
+1601(applications)X
+2014(of)X
+2107(checksum)X
+2454(technology)X
+2836(require)X
+3090(that)X
+3236(the)X
+3360(checksum)X
+3707(have)X
+3885(cer-)X
+755 4296(tain)N
+900(properties.)X
+1286(The)X
+1436(table)X
+1617(entry)X
+1807(indicates)X
+2117(whether)X
+2401(the)X
+2524(checksum)X
+2870(is)X
+2948(keyed)X
+3165(\(its)X
+3291(algorithm)X
+3626(is)X
+3703(perturbed)X
+755 4392(by)N
+868(an)X
+976(encryption)X
+1351(key)X
+1499(which)X
+1727(cannot)X
+1973(be)X
+2081(discovered)X
+2461(with)X
+2635(knowledge)X
+3019(only)X
+3193(of)X
+3292(the)X
+3422(algorithm)X
+3765(and)X
+3913(the)X
+755 4488(checksummed)N
+1240(text\))X
+1413(and)X
+1555(whether)X
+1840(the)X
+1964(checksum)X
+2311(is)X
+2390(collision)X
+2691(proof)X
+2891(\(it)X
+2988(is)X
+3067(computationally)X
+3612(infeasible)X
+3949(to)X
+755 4584(discover)N
+1062(a)X
+1133(different)X
+1445(checksum)X
+1801(text)X
+1956(which)X
+2187(has)X
+2329(the)X
+2462(same)X
+2662(checksum\).)X
+3085(The)X
+3244(core)X
+3417(library)X
+3665(provides)X
+3975(a)X
+755 4680(replaceable)N
+1142(default)X
+1385(checksum)X
+1726(table.)X
+755 4872(Four)N
+936(checksums)X
+1318(are)X
+1447(currently)X
+1766(available)X
+2085(from)X
+8 s
+2266(MIT)X
+10 s
+2383(:)X
+2434(the)X
+8 s
+2557(CRC-32)X
+10 s
+2771(,)X
+2820(which)X
+3045(is)X
+3127(neither)X
+3379(keyed)X
+3600(nor)X
+3736(collision)X
+755 4968(proof)N
+950(\(but)X
+1100(it)X
+1165(is)X
+1239(useful)X
+1456(for)X
+1571(integrity)X
+1862(checks)X
+2101(within)X
+2325(encryption)X
+2688(systems\);)X
+3010(the)X
+8 s
+3124(DES)X
+10 s
+3265(message)X
+3557(authentication)X
+755 5064(code)N
+934(\()X
+8 s
+961(MAC)X
+10 s
+1107(\),)X
+1181(which)X
+1404(is)X
+1483(both)X
+1651(keyed)X
+1869(and)X
+2011(collision)X
+2312(proof,)X
+2532(and)X
+8 s
+2670(MD4)X
+10 s
+2831([Riv92a])X
+3142(and)X
+8 s
+3280(MD5)X
+10 s
+3441([Riv92b],)X
+3776(both)X
+3944(of)X
+755 5160(which)N
+971(are)X
+1090(collision)X
+1385(proof)X
+1579(but)X
+1701(not)X
+1823(keyed.)X
+3 f
+555 5284(Credentials)N
+975(cache)X
+1191(and)X
+1343(key)X
+1487(table)X
+1680(routines:)X
+1 f
+2011(When)X
+2227(clients)X
+2459(store)X
+2638(tickets)X
+2870(and)X
+3009(credentials)X
+3380(in)X
+3465(a)X
+3524(cache,)X
+3751(the)X
+3872(core)X
+755 5380(routines)N
+1042(call)X
+1186(out)X
+1316(through)X
+1593(a)X
+1657(credentials)X
+2033(cache)X
+2245(table)X
+2429(entry)X
+2622(to)X
+2712(a)X
+2776(separate)X
+3068(library)X
+3310(module)X
+3578(which)X
+3802(imple-)X
+755 5476(ments)N
+978(the)X
+1108(storing)X
+1362(and)X
+1510(searching)X
+1850(routines)X
+2140(for)X
+2266(credentials)X
+2646(caches.)X
+2933(An)X
+3063(environment)X
+3500(variable)X
+3791(can)X
+3935(be)X
+755 5572(used)N
+924(to)X
+1008(specify)X
+1262(the)X
+1381(default)X
+1625(type)X
+1784(and)X
+1921(location)X
+2200(of)X
+2288(a)X
+2345(credentials)X
+2714(cache,)X
+2939(so)X
+3031(a)X
+3088(user)X
+3243(can)X
+3376(switch)X
+3606(between)X
+3895(dif-)X
+755 5668(ferent)N
+984(types)X
+1194(and)X
+1351(locations)X
+1681(of)X
+1789(caches)X
+2045(as)X
+2153(needed)X
+2422(\(perhaps)X
+2740(to)X
+2843(keep)X
+3035(the)X
+3173(credentials)X
+3561(for)X
+3695(two)X
+3855(roles)X
+755 5764(separate\).)N
+8 s
+1117(MIT)X
+10 s
+1234('s)X
+1327(implementation)X
+1863(provides)X
+2173(two)X
+2327(credentials)X
+2709(cache)X
+2927(implementations,)X
+3514(one)X
+3664(built)X
+3844(on)X
+3958(C)X
+
+11 p
+%%Page: 11 11
+10 s 0 xH 0 xS 1 f
+0 32(--)N
+4323(--)X
+2196 416(-)N
+2243(11)X
+2343(-)X
+755 672(")N
+7 f
+788(stdio)X
+1 f
+(")S
+1099(routines)X
+1395(and)X
+1549(the)X
+1684(other)X
+1886(built)X
+2069(on)X
+8 s
+2182(UNIX)X
+10 s
+2378(\256le-descriptor)X
+2865(semantics.)X
+3258(Other)X
+3478(implementations)X
+755 768(could)N
+953(provide)X
+1218(shared-memory)X
+1742(or)X
+1829(kernel-resident)X
+2331(caches.)X
+755 960(Servers)N
+1017(likewise)X
+1305(store)X
+1482(their)X
+1650(secret)X
+1859(keys)X
+2027(K)X
+7 s
+2085 976(s)N
+10 s
+2134 960(in)N
+2216(key)X
+2352(tables)X
+2559(accessed)X
+2861(by)X
+2961(the)X
+3079(core)X
+3238(routines)X
+3516(through)X
+3785(a)X
+3841(func-)X
+755 1056(tion)N
+899(table.)X
+8 s
+1111(MIT)X
+10 s
+1228('s)X
+1306(implementation)X
+1828(provides)X
+2124(a)X
+2180(key)X
+2316(table)X
+2492(library)X
+2726(built)X
+2892(on)X
+2992(C)X
+3065(")X
+7 f
+3098(stdio)X
+1 f
+(")S
+3391(routines.)X
+3 f
+8 s
+555 1180(KDC)N
+10 s
+725(database)X
+1055(support:)X
+1 f
+1376(All)X
+1506(accesses)X
+1807(to)X
+1897(the)X
+8 s
+2019(KDC)X
+10 s
+2154('s)X
+2240(principal)X
+2553(database)X
+2858(by)X
+2966(the)X
+8 s
+3087(KDC)X
+10 s
+3249(and)X
+3392(administrative)X
+3877(pro-)X
+755 1276(grams)N
+981(are)X
+1110(mediated)X
+1434(by)X
+1544(a)X
+1610(database)X
+1917(library)X
+2161(which)X
+2386(can)X
+2527(be)X
+2632(replaced)X
+2934(if)X
+3012(needed.)X
+8 s
+3305(MIT)X
+10 s
+3422('s)X
+3509(implementation)X
+755 1372(uses)N
+916(the)X
+8 s
+1033(UNIX)X
+2 f
+10 s
+1215(dbm)X
+1 f
+1383(database)X
+1683(system.)X
+1968(Since)X
+2 f
+2169(dbm)X
+1 f
+2337(does)X
+2507(not)X
+2632(provide)X
+2900(any)X
+3038(record)X
+3266(or)X
+3355(database)X
+3654(locking,)X
+3936(its)X
+755 1468(use)N
+883(is)X
+957(augmented)X
+1330(with)X
+1493(separate)X
+1778(locking)X
+2039(code)X
+2212(to)X
+2295(mediate)X
+2570(between)X
+2859(writers)X
+3102(and)X
+3238(readers.)X
+3531(Administrative)X
+755 1564(requests)N
+1038(\(e.g.)X
+1201(adding)X
+1439(entries,)X
+1693(changing)X
+2007(keys)X
+2174(or)X
+2261(passwords\))X
+2642(can)X
+2774(be)X
+2870(handled)X
+3144(on-line.)X
+3 f
+555 1688(Operating)N
+930(system)X
+1186(support:)X
+1 f
+1503(Although)X
+1828(it)X
+1895(is)X
+1971(targeted)X
+2253(for)X
+8 s
+2366(UNIX)X
+10 s
+2548(systems,)X
+2844(the)X
+8 s
+2961(MIT)X
+10 s
+3101(implementation)X
+3626(is)X
+3702(careful)X
+3949(to)X
+755 1784(access)N
+982(operating)X
+1306(system)X
+1549(features)X
+1825(only)X
+1988(from)X
+2165(a)X
+2221(few)X
+2362(well-contained)X
+2859(modules.)X
+3190(An)X
+3308(operating)X
+3631(system)X
+3873(sup-)X
+755 1880(port)N
+919(library)X
+1168(performs)X
+1493(all)X
+1608(the)X
+1741(accesses)X
+2049(required)X
+2352(by)X
+2467(the)X
+2600(rest)X
+2751(of)X
+2853(the)X
+2986(code,)X
+3193(such)X
+3374(as)X
+3475(transmitting)X
+3895(and)X
+755 1976(receiving)N
+1097(network)X
+1403(messages,)X
+1769(examining)X
+2150(con\256guration)X
+2620(\256les,)X
+2816(checking)X
+3149(the)X
+3290(system's)X
+3612(time-of-day,)X
+755 2072(translating)N
+1125(from)X
+1313(account)X
+1595(names)X
+1832(to)X
+1926(Kerberos)X
+2253(names)X
+2490(\(and)X
+2 f
+2665(vice)X
+2827(versa)X
+1 f
+3001(\),)X
+3080(and)X
+3227(performing)X
+3619(rudimentary)X
+755 2168(account)N
+1025(access)X
+1251(checks.)X
+3 f
+555 2360(5.2.)N
+715(User)X
+896(interaction)X
+1 f
+555 2484(If)N
+630(all)X
+731(parts)X
+908(of)X
+996(Kerberos)X
+1312(are)X
+1432(working)X
+1720(properly,)X
+2033(users)X
+2218(will)X
+2362(not)X
+2484(normally)X
+2793(be)X
+2889(aware)X
+3102(that)X
+3242(Kerberos)X
+3557(authentication)X
+555 2580(is)N
+629(in)X
+712(use)X
+840(by)X
+941(their)X
+1109(applications.)X
+1557(The)X
+1703(normal)X
+1951(login)X
+2136(process)X
+2397(obtains)X
+2648(and)X
+2784(caches)X
+3019(an)X
+3115(initial)X
+3321(ticket-granting)X
+3813(ticket,)X
+555 2676(and)N
+693(applications)X
+1102(automatically)X
+1560(obtain)X
+1782(and)X
+1920(cache)X
+2126(service)X
+2375(tickets)X
+2605(as)X
+2693(required.)X
+3022(Only)X
+3203(when)X
+3398(authentication)X
+3873(fails)X
+555 2772(will)N
+699(users)X
+884(become)X
+1154(aware)X
+1367(of)X
+1454(the)X
+1572(underlying)X
+1939(use)X
+2066(of)X
+2153(Kerberos.)X
+555 2896(If)N
+635(users)X
+826(need)X
+1004(to)X
+1092(refresh)X
+1341(tickets)X
+1575(\(e.g.,)X
+1763(if)X
+1837(they)X
+2000(expire\),)X
+2273(then)X
+2436(they)X
+2599(can)X
+2736(use)X
+2868(the)X
+2 f
+2991(kinit)X
+1 f
+3165(program,)X
+3482(which)X
+3703(will)X
+3852(get)X
+3975(a)X
+555 2992(new)N
+716(ticket-granting)X
+1214(ticket)X
+1418(after)X
+1592(reading)X
+1859(a)X
+1921(password)X
+2250(from)X
+2432(the)X
+2556(keyboard.)X
+2921(Users)X
+3130(examine)X
+3428(the)X
+3552(cached)X
+3802(tickets)X
+555 3088(with)N
+2 f
+717(klist)X
+1 f
+877(and)X
+1013(destroy)X
+1269(the)X
+1387(cache)X
+1591(with)X
+2 f
+1753(kdestroy.)X
+1 f
+555 3212(When)N
+776(principal)X
+1090(names)X
+1324(need)X
+1505(to)X
+1596(be)X
+1701(displayed)X
+2037(to)X
+2128(human)X
+2375(users,)X
+2589(by)X
+2698(convention\262)X
+3123(they)X
+3290(are)X
+3418(represented)X
+3818(as)X
+3913(the)X
+555 3308(sequence)N
+877(of)X
+971(name)X
+1172(components)X
+1586(separated)X
+1917(by)X
+2024(slashes)X
+2278(\(/\),)X
+2401(followed)X
+2713(by)X
+2820(an)X
+2923(at-sign)X
+3168(\(@\),)X
+3342(and)X
+3484(the)X
+3608(realm)X
+3817(name.)X
+555 3404(Thus,)N
+769(a)X
+839(principal)X
+1158(with)X
+1334(two)X
+1488(name)X
+1696(components)X
+7 f
+2145(userX)X
+1 f
+2419(and)X
+7 f
+2596(role2)X
+1 f
+2869(in)X
+2964(the)X
+3095(realm)X
+7 f
+3339(ATHENA.MIT.EDU)X
+1 f
+555 3500(would)N
+775(be)X
+871(represented)X
+1262(as)X
+7 f
+1377(userX/role2@ATHENA.MIT.EDU)X
+1 f
+(.)S
+3 f
+555 3692(Password)N
+904(to)X
+991(key)X
+1131(conversion)X
+1 f
+555 3816(Since)N
+754(users)X
+940(are)X
+1060(not)X
+1183(good)X
+1364(at)X
+1442(remembering)X
+1890(binary)X
+2115(encryption)X
+2478(keys,)X
+2665(Kerberos)X
+2980(provides)X
+3276(routines)X
+3554(which)X
+3770(convert)X
+555 3912(passwords)N
+918(into)X
+1071(keys.)X
+1287(The)X
+1441(algorithm)X
+1781(used)X
+1957(to)X
+2047(convert)X
+2316(a)X
+2380(password)X
+2711(into)X
+2863(an)X
+2967(encryption)X
+3338(key)X
+3482(performs)X
+3800(a)X
+3864(non-)X
+555 4008(invertible)N
+886(transformation,)X
+1402(so)X
+1497(that)X
+1641(an)X
+1741(attacker)X
+2020(cannot)X
+2257(discover)X
+2552(a)X
+2611(user's)X
+2826(password)X
+3152(knowing)X
+3455(only)X
+3620(K)X
+7 s
+3678 4024(c)N
+10 s
+3710 4008(.)N
+3773(In)X
+3863(Ver-)X
+555 4104(sion)N
+715(5,)X
+802(the)X
+927(conversion)X
+1306(can)X
+1445(be)X
+1548(seeded)X
+1794(with)X
+1963(an)X
+2066(additional)X
+2413(string)X
+2622(\(often)X
+2841(the)X
+2966(realm)X
+3175(name\))X
+3402(which)X
+3624(perturbs)X
+3913(the)X
+555 4200(output)N
+783(key,)X
+943(so)X
+1038(that)X
+1182(a)X
+1242(user)X
+1400(who)X
+1562(is)X
+1638(registered)X
+1978(in)X
+2063(multiple)X
+2352(realms)X
+2589(and)X
+2728(uses)X
+2889(the)X
+3010(same)X
+3198(password)X
+3524(in)X
+3609(two)X
+3752(of)X
+3842(those)X
+555 4296(realms)N
+791(will)X
+937(have)X
+1111(a)X
+1169(different)X
+1468(K)X
+7 s
+1526 4312(c)N
+10 s
+1580 4296(in)N
+1664(each)X
+1834(realm.)X
+2079(Without)X
+2363(this)X
+2499(perturbation,)X
+2932(an)X
+3029(attacker)X
+3305(discovering)X
+3700(the)X
+3819(user's)X
+555 4392(key)N
+696(in)X
+783(one)X
+923(realm)X
+1130(could)X
+1332(impersonate)X
+1748(that)X
+1892(user)X
+2050(in)X
+2136(the)X
+2258(other)X
+2447(realm,)X
+2674(without)X
+2942(needing)X
+3220(to)X
+3306(know)X
+3508(the)X
+3630(user's)X
+3846(pass-)X
+555 4488(word.)N
+781(When)X
+994(no)X
+1095(additional)X
+1436(perturbation)X
+1849(string)X
+2052(is)X
+2126(supplied,)X
+2438(the)X
+2557(resulting)X
+2858(key)X
+2995(is)X
+3068(the)X
+3186(same)X
+3371(as)X
+3458(the)X
+3576(key)X
+3712(produced)X
+555 4584(by)N
+655(the)X
+773(Version)X
+1047(4)X
+1107(algorithm.)X
+3 f
+555 4776(5.3.)N
+715(Compatibility)X
+1210(support)X
+1496(for)X
+1619(Version)X
+1906(4)X
+1 f
+555 4900(There)N
+764(is)X
+838(a)X
+895(small)X
+1089(but)X
+1212(growing)X
+1500(base)X
+1664(of)X
+1752(Kerberos)X
+2068(Version)X
+2343(4)X
+2404(applications,)X
+2832(and)X
+2968(a)X
+3024(number)X
+3289(of)X
+3376(sites)X
+3538(running)X
+3807(a)X
+3863(Ker-)X
+555 4996(beros)N
+759(Version)X
+1043(4)X
+1113(authentication)X
+1597(server.)X
+8 s
+1840(MIT)X
+10 s
+1957('s)X
+2044(implementation)X
+2575(of)X
+2671(Version)X
+2954(5)X
+3023(provides)X
+3328(several)X
+3585(compatibility)X
+555 5092(features)N
+830(which)X
+1046(can)X
+1178(help)X
+1336(sites)X
+1498(and)X
+1634(programmers)X
+2082(convert)X
+2343(to)X
+2425(Version)X
+2699(5.)X
+3 f
+555 5216(Interface)N
+900(compatibility:)X
+1 f
+8 s
+1412(MIT)X
+10 s
+1529('s)X
+1619(implementation)X
+2153(of)X
+2252(Version)X
+2538(5)X
+2609(includes)X
+2907(a)X
+2974("glue)X
+3176(library")X
+3454(which)X
+3681(presents)X
+3975(a)X
+755 5312(Kerberos)N
+1085(Version)X
+1374(4)X
+1449(application)X
+1840(programming)X
+2311(interface)X
+2627(\(API\))X
+2844(but)X
+2980(which)X
+3210(uses)X
+3382(Version)X
+3670(5)X
+3744(protocol)X
+755 5408(messages)N
+1083(and)X
+1224(routines.)X
+1527(This)X
+1693(library)X
+1931(converts)X
+2227(data)X
+2385(structures)X
+2721(as)X
+2812(much)X
+3014(as)X
+3105(possible)X
+3391(between)X
+3683(the)X
+3805(differ-)X
+755 5504(ing)N
+878(Version)X
+1153(4)X
+1214(and)X
+1351(Version)X
+1626(5)X
+1687(data)X
+1842(structures.)X
+2214(In)X
+2301(many)X
+2499(cases)X
+2689(\(especially)X
+3057(those)X
+3246(that)X
+3386(use)X
+3513(only)X
+3675(a)X
+3731(common)X
+8 s
+10 f
+555 5584(hhhhhhhhhhhhhhhhhh)N
+1 f
+555 5664(\262)N
+603(Please)X
+782(note)X
+908(that)X
+1020(this)X
+1129(is)X
+1188(only)X
+1318(a)X
+2 f
+1362(convention,)X
+1 f
+1679(and)X
+1787(other)X
+1934(implementations)X
+2377(may)X
+2503(display)X
+2704(the)X
+2798(principal)X
+3041(names)X
+3220(differently.)X
+
+12 p
+%%Page: 12 12
+8 s 0 xH 0 xS 1 f
+10 s
+0 32(--)N
+4323(--)X
+2196 416(-)N
+2243(12)X
+2343(-)X
+755 672(subset)N
+983(of)X
+1078(the)X
+1204(Version)X
+1486(4)X
+1554(library)X
+1796(functions\),)X
+2169(an)X
+2272(application)X
+2655(originally)X
+2993(written)X
+3247(for)X
+3368(Kerberos)X
+3690(Version)X
+3971(4)X
+755 768(need)N
+936(only)X
+1107(be)X
+1212(re-linked)X
+1531(with)X
+1702(this)X
+1846(library)X
+2089(and)X
+2233(the)X
+2359(remainder)X
+2713(of)X
+2808(the)X
+2934(Version)X
+3216(5)X
+3284(code)X
+3464(to)X
+3554(use)X
+3689(Version)X
+3971(5)X
+755 864(protocols.)N
+1131(However,)X
+1484(such)X
+1669(applications)X
+2094(will)X
+2256(no)X
+2374(longer)X
+2617(be)X
+2731(compatible)X
+3125(with)X
+3305(older)X
+3507(peer)X
+3683(processes,)X
+755 960(which)N
+982(would)X
+1213(still)X
+1363(expect)X
+1604(the)X
+1733(Version)X
+2017(4)X
+2087(messages,)X
+2440(and)X
+2586(continued)X
+2932(maintenance)X
+3368(may)X
+3536(be)X
+3642(made)X
+3846(more)X
+755 1056(dif\256cult.)N
+3 f
+555 1180(A)N
+660(generic)X
+956(authentication)X
+1495(interface:)X
+1 f
+1872(The)X
+2043(Generic)X
+2344(Security)X
+2657(Services)X
+2975(API)X
+3150(\(GSSAPI\))X
+3545([Lin91])X
+3836(is)X
+3935(an)X
+755 1276(authentication-system)N
+1480(independent)X
+1894(programming)X
+2352(interface)X
+2656(which)X
+2874(is)X
+2949(currently)X
+3261(being)X
+3461(developed)X
+3812(by)X
+3913(the)X
+755 1372(Common)N
+1083(Authentication)X
+1590(Technology)X
+2004(Working)X
+2320(Group)X
+2556(within)X
+2791(the)X
+2920(Internet)X
+3200(Engineering)X
+3622(Task)X
+3808(Force.)X
+755 1468(The)N
+907(GSSAPI)X
+1209(provides)X
+1512(a)X
+1575(convenient)X
+1954(abstraction)X
+2333(boundary)X
+2663(for)X
+2784(applications)X
+3198(writers)X
+3448(who)X
+3612(wish)X
+3789(to)X
+3877(take)X
+755 1564(advantage)N
+1113(of)X
+1212(multiple)X
+1509(authentication)X
+1994(systems)X
+2278(\(even)X
+2488(ones)X
+2666(not)X
+2799(yet)X
+2928(invented\),)X
+3282(without)X
+3557(needing)X
+3842(to)X
+3935(be)X
+755 1660(aware)N
+972(of)X
+1063(any)X
+1203(of)X
+1294(the)X
+1416(details)X
+1649(of)X
+1740(those)X
+1933(systems.)X
+2250(Since)X
+2452(the)X
+2574(GSSAPI)X
+2873(only)X
+3039(provides)X
+3339(access)X
+3569(to)X
+3654(those)X
+3846(basic)X
+755 1756(authentication)N
+1236(services)X
+1522(which)X
+1745(form)X
+1928(a)X
+1991(common)X
+2297(denominator)X
+2728(across)X
+2955(different)X
+3258(authentication)X
+3738(systems,)X
+755 1852(applications)N
+1164(which)X
+1382(need)X
+1556(access)X
+1784(to)X
+1867(specialized)X
+2245(features)X
+2521(provided)X
+2827(by)X
+2928(a)X
+2985(particular)X
+3314(authentication)X
+3789(system)X
+755 1948(will)N
+906(still)X
+1052(need)X
+1231(to)X
+1320(code)X
+1499(to)X
+1588(that)X
+1755(system's)X
+2062(native)X
+2285(interface.)X
+2634(However,)X
+2976(the)X
+3101(basic)X
+3292(functionality)X
+3727(to)X
+3815(which)X
+755 2044(the)N
+884(GSSAPI)X
+1190(provides)X
+1497(access)X
+1734(should)X
+1978(be)X
+2085(suf\256cient)X
+2414(for)X
+2539(the)X
+2668(majority)X
+2970(of)X
+3068(applications.)X
+8 s
+3522(MIT)X
+10 s
+3669(provides)X
+3975(a)X
+755 2140(binding)N
+1019(of)X
+1106(this)X
+1241(interface)X
+1543(to)X
+1625(the)X
+1743(Kerberos)X
+2058(Version)X
+2332(5)X
+2392(implementation.)X
+3 f
+555 2264(Protocol)N
+870(compatibility:)X
+1 f
+1375(For)X
+1511(those)X
+1705(sites)X
+1871(which)X
+2091(wish)X
+2266(to)X
+2352(convert)X
+2617(the)X
+2739(Kerberos)X
+3058(server)X
+3279(to)X
+3365(provide)X
+3634(the)X
+3756(features)X
+755 2360(of)N
+847(Version)X
+1126(5,)X
+1211(a)X
+1272(compatibility)X
+1723(mode)X
+1926(may)X
+2089(be)X
+2190(enabled)X
+2465(on)X
+2570(the)X
+8 s
+2689(KDC)X
+10 s
+2849(which)X
+3070(causes)X
+3305(it)X
+3374(to)X
+3461(accept)X
+3692(Version)X
+3971(4)X
+755 2456(format)N
+8 s
+992(KDC)X
+10 s
+1154(requests)X
+1444(and)X
+1587(respond)X
+1868(with)X
+2037(Version)X
+2318(4)X
+2385(format)X
+2626(tickets)X
+2862(and)X
+3004(messages,)X
+3353(as)X
+3446(well)X
+3610(as)X
+3703(accepting)X
+755 2552(Version)N
+1036(5)X
+1103(format)X
+1344(requests.)X
+1673(This)X
+1841(allows)X
+2076(an)X
+2178(administrator)X
+2631(to)X
+2719(convert)X
+2986(a)X
+3048(Version)X
+3328(4)X
+3394(installation)X
+3775(to)X
+3863(Ver-)X
+755 2648(sion)N
+911(5)X
+974(slowly,)X
+1230(by)X
+1333(supporting)X
+1698(the)X
+1819(old)X
+1944(users)X
+2132(with)X
+2297(the)X
+2418(compatibility)X
+2867(code.)X
+3082(After)X
+3275(some)X
+3467(grace)X
+3665(period,)X
+3913(the)X
+755 2744(Version)N
+1035(4)X
+1101(compatibility)X
+1553(would)X
+1779(be)X
+1881(turned)X
+2112(off.)X
+2272(If)X
+2352(a)X
+2414(user)X
+2574(wishes)X
+2818(to)X
+2906(use)X
+3039(both)X
+3207(Version)X
+3486(4)X
+3551(and)X
+3692(Version)X
+3971(5)X
+755 2840(programs)N
+1090(simultaneously,)X
+1626(the)X
+1756(user's)X
+1980(key)X
+2128(must)X
+2315(be)X
+2423(encoded)X
+2723(using)X
+2928(the)X
+3058(Version)X
+3344(4)X
+3415(style)X
+3597(string-to-key)X
+755 2936(algorithm;)N
+1109(the)X
+1228(Version)X
+1503(5)X
+1564(response)X
+1866(will)X
+2011(include)X
+2268(information)X
+2667(in)X
+2750(the)X
+2869(pre-authentication)X
+3474(data)X
+3628(of)X
+3715(the)X
+3833(ticket)X
+755 3032(response)N
+1056(to)X
+1138(indicate)X
+1412(which)X
+1628(string-to-key)X
+2062(algorithm)X
+2393(should)X
+2626(be)X
+2722(used)X
+2889(by)X
+2989(the)X
+3107(Version)X
+3381(5)X
+3441(client.)X
+3 f
+555 3156(Interface)N
+900(coexistence:)X
+1 f
+1343(The)X
+8 s
+1496(MIT)X
+10 s
+1645(Version)X
+1931(5)X
+2003(libraries)X
+2298(were)X
+2487(purposely)X
+2835(designed)X
+3152(to)X
+3246(allow)X
+3455(an)X
+3562(application)X
+3949(to)X
+755 3252(simultaneously)N
+1260(support)X
+1521(both)X
+1684(Versions)X
+1990(4)X
+2051(and)X
+2188(5,)X
+2269(and)X
+2406(this)X
+2542(is)X
+2616(the)X
+2735(suggested)X
+3072(compatibility)X
+3519(mode.)X
+3758(The)X
+3904(tel-)X
+755 3348(net)N
+874([Pos83])X
+1144(program)X
+1437(distributed)X
+1800(with)X
+1963(the)X
+8 s
+2078(MIT)X
+10 s
+2216(code)X
+2388(can)X
+2520(automatically)X
+2976(choose)X
+3219(an)X
+3315(authentication)X
+3789(system)X
+755 3444(to)N
+842(use)X
+973(when)X
+1171(it)X
+1239(connects)X
+1544(to)X
+1630(a)X
+1690(remote)X
+1937(system,)X
+2203(based)X
+2410(on)X
+2514(what)X
+2694(credentials)X
+3066(the)X
+3188(user)X
+3346(holds)X
+3543(and)X
+3683(what)X
+3863(Ver-)X
+755 3540(sions)N
+966(of)X
+1080(authentication)X
+1581(the)X
+1726(remote)X
+1996(telnet)X
+2221(server)X
+2465(will)X
+2635(accept.)X
+2927(It)X
+3022(implements)X
+3441(the)X
+3585(current)X
+3859(draft)X
+755 3636(speci\256cations)N
+1215(of)X
+1306(the)X
+1428(authentication)X
+1906([Bor92a])X
+2220(and)X
+2360(encryption)X
+2727([Bor91])X
+3005(options)X
+3263(for)X
+3380(both)X
+3545(Kerberos)X
+3863(Ver-)X
+755 3732(sion)N
+908(5)X
+968([Bor92b])X
+1282(and)X
+1418(Kerberos)X
+1733(Version)X
+2007(4)X
+2067([Bor92c])X
+2377(authentication)X
+2851(systems.)X
+3 f
+555 3856(Program)N
+891(compatibility:)X
+1 f
+1399(Another)X
+1690(possible)X
+1980(compatibility)X
+2434(mode)X
+2640(can)X
+2779(be)X
+2882(fabricated)X
+3231(by)X
+3338(maintaining)X
+3747(separate)X
+755 3952(copies)N
+993(of)X
+1093(network)X
+1389(applications)X
+1809(which)X
+2038(use)X
+2178(Version)X
+2465(4)X
+2538(and)X
+2687(Version)X
+2974(5)X
+3046(protocol)X
+3345(messages.)X
+3720(The)X
+3877(user)X
+755 4048(would)N
+978(use)X
+1108(a)X
+1167(generic)X
+1427(name)X
+1624(for)X
+1741(the)X
+1862(application,)X
+2261(and)X
+2400(the)X
+2521(application)X
+2900(would)X
+3123(try)X
+3235(each)X
+3406(authentication)X
+3882(sys-)X
+755 4144(tem)N
+907(in)X
+1001(turn,)X
+1182(by)X
+1294(executing)X
+1638(a)X
+1706(separate)X
+2002(copy)X
+2190(of)X
+2289(the)X
+2419(program)X
+2723(for)X
+2848(each)X
+3027(system)X
+3280(\(see)X
+3441(Figure)X
+3681(6\).)X
+3819(When)X
+755 4240(authentication)N
+1245(is)X
+1334(successfully)X
+1761(completed,)X
+2150(the)X
+2283(application)X
+2674(would)X
+2909(proceed)X
+3199(as)X
+3301(normal.)X
+3603(On)X
+3736(both)X
+3913(the)X
+755 4336(client)N
+963(and)X
+1109(server)X
+1336(sides)X
+1526(of)X
+1623(the)X
+1751(application,)X
+2157(this)X
+2302(approach)X
+2627(requires)X
+2916(two)X
+3066(copies)X
+3301(of)X
+3398(the)X
+3525(same)X
+3719(program,)X
+755 4432(each)N
+929(linked)X
+1155(with)X
+1323(a)X
+1385(different)X
+1688(authentication)X
+2168(system.)X
+2456(The)X
+2607(different)X
+2909(versions)X
+3201(of)X
+3293(the)X
+3416(server)X
+3638(would)X
+3863(each)X
+755 4528(accept)N
+986(requests)X
+1274(at)X
+1357(different)X
+1659(network)X
+1947(ports,)X
+2152(and)X
+2293(the)X
+2416(different)X
+2717(clients)X
+2950(would)X
+3174(only)X
+3340(send)X
+3511(a)X
+3571(request)X
+3827(to)X
+3913(the)X
+755 4624(server)N
+972(which)X
+1188(supports)X
+1479(its)X
+1574(authentication)X
+2048(type.)X
+755 4816(This)N
+921(approach)X
+1240(could)X
+1442(be)X
+1542(mixed)X
+1766(with)X
+1932(the)X
+2054(glue)X
+2216(library)X
+2454(and/or)X
+2683(single-server)X
+3122(approaches,)X
+3528(by)X
+3631(creating)X
+3913(the)X
+755 4912(separate)N
+1046(clients)X
+1281(using)X
+1480(the)X
+1604(glue)X
+1768(library)X
+2008(and/or)X
+2239(using)X
+2438(a)X
+2500(single)X
+2717(server)X
+2940(program)X
+3238(which)X
+3460(understands)X
+3869(both)X
+755 5008(protocols.)N
+
+13 p
+%%Page: 13 13
+10 s 0 xH 0 xS 1 f
+0 32(--)N
+4323(--)X
+2196 416(-)N
+2243(13)X
+2343(-)X
+1619 808(Client)N
+1834(A)X
+1587 792 MXY
+336 238 De
+2056 760(try)N
+2165(protocol)X
+2452(A)X
+1971 780 MXY
+-48 12 Dl
+1971 804 MXY
+-48 -12 Dl
+10 f
+(hhhhhhhhhhhhhhhhhh)S
+2594 804 MXY
+48 -12 Dl
+2594 780 MXY
+48 12 Dl
+1 f
+2666 808(Server)N
+2896(A)X
+2642 792 MXY
+336 238 De
+1775 1168(\(execute)N
+2068(B)X
+2141(if)X
+2210(A)X
+2288(fails\))X
+1755 912 MXY
+0 24 Dl
+962 MY
+0 24 Dl
+1013 MY
+0 24 Dl
+1064 MY
+0 24 Dl
+1114 MY
+0 24 Dl
+1165 MY
+0 24 Dl
+1216 MY
+0 24 Dl
+1266 MY
+0 24 Dl
+1317 MY
+0 24 Dl
+1368 MY
+0 23 Dl
+1743 1344 MXY
+12 47 Dl
+1767 1344 MXY
+-12 47 Dl
+1621 1527(Client)N
+1836(B)X
+1587 1511 MXY
+336 238 De
+2059 1479(try)N
+2168(protocol)X
+2455(B)X
+1971 1499 MXY
+-48 12 Dl
+1971 1523 MXY
+-48 -12 Dl
+10 f
+(hhhhhhhhhhhhhhhhhh)S
+2594 1523 MXY
+48 -12 Dl
+2594 1499 MXY
+48 12 Dl
+1 f
+2669 1527(Server)N
+2899(B)X
+2642 1511 MXY
+336 238 De
+2830 1168(\(might)N
+3063(be)X
+3159(the)X
+3277(same)X
+3462(program\))X
+2822 960 MXY
+-12 -48 Dl
+2798 960 MXY
+12 -48 Dl
+0 24 Dl
+962 MY
+0 24 Dl
+1013 MY
+0 24 Dl
+1064 MY
+0 24 Dl
+1114 MY
+0 24 Dl
+1165 MY
+0 24 Dl
+1216 MY
+0 24 Dl
+1266 MY
+0 24 Dl
+1317 MY
+0 24 Dl
+1368 MY
+0 23 Dl
+2798 1344 MXY
+12 47 Dl
+2822 1344 MXY
+-12 47 Dl
+3 f
+1103 1784(Figure)N
+1350(6:)X
+2 f
+1437(Implementing)X
+1898(protocol)X
+2189(compatibility)X
+2631(by)X
+2727(executing)X
+3055(separate)X
+3351(programs)X
+3 f
+555 2072(6.)N
+655(Future)X
+911(work)X
+1 f
+555 2196(Version)N
+831(5)X
+893(of)X
+981(Kerberos)X
+1297(is)X
+1371(a)X
+1428(step)X
+1578(toward)X
+1822(the)X
+1941(design)X
+2171(of)X
+2259(an)X
+2356(authentication)X
+2831(system)X
+3074(that)X
+3215(is)X
+3289(widely)X
+3528(applicable.)X
+3899(We)X
+555 2292(believe)N
+813(the)X
+937(framework)X
+1316(is)X
+1395(\257exible)X
+1661(enough)X
+1923(to)X
+2011(accommodate)X
+2483(future)X
+2701(requirements.)X
+3186(Some)X
+3394(items)X
+3593(we)X
+3713(expect)X
+3949(to)X
+555 2388(add)N
+691(to)X
+773(Kerberos)X
+1088(in)X
+1170(the)X
+1288(near)X
+1447(future)X
+1659(include:)X
+3 f
+555 2512(Public-key)N
+940(cryptosystems:)X
+1 f
+1474(The)X
+1620(encryption)X
+1984(speci\256cations)X
+2441(in)X
+2524(Kerberos)X
+2840(Version)X
+3115(5)X
+3175(are)X
+3294(designed)X
+3599(primarily)X
+3917(for)X
+755 2608(secret-key)N
+1109(cryptosystems,)X
+1610(but)X
+1735(we)X
+1852(are)X
+1974(considering)X
+2371(support)X
+2634(for)X
+2751(public-key)X
+3116(cryptosystems.)X
+3636(One)X
+3792(advan-)X
+755 2704(tage)N
+913(of)X
+1004(such)X
+1175(support)X
+1439(will)X
+1587(be)X
+1687(the)X
+1809(ability)X
+2037(to)X
+2123(interoperate)X
+2531(with)X
+2697(the)X
+2818(evolving)X
+3121(certi\256cate)X
+3461(infrastructure)X
+3917(for)X
+755 2800(Privacy)N
+1033(Enhanced)X
+1383(Mail.)X
+1607(There)X
+1828(is)X
+1914(also)X
+2076(work)X
+2274(proceeding)X
+2664(on)X
+2777(the)X
+2907(development)X
+3353(of)X
+3452(a)X
+3520(hybrid)X
+3761(Internet)X
+755 2896(Authentication)N
+1266(System)X
+1536(\(IAS\))X
+1754(that)X
+1909(will)X
+2068(provide)X
+2348(interoperability)X
+2877(between)X
+3180(Kerberos)X
+3510(and)X
+3661(public)X
+3895(key)X
+755 2992(based)N
+958(systems)X
+1231(such)X
+1398(as)X
+1485(Digital)X
+1727(Equipment)X
+2098(Corporation's)X
+2563(DASS)X
+2787([Tar91].)X
+3 f
+555 3116(\252Smartcards\272:)N
+1 f
+1089(Several)X
+1356(companies)X
+1725(manufacture)X
+2153(hand-held)X
+2499(devices)X
+2765(which)X
+2986(can)X
+3123(be)X
+3224(used)X
+3396(to)X
+3483(augment)X
+3784(normal)X
+755 3212(password)N
+1078(security)X
+1352(methods,)X
+1663(and)X
+1799(there)X
+1980(is)X
+2053(strong)X
+2273(interest)X
+2529(within)X
+2753(the)X
+2871(industry)X
+3153(to)X
+3235(integrate)X
+3536(one)X
+3672(or)X
+3759(more)X
+3944(of)X
+755 3308(these)N
+946(systems)X
+1225(with)X
+1393(Kerberos.)X
+1754(Work)X
+1963(is)X
+2042(underway)X
+2385(to)X
+2473(use)X
+2605(the)X
+2728(pre-authentication)X
+3337(data)X
+3496(\256eld)X
+3663(to)X
+3750(pass)X
+3913(the)X
+755 3404(additional)N
+1095(information)X
+1493(needed)X
+1741(to)X
+1823(use)X
+1950(such)X
+2117(devices.)X
+755 3596(In)N
+844(the)X
+964(more)X
+1151(distant)X
+1386(future)X
+1600(it)X
+1666(might)X
+1874(also)X
+2025(be)X
+2123(possible)X
+2407(to)X
+2491(program)X
+2785(a)X
+2842(smartcard)X
+3180(to)X
+3263(directly)X
+3529(take)X
+3684(part)X
+3830(in)X
+3913(the)X
+755 3692(Kerberos)N
+1073(protocol.)X
+1403(To)X
+1515(do)X
+1618(so)X
+1712(would)X
+1935(require)X
+2186(special)X
+2432(hardware)X
+2755(to)X
+2840(support)X
+3103(communication)X
+3623(between)X
+3913(the)X
+755 3788(smartcard)N
+1095(and)X
+1234(the)X
+1355(workstation)X
+1756(\(so)X
+1877(that)X
+2020(the)X
+2141(smartcard)X
+2481(could)X
+2682(communicate)X
+3137(with)X
+3302(the)X
+8 s
+3419(KDC)X
+10 s
+3554(\).)X
+3644(The)X
+3792(advan-)X
+755 3884(tage)N
+916(of)X
+1009(such)X
+1182(an)X
+1284(approach)X
+1605(is)X
+1684(that)X
+1830(the)X
+1954(initial)X
+2166(Kerberos)X
+2487(exchange)X
+2817(could)X
+3021(take)X
+3181(place)X
+3377(without)X
+3647(making)X
+3913(the)X
+755 3980(user's)N
+967(password)X
+1290(available)X
+1600(to)X
+1682(a)X
+1738(potentially)X
+2100(untrusted)X
+2418(workstation.)X
+3 f
+555 4104(Remote)N
+845(administration:)X
+1 f
+1404(The)X
+1555(current)X
+1809(protocol)X
+2102(speci\256cations)X
+2564(do)X
+2670(not)X
+2798(specify)X
+3056(an)X
+3158(administrative)X
+3642(interface)X
+3949(to)X
+755 4200(the)N
+8 s
+881(KDC)X
+10 s
+1048(database.)X
+8 s
+1393(MIT)X
+10 s
+1510('s)X
+1600(implementation)X
+2133(provides)X
+2440(a)X
+2507(sample)X
+2765(remote)X
+3019(administration)X
+3512(program)X
+3815(which)X
+755 4296(allows)N
+993(administrators)X
+1480(to)X
+1571(add)X
+1715(and)X
+1859(modify)X
+2118(entries)X
+2360(and)X
+2504(users)X
+2697(to)X
+2787(change)X
+3043(their)X
+3218(keys.)X
+3433(We)X
+3573(would)X
+3801(like)X
+3949(to)X
+755 4392(standardize)N
+1143(such)X
+1312(a)X
+1370(protocol.)X
+1699(Some)X
+1903(features)X
+2180(we)X
+2296(would)X
+2518(like)X
+2660(to)X
+2744(add)X
+2882(include)X
+3140(remote)X
+3384(extraction)X
+3726(of)X
+3814(server)X
+755 4488(key)N
+911(tables,)X
+1158(password)X
+1501("quality)X
+1796(checks,")X
+2108(and)X
+2264(a)X
+2340(provision)X
+2682(for)X
+2816(servers)X
+3083(to)X
+3184(change)X
+3451(their)X
+3637(secret)X
+3864(keys)X
+755 4584(automatically)N
+1211(every)X
+1410(so)X
+1501(often.)X
+3 f
+555 4708(Database)N
+893(propagation:)X
+1 f
+1359(The)X
+1506(current)X
+1756(implementation)X
+2280(provides)X
+2578(reliable)X
+8 s
+2837(KDC)X
+10 s
+2994(service)X
+3244(by)X
+3345(a)X
+3402(periodic)X
+3686(bulk-copy)X
+755 4804(of)N
+844(the)X
+8 s
+960(KDC)X
+10 s
+1117(database)X
+1416(to)X
+1500(slave)X
+8 s
+1682(KDC)X
+10 s
+1838(machines.)X
+2202(It)X
+2272(might)X
+2479(be)X
+2576(more)X
+2762(convenient)X
+3135(and/or)X
+3361(ef\256cient)X
+3645(to)X
+3728(build)X
+3913(the)X
+8 s
+755 4900(KDC)N
+10 s
+917(on)X
+1023(distributed)X
+1391(database)X
+1694(technologies.)X
+2165(However,)X
+2506(to)X
+2594(insure)X
+2816(that)X
+2962(an)X
+3064(attacker)X
+3345(cannot)X
+3585(illegitimately)X
+755 4996(obtain)N
+982(any)X
+1125(database)X
+1429(entry,)X
+1641(the)X
+1766(technology)X
+2149(must)X
+2331(provide)X
+2602(for)X
+2722(private)X
+2971(secure)X
+3203(transmission)X
+3633(of)X
+3726(the)X
+3850(data-)X
+755 5092(base)N
+918(elements)X
+1223(to)X
+1305(each)X
+1473(server,)X
+3 f
+555 5216(Validation)N
+940(suites:)X
+1 f
+1184(The)X
+1335(current)X
+1589(implementation)X
+2117(does)X
+2290(not)X
+2418(include)X
+2680(a)X
+2742(complete)X
+3062(validation)X
+3408(suite)X
+3585(to)X
+3673(verify)X
+3891(that)X
+755 5312(the)N
+885(protocol)X
+1184(is)X
+1269(properly)X
+1573(implemented.)X
+2062(Such)X
+2253(a)X
+2320(suite)X
+2502(could)X
+2711(prevent)X
+2983(future)X
+3206(security)X
+3491(problems)X
+3820(in)X
+3913(the)X
+755 5408(case)N
+914(of)X
+1001(a)X
+1057(faulty)X
+1264(implementation,)X
+1806(and)X
+1942(would)X
+2162(help)X
+2320(facilitate)X
+2621(interoperation)X
+3091(of)X
+3178(diverse)X
+3430(implementations.)X
+3 f
+555 5532(Applications:)N
+1 f
+1035(There)X
+1246(are)X
+1368(many)X
+1568(network)X
+1853(applications)X
+2262(that)X
+2404(would)X
+2626(bene\256t)X
+2866(from)X
+3044(the)X
+3164(addition)X
+3448(of)X
+3537(authentication.)X
+755 5628(Among)N
+1031(the)X
+1165(highly)X
+1405(visible)X
+1654(examples)X
+1993(are)X
+2128(electronic)X
+2481(mail,)X
+2678(popular)X
+2958(bulletin-board)X
+3447(systems)X
+3735(\(such)X
+3944(as)X
+755 5724(Usenet\),)N
+1049(and)X
+1189(distributed)X
+1555(\256le)X
+1681(systems.)X
+1997(It)X
+2069(is)X
+2145(hoped)X
+2364(that)X
+2507(application)X
+2886(designers)X
+3212(will)X
+3359(consider)X
+3654(authentica-)X
+755 5820(tion)N
+934(and)X
+1105(related)X
+1378(security)X
+1686(services)X
+1999(when)X
+2227(designing)X
+2592(their)X
+2793(protocols.)X
+3185(The)X
+3364(generic)X
+3655(application)X
+
+14 p
+%%Page: 14 14
+10 s 0 xH 0 xS 1 f
+0 32(--)N
+4323(--)X
+2196 416(-)N
+2243(14)X
+2343(-)X
+755 672(programming)N
+1211(interface)X
+1513(should)X
+1746(go)X
+1846(a)X
+1902(long)X
+2064(way)X
+2218(toward)X
+2461(making)X
+2721(it)X
+2785(possible)X
+3067(to)X
+3149(do)X
+3249(so.)X
+3 f
+555 864(Acknowledgements)N
+1 f
+555 988(The)N
+706(work)X
+897(described)X
+1231(here)X
+1396(has)X
+1529(been)X
+1707(the)X
+1831(result)X
+2035(of)X
+2128(many)X
+8 s
+2328(MIT)X
+10 s
+2471(Project)X
+2724(Athena)X
+2982(and)X
+8 s
+3120(MIT)X
+10 s
+3263(Network)X
+3570(Services)X
+3868(staff)X
+555 1084(members')N
+896(visions,)X
+1162(ideas,)X
+1367(and)X
+1503(hard)X
+1666(work.)X
+555 1208(The)N
+701(authors)X
+958(would)X
+1178(especially)X
+1519(like)X
+1659(to)X
+1741(thank)X
+1939(Steve)X
+2137(Bellovin,)X
+2452(Jennifer)X
+2731(Steiner,)X
+2998(and)X
+3134(Ralph)X
+3345(Swick)X
+3565(for)X
+3679(their)X
+3846(com-)X
+555 1304(ments)N
+766(on)X
+866(early)X
+1047(drafts)X
+1250(of)X
+1337(this)X
+1472(paper.)X
+3 f
+555 1496(REFERENCES)N
+1 f
+555 1676(Bel90.)N
+884(S.)X
+970(M.)X
+1083(Bellovin)X
+1380(and)X
+1518(M.)X
+1630(Merritt,)X
+1898(``Limitations)X
+2341(of)X
+2429(the)X
+2548(Kerberos)X
+2864(Authentication)X
+3361(System,'')X
+2 f
+3691(Computer)X
+884 1772(Communications)N
+1446(Review)X
+3 f
+1698(20)X
+1 f
+(\(5\),)S
+1912(pp.)X
+2032(119-132)X
+2319(\(October)X
+2625(1990\).)X
+555 1896(Cha90.)N
+884(George)X
+1151(A.)X
+1259(Champine,)X
+1638(Daniel)X
+1882(E.)X
+1981(Geer,)X
+2188(and)X
+2334(William)X
+2626(N.)X
+2734(Ruh,)X
+2917(``Project)X
+3228(Athena)X
+3490(as)X
+3586(a)X
+3651(Distributed)X
+884 1992(Computer)N
+1224(System,'')X
+2 f
+1553(IEEE)X
+1747(Computer)X
+3 f
+2087(23)X
+1 f
+(\(9\),)S
+2301(pp.)X
+2421(40-50)X
+2628(\(September)X
+3018(1990\).)X
+555 2116(Bor91.)N
+884(D.)X
+1002(Borman,)X
+1320(Editor,)X
+1580(``Telnet)X
+1879(Encryption)X
+2274(Option,'')X
+2609(Internet-Draft,)X
+3135(Internet)X
+3424(Engineering)X
+3855(Task)X
+884 2212(Force,)N
+1107(Telnet)X
+1332(Working)X
+1637(Group)X
+1862(\(July)X
+2042(1991\).)X
+555 2336(Bor92a.)N
+884(D.)X
+989(Borman,)X
+1293(Editor,)X
+1539(``Telnet)X
+1824(Authentication)X
+2326(Option,'')X
+2648(Internet-Draft,)X
+3161(Internet)X
+3437(Engineering)X
+3855(Task)X
+884 2432(Force,)N
+1107(Telnet)X
+1332(Working)X
+1637(Group)X
+1862(\(February)X
+2199(1992\).)X
+555 2556(Bor92b.)N
+884(D.)X
+1006(Borman,)X
+1328(Editor,)X
+1592(``Telnet)X
+1895(Authentication:)X
+2437(Kerberos)X
+2776(Version)X
+3074(5,'')X
+3231(Internet-Draft,)X
+3761(Internet)X
+884 2652(Engineering)N
+1296(Task)X
+1472(Force,)X
+1695(Telnet)X
+1920(Working)X
+2225(Group)X
+2450(\(February)X
+2787(1992\).)X
+555 2776(Bor92c.)N
+884(D.)X
+1006(Borman,)X
+1328(Editor,)X
+1592(``Telnet)X
+1895(Authentication:)X
+2437(Kerberos)X
+2776(Version)X
+3074(4,'')X
+3231(Internet-Draft,)X
+3761(Internet)X
+884 2872(Engineering)N
+1296(Task)X
+1472(Force,)X
+1695(Telnet)X
+1920(Working)X
+2225(Group)X
+2450(\(February)X
+2787(1992\).)X
+555 2996(Dav90.)N
+884(Don)X
+1057(Davis)X
+1279(and)X
+1430(Ralph)X
+1656(Swick,)X
+1911(``Workstation)X
+2396(Services)X
+2703(and)X
+2853(Kerberos)X
+3182(Authentication)X
+3692(at)X
+3784(Project)X
+884 3092(Athena,'')N
+1219(Technical)X
+1565(Memorandum)X
+2048(TM-424,)X
+2384(MIT)X
+2560(Laboratory)X
+2946(for)X
+3068(Computer)X
+3416(Science)X
+3694(\(February)X
+884 3188(1990\).)N
+555 3312(Jue85.)N
+884(R.)X
+983(R.)X
+1082(Jueneman,)X
+1449(S.)X
+1539(M.)X
+1656(Matyas,)X
+1938(and)X
+2080(C.)X
+2179(H.)X
+2283(Meyer,)X
+2539(``Message)X
+2899(Authentication,'')X
+2 f
+3474(IEEE)X
+3673(Communi-)X
+884 3408(cations)N
+3 f
+1135(23)X
+1 f
+(\(9\),)S
+1349(pp.)X
+1469(29-40)X
+1676(\(September)X
+2066(1985\).)X
+555 3532(Koh89.)N
+884(John)X
+1059(T.)X
+1152(Kohl,)X
+1356(``The)X
+1559(Use)X
+1708(of)X
+1798(Encryption)X
+2177(in)X
+2262(Kerberos)X
+2580(for)X
+2697(Network)X
+3001(Authentication,'')X
+3574(in)X
+2 f
+3659(Crypto)X
+3904('89)X
+884 3628(Conference)N
+1276(Proceedings)X
+1 f
+1677(,)X
+1719(International)X
+2151(Association)X
+2551(for)X
+2666(Cryptologic)X
+3069(Research,)X
+3405(Santa)X
+3604(Barbara,)X
+3900(CA)X
+884 3724(\(August)N
+1162(1989\).)X
+555 3848(Koh92.)N
+884(John)X
+1062(T.)X
+1158(Kohl)X
+1344(and)X
+1486(B.)X
+1585(Clifford)X
+1869(Neuman,)X
+2187(``The)X
+2392(Kerberos)X
+2713(Network)X
+3020(Authentication)X
+3522(Service,'')X
+3863(Ver-)X
+884 3944(sion)N
+1037(5)X
+1097(Revision)X
+1401(5,)X
+1501(Project)X
+1748(Athena,)X
+2020(Massachusetts)X
+2503(Institute)X
+2785(of)X
+2872(Technology)X
+3275(\(April)X
+3491(1992\).)X
+555 4068(Lin91.)N
+884(John)X
+1062(Linn,)X
+1260(``Generic)X
+1595(Security)X
+1888(Service)X
+2155(Application)X
+2559(Program)X
+2861 0.3295(Interface,'')AX
+3248(Internet-Draft,)X
+3761(Internet)X
+884 4164(Engineering)N
+1296(Task)X
+1472(Force,)X
+1695(Common)X
+2012(Authentication)X
+2508(Technology)X
+2911(Working)X
+3216(Group)X
+3441(\(June)X
+3635(1991\).)X
+555 4288(Lom89.)N
+884(T.)X
+975(Mark)X
+1171(A.)X
+1271(Lomas,)X
+1531(Li)X
+1624(Gong,)X
+1844(Jerome)X
+2097(H.)X
+2196(Saltzer,)X
+2460(and)X
+2597(Roger)X
+2814(M.)X
+2926(Needham,)X
+3275(``Reducing)X
+3657(Risks)X
+3855(from)X
+884 4384(Poorly)N
+1117(Chosen)X
+1377(Keys,'')X
+2 f
+1636(Operating)X
+1985(Systems)X
+2259(Review)X
+3 f
+2511(23)X
+1 f
+(\(5\),)S
+2725(pp.)X
+2845(14-18)X
+3052(\(December)X
+3430(1989\).)X
+555 4508(Mer90.)N
+884(Ralph)X
+1106(C.)X
+1210(Merkle,)X
+1493(``Fast)X
+1710(Software)X
+2030(Encryption)X
+2416(Functions,'')X
+2835(in)X
+2 f
+2927(Crypto)X
+3179('90)X
+3316(Conference)X
+3716(Proceed-)X
+884 4604(ings)N
+1 f
+1017(,)X
+1057(International)X
+1487(Association)X
+1885(for)X
+1999(Cryptologic)X
+2401(Research,)X
+2736(Santa)X
+2934(Barbara,)X
+3229(CA)X
+3360(\(August)X
+3638(1990\).)X
+555 4728(Mil87.)N
+884(S.)X
+972(P.)X
+1060(Miller,)X
+1304(B.)X
+1401(C.)X
+1498(Neuman,)X
+1814(J.)X
+1889(I.)X
+1960(Schiller,)X
+2253(and)X
+2393(J.)X
+2468(H.)X
+2570(Saltzer,)X
+2 f
+2837(Section)X
+3097(E.2.1:)X
+3316(Kerberos)X
+3637(Authentica-)X
+884 4824(tion)N
+1030(and)X
+1172(Authorization)X
+1633(System,)X
+1 f
+1898(M.I.T.)X
+2127(Project)X
+2376(Athena,)X
+2650(Cambridge,)X
+3048(Massachusetts)X
+3532(\(December)X
+3911(21,)X
+884 4920(1987\).)N
+555 5044(FIPS46.)N
+884(National)X
+1194(Bureau)X
+1460(of)X
+1561(Standards,)X
+1931(U.S.)X
+2107(Department)X
+2519(of)X
+2619(Commerce,)X
+3024(``Data)X
+3263(Encryption)X
+3652(Standard,'')X
+884 5140(Federal)N
+1145(Information)X
+1548(Processing)X
+1915(Standards)X
+2251(Publication)X
+2635(46,)X
+2775(Washington,)X
+3202(DC)X
+3333(\(1977\).)X
+555 5264(FIPS81.)N
+884(National)X
+1194(Bureau)X
+1460(of)X
+1561(Standards,)X
+1931(U.S.)X
+2107(Department)X
+2520(of)X
+2621(Commerce,)X
+3027(``DES)X
+3265(Modes)X
+3516(of)X
+3616(Operation,'')X
+884 5360(Federal)N
+1145(Information)X
+1548(Processing)X
+1915(Standards)X
+2251(Publication)X
+2635(81,)X
+2775(Spring\256eld,)X
+3170(VA)X
+3306(\(December)X
+3684(1980\).)X
+555 5484(Nee78.)N
+884(Roger)X
+1106(M.)X
+1223(Needham)X
+1557(and)X
+1699(Michael)X
+1988(D.)X
+2092(Schroeder,)X
+2464(``Using)X
+2735(Encryption)X
+3116(for)X
+3235(Authentication)X
+3736(in)X
+3823(Large)X
+884 5580(Networks)N
+1216(of)X
+1303(Computers,'')X
+2 f
+1748(Communications)X
+2310(of)X
+2392(the)X
+2510(ACM)X
+3 f
+2699(21)X
+1 f
+(\(12\),)S
+2953(pp.)X
+3073(993-999)X
+3360(\(December,)X
+3758(1978\).)X
+555 5704(Neu91.)N
+884(B.)X
+992(Clifford)X
+1284(Neuman,)X
+1610(``Proxy-Based)X
+2112(Authorization)X
+2591(and)X
+2741(Accounting)X
+3149(for)X
+3277(Distributed)X
+3671(Systems,'')X
+884 5800(Technical)N
+1232(Report)X
+1481(91-02-01,)X
+1846(Department)X
+2256(of)X
+2354(Computer)X
+2705(Science)X
+2986(and)X
+3133(Engineering,)X
+3576(University)X
+3944(of)X
+
+15 p
+%%Page: 15 15
+10 s 0 xH 0 xS 1 f
+0 32(--)N
+4323(--)X
+2196 416(-)N
+2243(15)X
+2343(-)X
+884 672(Washington)N
+1291(\(March)X
+1548(1991\).)X
+555 796(Pos83.)N
+884(J.)X
+958(Postel)X
+1176(and)X
+1315(J.)X
+1389(Reynolds,)X
+1733(``TELNET)X
+2112(Protocol)X
+2405(Speci\256cation,'')X
+2919(RFC)X
+3091(854,)X
+3273(University)X
+3633(of)X
+3722(Southern)X
+884 892(California,)N
+1249(Information)X
+1652(Sciences)X
+1953(Institute)X
+2255(\(May)X
+2449(1983\).)X
+555 1016(Riv92a.)N
+884(R.)X
+984(Rivest,)X
+1235(``The)X
+1441(MD4)X
+1637(Message)X
+1945(Digest)X
+2180(Algorithm,'')X
+2613(RFC)X
+2789(1320,)X
+3015(MIT)X
+3188(Laboratory)X
+3571(for)X
+3691(Computer)X
+884 1112(Science)N
+1154(\(April)X
+1370(1992\).)X
+555 1236(Riv92b.)N
+884(R.)X
+984(Rivest,)X
+1235(``The)X
+1441(MD5)X
+1637(Message)X
+1945(Digest)X
+2180(Algorithm,'')X
+2613(RFC)X
+2789(1321,)X
+3015(MIT)X
+3188(Laboratory)X
+3571(for)X
+3691(Computer)X
+884 1332(Science)N
+1154(\(April)X
+1370(1992\).)X
+555 1456(Riv78.)N
+884(R.)X
+992(L.)X
+1096(Rivest,)X
+1355(A.)X
+1468(Shamir,)X
+1754(and)X
+1905(L.)X
+2008(Adleman,)X
+2356(``A)X
+2502(Method)X
+2785(for)X
+2913(Obtaining)X
+3267(Digital)X
+3523(Signatures)X
+3895(and)X
+884 1552(Public-Key)N
+1276(Cryptosystems,'')X
+2 f
+1852(Communications)X
+2421(of)X
+2509(the)X
+2633(ACM)X
+3 f
+2828(21)X
+1 f
+(\(2\),)S
+3048(pp.)X
+3168(120-126)X
+3461(\(February)X
+3804(1978\).)X
+884 1648(See)N
+1020(also)X
+1169(U.S.)X
+1331(Patent)X
+1551(4,405,829.)X
+555 1772(ISO8824.)N
+904(International)X
+1344(Organization)X
+1793(for)X
+1917(Standardization,)X
+2470(``Information)X
+2937(Processing)X
+3314(Systems)X
+3610(-)X
+3666(Open)X
+3869(Sys-)X
+884 1868(tems)N
+1078(Interconnection)X
+1625(-)X
+1695(Speci\256cation)X
+2156(of)X
+2266(Abstract)X
+2581(Syntax)X
+2846(Notation)X
+3169(One)X
+3346(\(ASN.1\),'')X
+3737(IS)X
+3851(8824)X
+884 1964(\(December)N
+1262(1987\).)X
+1509(First)X
+1675(Edition.)X
+555 2088(ISO8825.)N
+904(International)X
+1344(Organization)X
+1793(for)X
+1917(Standardization,)X
+2470(``Information)X
+2937(Processing)X
+3314(Systems)X
+3610(-)X
+3666(Open)X
+3869(Sys-)X
+884 2184(tems)N
+1060(Interconnection)X
+1589(-)X
+1641(Speci\256cation)X
+2083(of)X
+2174(Basic)X
+2376(Encoding)X
+2707(Rules)X
+2913(for)X
+3031(Abstract)X
+3327(Syntax)X
+3573(Notation)X
+3877(One)X
+884 2280(\(ASN.1\),'')N
+1252(IS)X
+1343(8825)X
+1523(\(November)X
+1909(1987\).)X
+2156(First)X
+2322(Edition.)X
+555 2404(Ste88.)N
+884(J.)X
+961(G.)X
+1064(Steiner,)X
+1336(B.)X
+1434(C.)X
+1532(Neuman,)X
+1849(and)X
+1990(J.)X
+2066(I.)X
+2138(Schiller,)X
+2432(``Kerberos:)X
+2828(An)X
+2951(Authentication)X
+3452(Service)X
+3718(for)X
+3837(Open)X
+884 2500(Network)N
+1196(Systems,'')X
+1567(pp.)X
+1698(191-202)X
+1996(in)X
+2 f
+2089(Usenix)X
+2343(Conference)X
+2744(Proceedings)X
+1 f
+3145(,)X
+3196(Dallas,)X
+3452(Texas)X
+3674(\(February,)X
+884 2596(1988\).)N
+555 2720(Stu92.)N
+884(Stuart)X
+1096(G.)X
+1195(Stubblebine)X
+1598(and)X
+1735(Virgil)X
+1947(D.)X
+2046(Gligor,)X
+2296(``On)X
+2469(Message)X
+2771(Integrity)X
+3068(in)X
+3151(Cryptographic)X
+3635(Protocols,'')X
+884 2816(in)N
+2 f
+971(Proceedings)X
+1397(of)X
+1484(the)X
+1607(IEEE)X
+1806(Symposium)X
+2196(on)X
+2301(Research)X
+2625(in)X
+2712(Security)X
+3000(and)X
+3145(Privacy)X
+1 f
+3395(,)X
+3440(Oakland,)X
+3757(Califor-)X
+884 2912(nia)N
+1002(\(May)X
+1196(1992\).)X
+555 3036(Tar91.)N
+884(Joseph)X
+1147(J.)X
+1243(Tardo)X
+1480(and)X
+1640(Kannan)X
+1934(Alagappan,)X
+2346(``SPX:)X
+2612(Global)X
+2874(Authentication)X
+3394(Using)X
+3629(Public)X
+3877(Key)X
+884 3132(Certi\256cates,'')N
+1344(in)X
+2 f
+1427(Proceedings)X
+1849(of)X
+1932(the)X
+2051(IEEE)X
+2246(Symposium)X
+2632(on)X
+2733(Research)X
+3053(in)X
+3136(Security)X
+3420(and)X
+3560(Privacy)X
+1 f
+3810(,)X
+3850(Oak-)X
+884 3228(land,)N
+1062(California)X
+1407(\(May)X
+1601(1991\).)X
+555 3448(Kohl)N
+739(may)X
+901(be)X
+1001(reached)X
+1276(at)X
+1358(UC)X
+1493(Berkeley,)X
+1827(Computer)X
+2170(Science)X
+2443(Division,)X
+2761(571)X
+2904(Evans)X
+3123(Hall,)X
+3304(Berkeley,)X
+3637(CA)X
+3791(94720,)X
+555 3544(USA.)N
+775(Email:)X
+1008(jtkohl@cs.berkeley.edu.)X
+555 3736(Neuman)N
+850(may)X
+1011(be)X
+1110(reached)X
+1384(at)X
+1465(USC/ISI,)X
+1783(4676)X
+1966(Admiralty)X
+2318(Way,)X
+2512(Marina)X
+2766(del)X
+2886(Rey,)X
+3057(CA)X
+3190(90292-6695,)X
+3619(USA.)X
+3841(Tele-)X
+555 3832(phone)N
+771(+1)X
+876(\(310\))X
+1070(822-1511.)X
+1457(Email:)X
+1690(bcn@isi.edu.)X
+555 4024(Ts'o)N
+729(may)X
+894(be)X
+997(reached)X
+1275(at)X
+1360(MIT)X
+1534(Room)X
+1755(E40-342b,)X
+2117(77)X
+2223(Massachusetts)X
+2712(Avenue,)X
+3008(Cambridge,)X
+3410(MA)X
+3585(02139,)X
+3831(USA.)X
+555 4120(Email:)N
+788(tytso@mit.edu.)X
+555 4244(Project)N
+808(Athena,)X
+1086(Athena,)X
+1364(Athena)X
+1622(MUSE,)X
+1890(Discuss,)X
+2185(Hesiod,)X
+2458(Kerberos,)X
+2799(Moira,)X
+3040(and)X
+3181(Zephyr)X
+3438(are)X
+3562(trademarks)X
+3944(of)X
+555 4340(the)N
+683(Massachusetts)X
+1176(Institute)X
+1468(of)X
+1565(Technology)X
+1978(\()X
+8 s
+2005(MIT)X
+10 s
+2122(\).)X
+2218(No)X
+2345(commercial)X
+2753(use)X
+2889(of)X
+2985(these)X
+3179(trademarks)X
+3565(may)X
+3732(be)X
+3837(made)X
+555 4436(without)N
+819(prior)X
+995(written)X
+1242(permission)X
+1613(of)X
+8 s
+1696(MIT)X
+10 s
+1813(.)X
+555 4532(X)N
+633(Window)X
+929(System)X
+1184(is)X
+1257(a)X
+1313(trademark)X
+1659(of)X
+8 s
+1742(MIT)X
+10 s
+1859(.)X
+8 s
+555 4628(UNIX)N
+10 s
+734(is)X
+807(a)X
+863(registered)X
+1200(trademark)X
+1546(of)X
+1633(Unix)X
+1813(System)X
+2068(Laboratories,)X
+2514(Inc.)X
+2657(in)X
+2739(the)X
+8 s
+2853(USA)X
+10 s
+3001(and)X
+3137(other)X
+3322(countries.)X
+0 6360(--)N
+4323(--)X
+
+15 p
+%%Trailer
+xt
+
+xs
