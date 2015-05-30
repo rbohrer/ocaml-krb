@@ -1,0 +1,51 @@
+Top priorities:
+Security (that's kind of the whole point)
+Complete enough for production use
+Compatible with MIT krb5
+Reasonable performance
+Portable at least b/w Linux and BSD
+
+Security thoughts:
+- Memory errors. While OCaml gives a great
+advantage, don't get cocky. Carefully vet the relevant parts of our
+dependencies as well as any type-unsafe code we may have to interact
+with
+- Concurrency bugs. It is probably acceptable to make everything
+  not-very-concurrent. Most of what Kerberos has to do is fast rite?
+- Resource exhaustion. It will likely be impossible to garbage collect
+  certain resources, so make sure they are managed well.
+- Resource starvation (e.g. DoS by thrashing the GC on the KDC). Since
+  MIT krb is not written in a garbage-collected language, we may be
+  walking into new territory here.
+- Dependency minimization: Don't trust nobody. Don't pull in any
+  libraries that we don't have to.
+- Do not repeat mistakes. MIT has a public bug tracker with about 8000
+  reported bugs - let's look for patterns and systematically prevent
+  the bugs that we can.
+- Consider possible side-channel attacks and protections against them.
+  I'm curious whether the unpredictability of garbage collection
+  actually helps us here, though I wouldn't count on it.  One thought
+  I had: We can probably prevent or complicate timing-based
+  side-channel attacks on the KDC by buffering all results until a
+  multiple of some interval occurs and then sending them all at once.
+
+Portability: We definitely want some level of portability. Try to rely
+only on POSIX things at the very least, and keep system dependencies
+organized so that ports are easier to implement. My main argument for
+using a non-Linux OS is that I could see BSD being very attractive for
+running a KDC.
+
+Testing:
+- krb5 has a nice test suite. See if we can reuse it or at least rip it off.
+- I love logging. Let's go heavy on the logging.
+- I love fuzzers. Let's write some fuzzers.
+- We may need to mock out certain components for unit testing:
+-- Filesystem
+-- All major system components (AS, TGS, application server, application client)
+-- KDB
+- Everything should have a strict mode that holds the rest of the system to the highest moral standard and a
+  permissive mode that actually works with existing systems.
+- For resources that have to be allocated manually, instrument the code to alert us to resource leaks.
+- We should try to DoS ourselves.
+
+Code review: Let's find a good book on security reviews.
