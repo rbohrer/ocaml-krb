@@ -28,6 +28,10 @@ with
   I had: We can probably prevent or complicate timing-based
   side-channel attacks on the KDC by buffering all results until a
   multiple of some interval occurs and then sending them all at once.
+- Randomness for nonces: We need to take a look at the OCaml PRNG and
+  make sure it's random enough. It claims to have 55 ints' worth of
+  state, so I suspect it's Mersenne or another decent generator. It
+  also allows using /dev/urandom for a seed.
 
 Portability: We definitely want some level of portability. Try to rely
 only on POSIX things at the very least, and keep system dependencies
@@ -43,6 +47,9 @@ Testing:
 -- Filesystem
 -- All major system components (AS, TGS, application server, application client)
 -- KDB
+-- RNG
+-- The intertrons. RFC 4120 mentions measures a KDC has to take to deal with UDP unreliability,
+ so we need a Udp module that we can force to be unreliable.
 - Everything should have a strict mode that holds the rest of the system to the highest moral standard and a
   permissive mode that actually works with existing systems.
 - For resources that have to be allocated manually, instrument the code to alert us to resource leaks.
