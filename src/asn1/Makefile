@@ -1,2 +1,2 @@
 all:
-	ocamlbuild -pkgs asn1-combinators,core as_req.native
+	ocamlbuild -pkgs asn1-combinators,cstruct as_req.native

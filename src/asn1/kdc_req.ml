@@ -1,3 +1,5 @@
+open Import;;
+
 type t =
   { msg_type : [ `As_req | `Tgs_req ]
   ; padata : Pa_data.t list
@@ -13,10 +15,10 @@ module Format = struct
 
   let asn =
     Asn.(sequence4
-           (required ~label:"pvno" int)
-           (required ~label:"msg_type" int)
-           (optional ~label:"padata" (sequence_of Pa_data.Format.asn))
-           (required ~label:"req_body" Kdc_req_body.Format.asn))
+           (tag_required 1 ~label:"pvno" int)
+           (tag_required 2 ~label:"msg_type" int)
+           (tag_optional 3 ~label:"padata" (sequence_of Pa_data.Format.asn))
+           (tag_required 4 ~label:"req_body" Kdc_req_body.Format.asn))
 end
 
 let format_of_t t =

@@ -17,13 +17,11 @@ let format_of_t t =
     ; req_body = t.req_body
     }
 
-(* CR bbohrer: delete this crap
-let my_codec = Asn.(codec ber Format.asn)
+let my_codec = Asn.(codec der Format.asn)
 
-let encode () = Asn.(encode my_codec (format_of_t { padata = []; req_body = 0}))
+let encode () = Asn.(encode my_codec (Asn.random Format.asn))
 
 let test () =
   Printf.printf "%s" (Cstruct.to_string (encode ()))
 
 let () = test ()
-*)
