@@ -25,3 +25,4 @@ let test () =
   Printf.printf "%s" (Cstruct.to_string (encode ()))
 
 let () = test ()
+let x = Enc_ticket_part.format_of_t
