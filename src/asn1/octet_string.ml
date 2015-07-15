@@ -10,4 +10,4 @@ module Format = struct
   let asn = octet_string
 end
 
-let format_of_t = Cstruct.of_string
+let format_of_t t = Cstruct.of_string t
