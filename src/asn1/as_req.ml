@@ -16,13 +16,3 @@ let format_of_t t =
     ; padata = t.padata
     ; req_body = t.req_body
     }
-
-let my_codec = Asn.(codec der Format.asn)
-
-let encode () = Asn.(encode my_codec (Asn.random Format.asn))
-
-let test () =
-  Printf.printf "%s" (Cstruct.to_string (encode ()))
-
-let () = test ()
-let x = Enc_ticket_part.format_of_t
